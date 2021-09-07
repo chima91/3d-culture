@@ -1,6 +1,14 @@
 // import React from 'react';
+// import { css, jsx } from '@emotion/core'
+import styled from "@emotion/styled";
 import { useRef } from "react";
 import { Canvas, useFrame } from "react-three-fiber";
+
+const Sdiv = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #88ee88;
+`;
 
 const Thing = () => {
   const ref: any = useRef();
@@ -25,12 +33,11 @@ const Thing = () => {
 
 const App = () => {
   return (
-    <>
-      <h1>react-three-fiberのテスト</h1>
+    <Sdiv>
       <Canvas>
         <Thing />
       </Canvas>
-    </>
+    </Sdiv>
   );
 }
 
