@@ -9,7 +9,7 @@ export const DashboardHeader = () => {
 
   return (
     <div>
-      <AppBar>
+      <AppBar color="inherit" elevation={1}>
         <Toolbar>
           <IconButton>
             <MenuIcon />
