@@ -1,4 +1,4 @@
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
+import { AppBar, Avatar, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { Logo } from "../../components/Logo";
@@ -11,15 +11,21 @@ export const DashboardHeader = () => {
   return (
     <div>
       <AppBar color="inherit" elevation={1}>
-        <Toolbar>
-          <IconButton>
-            <MenuIcon />
-          </IconButton>
-          <div className={styles.logo}>
-            <Logo />
+        <Toolbar className={styles.between}>
+          <div className={styles.flex}>
+            <IconButton>
+              <MenuIcon />
+            </IconButton>
+            <div className={styles.logo}>
+              <Logo />
+            </div>
           </div>
 
           <SearchBar />
+
+          <IconButton className={styles.profileIcon}>
+            <Avatar />
+          </IconButton>
 
         </Toolbar>
       </AppBar>
