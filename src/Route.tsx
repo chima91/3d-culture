@@ -3,12 +3,13 @@ import { useRoutes, Navigate } from "react-router-dom";
 import { HomeLayout } from "./layouts/Home";
 import { SideLessHomeLayout } from "./layouts/SidelessHome";
 import { SimpleLayout } from "./layouts/Simple";
+import { Home } from "./pages/Home";
 
 export const RootRouter = () => {
   return useRoutes([
     {
       element: <HomeLayout />,
-      children: [{ path: '/', element: <div>Home</div> }],
+      children: [{ path: '/', element: <Home /> }],
     },
     {
       element: <SideLessHomeLayout />,
