@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
 import { RootRouter } from './Route';
+import GlobalStyle from './GlobalStyle';
 
 const theme = createTheme();
 
@@ -14,7 +14,7 @@ ReactDOM.render(
       <BrowserRouter>
         <RootRouter />
         <CssBaseline />
-        <App />
+        <GlobalStyle />
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
