@@ -1,13 +1,17 @@
+import { Link } from "react-router-dom";
+
 import useStyles from "./style";
 
 export const Logo = () => {
   const styles = useStyles();
 
   return (
-    <img
-      className={styles.root}
-      src="/static/logo.png"
-      alt="Culpticon Logo"
-    />
+    <Link to="/">
+      <img
+        className={styles.root}
+        src="/static/logo.png"
+        alt="Culpticon Logo"
+      />
+    </Link>
   )
 }
