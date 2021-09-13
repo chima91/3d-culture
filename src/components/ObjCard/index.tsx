@@ -8,7 +8,7 @@ export const ObjCard= () => {
   return (
     // elevation={0} : Cardの影を削除する
     // square : 丸みの除去
-    <Card className={styles.root} elevation={0} square>
+    <Card>
 
       <CardMedia
         className={styles.media}
