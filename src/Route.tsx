@@ -3,6 +3,7 @@ import { useRoutes, Navigate } from "react-router-dom";
 import { HomeLayout } from "./layouts/Home";
 import { SideLessHomeLayout } from "./layouts/SidelessHome";
 import { SimpleLayout } from "./layouts/Simple";
+import { Detail } from "./pages/Detail";
 import { Home } from "./pages/Home";
 
 export const RootRouter = () => {
@@ -15,7 +16,7 @@ export const RootRouter = () => {
       element: <SideLessHomeLayout />,
       children: [
         { path: "detail", element: <Navigate to='/' /> },
-        { path: "detail/:objId", element: <div>detail</div> }
+        { path: "detail/:objId", element: <Detail /> }
       ],
     },
     {
