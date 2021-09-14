@@ -10,8 +10,8 @@ export const CanvasArea = () => {
   return (
     <Card>
       {/* 3Dオブジェ表示エリア */}
-      <CardContent className={styles.widthHeight}>
-        <Canvas>
+      <CardContent className={styles.canvas}>
+        <Canvas camera={{ position: [0, 0, 888] }}>
           <Three />
         </Canvas>
       </CardContent>
