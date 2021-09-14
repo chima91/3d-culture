@@ -11,4 +11,8 @@ export default makeStyles({
   descPadding: {
     paddingLeft: 56
   },
+  widthHeight: {
+    maxWidth: "1000px",
+    height: "450px"
+  }
 });
