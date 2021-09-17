@@ -1,7 +1,7 @@
 import * as Drei from "@react-three/drei";
 
 export const Model = () => {
-  const { scene } = Drei.useGLTF("/static/eren.glb");
+  const { scene } = Drei.useGLTF("/static/ship.glb");
 
   return (
     <group dispose={null}>
