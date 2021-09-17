@@ -1,18 +1,19 @@
-import { useRef } from "react";
-import { useFrame } from "react-three-fiber";
-import * as THREE from "three";
-import CameraControls from "camera-controls";
+import React from "react";
+import * as Fiber from "@react-three/fiber";
+import * as Drei from "@react-three/drei";
+
+import { Model } from "../Model";
 
 export const Three = () => {
-  const ref: any = useRef();
-  useFrame(() => {
-    ref.current.rotation.y += 0.01;
-  });
-
   return (
-    <mesh ref={ref}>
-      <boxGeometry attach="geometry" args={[400, 400, 400]} />
-      <meshNormalMaterial attach='material' />
-    </mesh>
+    <React.Suspense fallback={<span>loading...</span>}>
+      <Fiber.Canvas>
+        <Drei.PerspectiveCamera makeDefault fov={15} />
+        <Drei.OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+        <Drei.Stage>
+          <Model />
+        </Drei.Stage>
+      </Fiber.Canvas>
+    </React.Suspense>
   )
 };

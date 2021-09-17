@@ -1,6 +1,5 @@
 import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@material-ui/core";
 
-import { Canvas } from "react-three-fiber";
 import { Three } from "../../../components/Three";
 import useStyles from "./style";
 
@@ -11,9 +10,7 @@ export const CanvasArea = () => {
     <Card>
       {/* 3Dオブジェ表示エリア */}
       <CardContent className={styles.canvas}>
-        <Canvas camera={{ position: [0, 0, 888] }}>
-          <Three />
-        </Canvas>
+        <Three />
       </CardContent>
 
       {/* タイトル表示エリア */}
