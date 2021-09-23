@@ -1,10 +1,15 @@
 import { Typography } from "@material-ui/core";
 
-export const SubHeaderContent = () => {
+export type SubHeaderContentProps = {
+  owner: string;
+  created: Date;
+}
+
+export const SubHeaderContent = ({owner, created}: SubHeaderContentProps) => {
   return (
     <>
-      <Typography variant="body2">あいうえ博物館</Typography>
-      <Typography variant="body2">2021/06/28</Typography>
+      <Typography variant="body2">{owner}</Typography>
+      <Typography variant="body2">{new Date(created).toLocaleDateString()}</Typography>
     </>
   );
 };
