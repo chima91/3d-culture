@@ -1,26 +1,30 @@
 import { Avatar, Card, CardHeader, CardMedia } from "@material-ui/core";
 
 import useStyles from "./style";
+import { HeaderTitle, HeaderTitleProps } from "./HeaderTitle";
+import { SubHeaderContent, SubHeaderContentProps } from "./SubHeaderContent";
 
-export const ObjCard= () => {
+export type ObjCardProps = {
+  imageUrl: string;
+} & HeaderTitleProps & SubHeaderContentProps;
+
+export const ObjCard= ({ imageUrl, title, owner, created }: ObjCardProps) => {
   const styles = useStyles();
 
   return (
-    // elevation={0} : Cardの影を削除する
-    // square : 丸みの除去
+    // elevation={0}: Cardの影を削除する。 square: 丸みの除去
     <Card>
-
       <CardMedia
         className={styles.media}
-        image="/static/haniwa.jpg"
+        image={imageUrl}
         title="Thumbnail"
       />
 
       <CardHeader
         className={styles.header}
         avatar={<Avatar />}
-        title="踊るハニワ"
-        subheader="名古屋大学博物館"
+        title={<HeaderTitle title={title} />}
+        subheader={<SubHeaderContent owner={owner} created={created} />}
       />
     </Card>
   );
