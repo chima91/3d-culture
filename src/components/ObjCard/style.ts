@@ -10,12 +10,5 @@ export default makeStyles({
   media: {
     height: 0,
     paddingTop: "56.25%" // 16:9
-  },
-
-  header: {
-    alignItems: "start",
-    backgroundColor: "transparent",
-    paddingLeft: 0,
-    paddingRight: 0,
-  },
+  }
 });

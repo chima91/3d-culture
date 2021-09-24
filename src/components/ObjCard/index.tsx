@@ -21,7 +21,6 @@ export const ObjCard= ({ imageUrl, title, owner, created }: ObjCardProps) => {
       />
 
       <CardHeader
-        className={styles.header}
         avatar={<Avatar />}
         title={<HeaderTitle title={title} />}
         subheader={<SubHeaderContent owner={owner} created={created} />}
