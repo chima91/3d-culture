@@ -2,6 +2,7 @@ import { Container, Grid } from "@material-ui/core";
 
 import { CanvasArea } from "./CanvasArea";
 import { ObjHorizontalCard } from "../../components/ObjHorizontalCard";
+import { ModalQR } from "../../components/ModalQR";
 import useStyles from "./style";
 
 export const Detail = () => {
@@ -25,6 +26,7 @@ export const Detail = () => {
 
   return (
     <Container className={styles.root}>
+      <ModalQR />
       <Grid container spacing={4}>
         <Grid item xs={12} lg={8}>
           <CanvasArea />

@@ -2,6 +2,7 @@ import { Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import { ObjCard } from "../../components/ObjCard";
+import { ModalQR } from "../../components/ModalQR";
 import useStyles from "./style";
 
 export const Home = () => {
@@ -25,6 +26,7 @@ export const Home = () => {
 
   return (
     <Container>
+      <ModalQR />
       <Grid container spacing={2}>
         <Grid item className={styles.underline} component={Link} to="/detail/1" xs={12} md={6} lg={4}>
           <ObjCard imageUrl="/static/haniwa.jpg" title="踊るハニワ" owner="あいうえ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} />
