@@ -1,4 +1,5 @@
 import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@material-ui/core";
+import { Suspense } from "react";
 
 import { Three } from "../../../components/Three";
 import useStyles from "./style";
@@ -10,7 +11,9 @@ export const CanvasArea = () => {
     <Card>
       {/* 3Dオブジェ表示エリア */}
       <CardContent className={styles.canvas}>
-        <Three />
+        <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
+          <Three glbSource='/static/glb/ship.glb'/>
+        </Suspense>
       </CardContent>
 
       {/* タイトル表示エリア */}
