@@ -32,13 +32,13 @@ export const Detail = () => {
           <CanvasArea />
         </Grid>
         <Grid item xs={12} lg={4}>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/haniwa.jpg" title="馬のハニワ" owner="名古屋大学博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/no-image.jpg" title="踊らないハニワ" owner="たちつて博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/haniwa.jpg" title="鹿のハニワ" owner="やゆよ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/no-image.jpg" title="鰐のハニワ" owner="わをん博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/haniwa.jpg" title="象のハニワ" owner="さしすせ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/no-image.jpg" title="鳥のハニワ" owner="はひふへほ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
-          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/haniwa.jpg" title="蝶のハニワ" owner="まみむめ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/dance.jpg" title="踊るハニワ" owner="あいうえ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/dog.jpg" title="犬のハニワ" owner="かきくけ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/bird.jpg" title="鳥のハニワ" owner="さしすせ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/no-image.jpg" title="堀のハニワ" owner="たちつて博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/cylinder.jpg" title="円筒ハニワ" owner="なにぬね博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/japaneseSword.jpg" title="日本刀" owner="はひふへほ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
+          <div className={styles.cardPadding}><ObjHorizontalCard imageUrl="/static/thumbnail/horse.jpg" title="馬のハニワ" owner="まみむめ博物館" created={new Date(getRandomYmd('2021/01/01', '2021/12/31'))} /></div>
         </Grid>
       </Grid>
     </Container>
