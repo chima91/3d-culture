@@ -1,7 +1,7 @@
 import * as Fiber from "@react-three/fiber";
 import * as Drei from "@react-three/drei";
 
-type ThreeProp = {
+export type ThreeProp = {
   glbSource: string;
 }
 
