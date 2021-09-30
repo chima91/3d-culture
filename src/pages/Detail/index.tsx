@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { CanvasArea } from "./CanvasArea";
 import { ObjHorizontalCard } from "../../components/ObjHorizontalCard";
 import { ModalQR } from "../../components/ModalQR";
+import { SNS } from "../../components/SNS";
 import useStyles from "./style";
 
 export const Detail = () => {
@@ -89,6 +90,7 @@ export const Detail = () => {
   return (
     <Container className={styles.root}>
       <ModalQR />
+      <SNS />
       <Grid container spacing={4}>
         <Grid item xs={12} lg={8}>
           <CanvasArea glbSource={GLBSOURCE} title={TITLE} created={CREATED} owner={OWNER} description={DESCRIPTION} />
