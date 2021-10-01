@@ -12,7 +12,7 @@ export const ModalQR = () => {
   return(
     <>
       <Button onClick={handleOpen} variant="outlined" color="secondary" endIcon={<CropFreeIcon />} style={{ marginBottom: 20}}>
-        このページのQRコードを表示
+        QRコード
       </Button>
       <Dialog onClose={handleClose} open={isOpen}>
         <DialogContentText style={{ textAlign: "center", padding: 10, margin: 0 }}>これで布教してくださいm(._.)m</DialogContentText>
