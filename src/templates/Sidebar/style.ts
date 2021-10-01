@@ -4,8 +4,8 @@ export default makeStyles({
   root: {
     backgroundColor: "#ffffff",
     minHeight: "100%",
-    "@media (max-width: 600px)": {
-      display: "none",
-    }
+    // "@media (max-width: 600px)": {
+    //   display: "none",
+    // }
   },
 });

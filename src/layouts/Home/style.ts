@@ -10,7 +10,10 @@ export default makeStyles({
   },
   sidebar: {
     paddingTop: APP_BAR,
-    width: SIDEBAR_WIDTH
+    width: SIDEBAR_WIDTH,
+    "@media (max-width: 600px)": {
+      display: "none",
+    }
   },
   main: {
     paddingTop: APP_BAR + 30,
