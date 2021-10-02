@@ -3,8 +3,8 @@ import {
   TwitterShareButton,
   LineShareButton,
   LineIcon,
-  HatenaShareButton,
-  HatenaIcon,
+  FacebookShareButton,
+  FacebookIcon,
 } from "react-share";
 
 export const SNS = () => {
@@ -16,9 +16,9 @@ export const SNS = () => {
       <LineShareButton url={window.location.href} title='文化財のYouTube「Culpticon」で3Dの文化財を楽しもう!!!!' style={{ margin: 5 }}>
         <LineIcon size={32} round />
       </LineShareButton>
-      <HatenaShareButton url={window.location.href} title='文化財のYouTube「Culpticon」で3Dの文化財を楽しもう!!!!' style={{ margin: 5 }}>
-        <HatenaIcon size={32} round />
-      </HatenaShareButton>
+      <FacebookShareButton url={window.location.href} quote='文化財のYouTube「Culpticon」で3Dの文化財を楽しもう!!!!' style={{ margin: 5 }}>
+        <FacebookIcon size={32} round />
+      </FacebookShareButton>
     </span>
   )
 }
