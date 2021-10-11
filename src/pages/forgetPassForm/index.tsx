@@ -1,7 +1,7 @@
 import { Button, Card, TextField, Typography } from "@material-ui/core";
 
 import { Logo } from "../../components/Logo";
-import useStyles from "./style";
+import useStyles from "../../components/AuthenticationStyle/style";
 
 export const ForgetPassForm = () => {
   const styles = useStyles();
