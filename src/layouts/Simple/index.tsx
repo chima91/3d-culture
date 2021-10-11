@@ -1,9 +1,12 @@
 import { Outlet } from "react-router-dom";
 
+import useStyles from "./style"
+
 export const SimpleLayout = () => {
+  const styles = useStyles();
+
   return (
-    <div>
-      <h1>Simple</h1>
+    <div className={styles.root}>
       <Outlet />
     </div>
   );
