@@ -4,7 +4,10 @@ import { HomeLayout } from "./layouts/Home";
 import { SideLessHomeLayout } from "./layouts/SidelessHome";
 import { SimpleLayout } from "./layouts/Simple";
 import { Detail } from "./pages/Detail";
+import { ForgetPassForm } from "./pages/ForgetPassForm";
 import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Signup } from "./pages/Signup";
 
 export const RootRouter = () => {
   return useRoutes([
@@ -22,9 +25,9 @@ export const RootRouter = () => {
     {
       element: <SimpleLayout />,
       children: [
-        { path: 'login', element: <div>ログイン</div> },
-        { path: 'signup', element: <div>アカウント新規作成</div> },
-        { path: 'forget', element: <div>パスワードリセット</div> },
+        { path: 'login', element: <Login /> },
+        { path: 'signup', element: <Signup /> },
+        { path: 'forget', element: <ForgetPassForm /> },
         { path: '404', element: <div>Not Found</div> },
         { path: '*', element: <Navigate to='/404' /> }
       ]
