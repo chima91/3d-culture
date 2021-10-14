@@ -5,9 +5,47 @@ import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
 import useStyles from "./style";
+import { useEffect, useState } from "react";
+
+// GraphQLテスト（後で削除する）
+const query = `
+query User {
+  users {
+    id
+    name
+    profile_photo_url
+    created_at
+    updated_at
+  }
+}
+`;
+let called = false;
 
 export const Home = () => {
   const styles = useStyles();
+
+  // GraphQLテスト（後で削除する）
+  const [user, setUser] = useState<any>();
+  useEffect(() => {
+    if(!called) {
+      fetch("https://react-3d.hasura.app/v1/graphql", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "x-hasura-admin-secret": "rIdi6g7HfNTvYabAlV7kA8bKREUplsjwlYg5e3FM2LjZ8tCZlEJtyMPF4xvoWgR4"
+        },
+        body: JSON.stringify({ query }),
+      }).then(async (res) => {
+        called = true;
+        const json = await res.json();
+        if(json?.errors) console.error(json.errors);
+        if(json?.data?.users.length) {
+          const testUser = json.data.users[0];
+          setUser(testUser);
+        }
+      })
+    }
+  })
 
   const getRandomYmd = (fromYmd: string, toYmd: string) => {
     let from: any = new Date(fromYmd);
@@ -27,6 +65,9 @@ export const Home = () => {
 
   return (
     <Container>
+      {/* 後で削除する */}
+      {user?.name}
+
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
