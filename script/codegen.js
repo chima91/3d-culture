@@ -9,7 +9,10 @@ module.exports = {
   documents: "",
   generates: {
     "src/utils/graphql/generated.ts": {
-      plugins: ["typescript", "typescript-operations"]
+      plugins: ["typescript", "typescript-operations", "typescript-react-apollo"],
+      config: {
+        withHooks: true
+      }
     }
   }
 };
