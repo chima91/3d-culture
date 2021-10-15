@@ -28,11 +28,11 @@ export const Home = () => {
   const [user, setUser] = useState<any>();
   useEffect(() => {
     if(!called) {
-      fetch("https://react-3d.hasura.app/v1/graphql", {
+      fetch(process.env.REACT_APP_GRAPHQL_END_POINT_ORIGIN!, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
-          "x-hasura-admin-secret": "rIdi6g7HfNTvYabAlV7kA8bKREUplsjwlYg5e3FM2LjZ8tCZlEJtyMPF4xvoWgR4"
+          "x-hasura-admin-secret": process.env.REACT_APP_HASURA_SECRET_KEY!
         },
         body: JSON.stringify({ query }),
       }).then(async (res) => {
