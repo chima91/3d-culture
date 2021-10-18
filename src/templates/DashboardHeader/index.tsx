@@ -1,5 +1,6 @@
 import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 import { Logo } from "../../components/Logo";
 import { SearchBar } from "./SearchBar";
@@ -21,9 +22,9 @@ export const DashboardHeader = () => {
             <IconButton>
               <MenuIcon />
             </IconButton>
-            <div className={styles.logo}>
+            <Link to="/" className={styles.logo}>
               <Logo />
-            </div>
+            </Link>
           </div>
 
           <SearchBar />
