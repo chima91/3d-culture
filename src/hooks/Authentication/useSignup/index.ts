@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 
 import { signup as FireSignup } from "../../../utils/Firebase/signup";
@@ -24,7 +24,7 @@ export const useSignup = () => {
 
     // 今回はシンプルにするために、入力が空でないかだけ確認する
     if (!nameRef.current?.value) {
-      setError("name", "名前を入力してください");
+      setError("name", "名前を入力してください。");
       invalidValidation = true;
     }
     if (!emailRef.current?.value) {
@@ -73,6 +73,7 @@ export const useSignup = () => {
     if(apolloError?.message) {
       setErrorHandler("main", apolloError.message);
     }
+  // eslint-disable-next-line
   }, [apolloError]);
 
   return {
