@@ -2,9 +2,11 @@ import { Button, Card, TextField, Typography } from "@material-ui/core";
 
 import { Logo } from "../../components/Logo";
 import useStyles from "../../components/AuthenticationStyle/style";
+import { useLogin } from "../../hooks/Authentication/useLogin";
 
 export const Login = () => {
   const styles = useStyles();
+  const { ref, error, loading, login } = useLogin();
 
   return (
     <Card className={styles.root} variant="outlined">
@@ -16,6 +18,12 @@ export const Login = () => {
         ログイン
       </Typography>
 
+      {error.has("main") && (
+        <Typography className={styles.margin} color="error">
+          {error.get("main")}
+        </Typography>
+      )}
+
       <label className={`${styles.label} ${styles.margin}`}>
         <Typography>メールアドレス</Typography>
         <TextField
@@ -24,6 +32,9 @@ export const Login = () => {
           size="small"
           fullWidth
           variant="outlined"
+          inputRef={ref.emailRef}
+          error={error.has("email")}
+          helperText={error.has("email") ? error.get("email") : ""}
         />
       </label>
 
@@ -35,12 +46,15 @@ export const Login = () => {
           size="small"
           fullWidth
           variant="outlined"
+          inputRef={ref.passwordRef}
+          error={error.has("password")}
+          helperText={error.has("password") ? error.get("password") : ""}
         />
       </label>
 
       <div className={styles.margin}>
-        <Button variant="contained" color="primary">
-          ログイン
+        <Button variant="contained" color="primary" disabled={loading} onClick={login}>
+          {loading ? "ログイン中" : "ログインする"}
         </Button>
       </div>
 
