@@ -1,8 +1,16 @@
 import { Card, CircularProgress, Typography } from "@material-ui/core";
-import useStyles from "../../components/AuthenticationStyle/style"
+import { useEffect } from "react";
+
+import useStyles from "../../components/AuthenticationStyle/style";
+import { useSignout } from "../../hooks/Authentication/useSignout";
 
 export const Signout = () => {
   const styles = useStyles();
+  const { signout } = useSignout();
+
+  useEffect(() => {
+    signout();
+  });
 
   return (
     <Card className={styles.root} variant="outlined">
