@@ -18,7 +18,6 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
   const [globalUser, setGlobalUser] = useRecoilState(GlobalUser);
   const credential = useRecoilValue(AuthCredential);
   const authLoaded = useRecoilValue(AuthCredentialLoaded);
-
   // Accountのローディング状態を管理
   const setAccountLoaded = useSetRecoilState(AccountLoaded);
 
@@ -46,7 +45,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
     // ユーザー情報が取れていれば、Recoilを更新し、
     // 取れていなければ、Recoilをundefinedにする
     if (authLoaded && !apolloLoading) {
-      if (apolloData?.users_by_pk?.id) {
+      if (apolloData?.users_by_pk?.id && credential) {
         setGlobalUser(apolloData.users_by_pk);
       } else {
         if (globalUser?.id) {
