@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
+import { useSetRecoilState } from "recoil";
 
 import { signup as FireSignup } from "../../../utils/Firebase/signup";
 import { FireSignupType } from "../../../utils/Firebase/signup";
 import { useInsertUserMutation } from "../../../utils/graphql/generated";
 import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
+import { GlobalUser } from "../../../stores/User";
 
 export type SignupPropsType = {
   name: string;
@@ -16,6 +18,9 @@ export const useSignup = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+
+  // mutationで作成するデータをグローバルステートに格納
+  const setGlobalUser = useSetRecoilState(GlobalUser);
 
   const [ insertMutation, { error: apolloError } ] = useInsertUserMutation();
 
@@ -55,6 +60,8 @@ export const useSignup = () => {
       }
     });
     if(apolloResponse.data?.insert_users_one?.id) {
+      // GraphQLでデータが作成された後に確実にデータをグローバルステートに格納する
+      setGlobalUser(apolloResponse.data?.insert_users_one);
       navigate("/")
     } else {
       throw new Error("ユーザー登録に失敗しました。")
