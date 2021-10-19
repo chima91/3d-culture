@@ -1,18 +1,16 @@
-import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Avatar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import { Logo } from "../../components/Logo";
 import { SearchBar } from "./SearchBar";
 import useStyles from "./style";
-import { useUserByIdQuery } from "../../utils/graphql/generated";
+import { GlobalUser } from "../../stores/User";
 
 export const DashboardHeader = () => {
   const styles = useStyles();
-
-  const { data } = useUserByIdQuery({
-    variables: { id: "test-id2" }
-  });
+  const globalUser = useRecoilValue(GlobalUser);
 
   return (
     <div>
@@ -29,12 +27,19 @@ export const DashboardHeader = () => {
 
           <SearchBar />
 
-          {/* test */}
-          <Typography>{data?.users_by_pk?.name}</Typography>
-
-          <IconButton className={styles.profileIcon}>
-            <Avatar />
-          </IconButton>
+          {/*
+            ユーザーがログインしていれば、ユーザー用のデザインを表示
+            未ログインであれば「ログインボタン」を表示
+          */}
+          {globalUser ? (
+            <IconButton className={styles.profileIcon}>
+              <Avatar />
+            </IconButton>
+          ) : (
+            <Button variant="outlined" color="primary" href="/login">
+              ログイン
+            </Button>
+          )}
 
         </Toolbar>
       </AppBar>
