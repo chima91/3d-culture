@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBcaCwPXi3F4a0uz3JGkMZNIy3i9PmVNS8",
@@ -17,6 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const fireAuth = firebase.auth();
 export const storage = firebase.storage();
+export const firestore = firebase.firestore();
 
 // 初期化済みのfirebaseパッケージをexport
 export default firebase;
