@@ -26,13 +26,18 @@ export const DashboardHeader = () => {
         <SearchBar />
 
         {/*
-          ユーザーがログインしていれば、ユーザーアバターを表示
+          ユーザーがログインしていれば、アップロードボタンとユーザーアバターを表示
           未ログインであれば「ログインボタン」を表示
         */}
         {globalUser ? (
-          <IconButton className={styles.profileIcon}>
-            <Avatar />
-          </IconButton>
+          <>
+            <Button variant="outlined" color="primary" href="/upload">
+              アップロード
+            </Button>
+            <IconButton className={styles.profileIcon}>
+              <Avatar />
+            </IconButton>
+          </>
         ) : (
           <Button variant="outlined" color="primary" href="/login">
             ログイン
