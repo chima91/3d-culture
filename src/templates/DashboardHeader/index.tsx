@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Avatar, Button, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -13,36 +13,33 @@ export const DashboardHeader = () => {
   const globalUser = useRecoilValue(GlobalUser);
 
   return (
-    <div>
-      <AppBar color="inherit" elevation={1}>
-        <Toolbar className={styles.between}>
-          <div className={styles.flex}>
-            <IconButton>
-              <MenuIcon />
-            </IconButton>
-            <Link to="/" className={styles.logo}>
-              <Logo />
-            </Link>
-          </div>
+    <AppBar color="inherit" elevation={1}>
+      <Toolbar className={styles.between}>
+        <div className={styles.flex}>
+          <IconButton>
+            <MenuIcon />
+          </IconButton>
+          <Link to="/" className={styles.logo}>
+            <Logo />
+          </Link>
+        </div>
 
-          <SearchBar />
+        <SearchBar />
 
-          {/*
-            ユーザーがログインしていれば、ユーザー用のデザインを表示
-            未ログインであれば「ログインボタン」を表示
-          */}
-          {globalUser ? (
-            <IconButton className={styles.profileIcon}>
-              <Avatar />
-            </IconButton>
-          ) : (
-            <Button variant="outlined" color="primary" href="/login">
-              ログイン
-            </Button>
-          )}
-
-        </Toolbar>
-      </AppBar>
-    </div>
+        {/*
+          ユーザーがログインしていれば、ユーザーアバターを表示
+          未ログインであれば「ログインボタン」を表示
+        */}
+        {globalUser ? (
+          <IconButton className={styles.profileIcon}>
+            <Avatar />
+          </IconButton>
+        ) : (
+          <Button variant="outlined" color="primary" href="/login">
+            ログイン
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   )
 }
