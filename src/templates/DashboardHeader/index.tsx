@@ -19,9 +19,9 @@ export const DashboardHeader = () => {
           <IconButton>
             <MenuIcon />
           </IconButton>
-          <Link to="/" className={styles.logo}>
+          <div className={styles.logo}>
             <Logo />
-          </Link>
+          </div>
         </div>
 
         <SearchBar />
