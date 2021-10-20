@@ -1,6 +1,5 @@
 import { AppBar, Avatar, Button, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 
 import { Logo } from "../../components/Logo";

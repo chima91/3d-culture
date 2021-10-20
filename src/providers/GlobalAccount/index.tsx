@@ -2,7 +2,7 @@ import { useEffect, PropsWithChildren } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { GlobalUser } from "../../stores/User";
 import { useUserByIdLazyQuery } from "../../utils/graphql/generated";
-import { signout } from "../../utils/Firebase/signout";
+// import { signout } from "../../utils/Firebase/signout";
 import { AuthCredential } from "../../stores/AuthCredential";
 import { AuthCredentialLoaded } from "../../stores/AuthCredentialLoaded";
 import { AccountLoaded } from "../../stores/AccountLoaded";
@@ -38,6 +38,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
         }
       }
     }
+  // eslint-disable-next-line
   }, [credential, authLoaded]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
       // Accountのローディングを完了
       setAccountLoaded(true);
     }
+  // eslint-disable-next-line
   }, [authLoaded, apolloData]);
 
   useEffect(() => {
@@ -65,6 +67,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
       console.error(apolloError?.message);
       setGlobalUser(undefined);
     }
+  // eslint-disable-next-line
   }, [apolloError]);
 
   return <>{children}</>
