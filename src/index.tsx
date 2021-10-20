@@ -2,39 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 import { BrowserRouter } from 'react-router-dom';
-import { ApolloProvider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import { RecoilRoot } from "recoil";
 
 import { RootRouter } from './Route';
 import GlobalStyle from './GlobalStyle';
 import { AuthStateListener } from './providers/AuthStateListener';
 import { GlobalAccount } from './providers/GlobalAccount';
+import { ApolloProvider } from './providers/ApolloClient';
 
 const theme = createTheme();
-
-// GraphQL APIのエンドポイントを指定する
-const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_END_POINT_ORIGIN,
-});
-
-const authLink = setContext(async () => {
-  return {
-    headers: {
-      "x-hasura-admin-secret": process.env.REACT_APP_HASURA_SECRET_KEY,
-    }
-  }
-});
-
-const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
-})
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ApolloProvider client={apolloClient}>
+      <ApolloProvider>
         <ThemeProvider theme={theme}>
           <AuthStateListener>
             <GlobalAccount>
