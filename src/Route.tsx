@@ -9,18 +9,22 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Signout } from "./pages/Signout";
 import { Signup } from "./pages/Signup";
+import { Upload } from "./pages/Upload";
 
 export const RootRouter = () => {
   return useRoutes([
     {
       element: <HomeLayout />,
-      children: [{ path: '/', element: <Home /> }],
+      children: [
+        { path: '/', element: <Home /> },
+        { path: '/upload', element: <Upload /> }
+      ],
     },
     {
       element: <SideLessHomeLayout />,
       children: [
-        { path: "detail", element: <Navigate to='/' /> },
-        { path: "detail/:objId", element: <Detail /> }
+        { path: 'detail', element: <Navigate to='/' /> },
+        { path: 'detail/:objId', element: <Detail /> }
       ],
     },
     {
