@@ -7,6 +7,7 @@ import { FireSignupType } from "../../../utils/Firebase/signup";
 import { useInsertUserMutation } from "../../../utils/graphql/generated";
 import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
 import { GlobalUser } from "../../../stores/User";
+import { checkAuthToken } from "./checkAuthToken";
 
 export type SignupPropsType = {
   name: string;
@@ -50,6 +51,9 @@ export const useSignup = () => {
       password: passwordRef.current?.value || ""
     });
     if(!user?.uid) throw new Error("ユーザー登録に失敗しました。");
+
+    // アカウントにトークンが設定されるまで待機
+    await checkAuthToken(user.uid);
 
     // Hasuraにuserを作成する
     const apolloResponse = await insertMutation({
