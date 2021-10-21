@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-
-import { signup as FireSignup } from "../../../utils/Firebase/signup";
+import { GlobalUser } from "../../../stores/User";
 import { FireSignupType } from "../../../utils/Firebase/signup";
+import { signup as fireSignup } from "../../../utils/Firebase/signup";
 import { useInsertUserMutation } from "../../../utils/graphql/generated";
 import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
-import { GlobalUser } from "../../../stores/User";
 import { checkAuthToken } from "./checkAuthToken";
 
 export type SignupPropsType = {
@@ -14,43 +14,60 @@ export type SignupPropsType = {
 } & FireSignupType;
 
 export const useSignup = () => {
+  // ユーザーが入力した値を読み取るための`ref`
+  // それぞれのrefに<input />要素の直接の参照を格納する
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  // リダイレクト用の関数
   const navigate = useNavigate();
 
-  // mutationで作成するデータをグローバルステートに格納
+  // mutationで作成するデータを格納
   const setGlobalUser = useSetRecoilState(GlobalUser);
 
-  const [ insertMutation, { error: apolloError } ] = useInsertUserMutation();
+  // userを追加するためのGraohQL Mutation Hooks
+  const [insertMutation, { error: apolloError }] = useInsertUserMutation();
 
   const formValidation = (setError: SetErrorFn) => {
     let invalidValidation = false;
 
+    // Nameフォームのバリデーションチェック
     // 今回はシンプルにするために、入力が空でないかだけ確認する
     if (!nameRef.current?.value) {
-      setError("name", "名前を入力してください。");
+      setError("name", "名前が入力されていません。");
       invalidValidation = true;
     }
+
+    // Emailフォームのバリデーションチェック
+    // 今回はシンプルにするために、入力が空でないかだけ確認する
     if (!emailRef.current?.value) {
       setError("email", "メールアドレスを入力してください。");
       invalidValidation = true;
     }
+
+    // Passwordフォームのバリデーションチェック
+    // 今回はシンプルにするために、入力が空でないかだけ確認する
     if (!passwordRef.current?.value) {
       setError("password", "パスワードを入力してください。");
       invalidValidation = true;
     }
 
+    // バリデーションが有効か無効化を返す
     return invalidValidation;
-  }
+  };
 
+  // 実際のサインアップのロジック
   const signup = async () => {
-    const { user } = await FireSignup({
+    // Firebaseのサインアップ処理を実行
+    const { user } = await fireSignup({
       email: emailRef.current?.value || "",
-      password: passwordRef.current?.value || ""
+      password: passwordRef.current?.value || "",
     });
-    if(!user?.uid) throw new Error("ユーザー登録に失敗しました。");
+
+    if (!user?.uid) {
+      throw new Error("ユーザーの登録に失敗しました。");
+    }
 
     // アカウントにトークンが設定されるまで待機
     await checkAuthToken(user.uid);
@@ -60,20 +77,23 @@ export const useSignup = () => {
       variables: {
         id: user.uid,
         name: nameRef.current?.value || "",
-        email: emailRef.current?.value || ""
-      }
+        email: emailRef.current?.value || "",
+      },
     });
-    if(apolloResponse.data?.insert_users_one?.id) {
-      // GraphQLでデータが作成された後に確実にデータをグローバルステートに格納する
+
+    if (apolloResponse.data?.insert_users_one?.id) {
+      // GraphQLでデータが作成された後に確実にデータを格納する
       setGlobalUser(apolloResponse.data?.insert_users_one);
-      navigate("/")
+
+      // `/`へリダイレクト
+      navigate("/");
     } else {
-      throw new Error("ユーザー登録に失敗しました。")
+      throw new Error("ユーザーの登録に失敗しました。");
     }
   };
 
   // useAuthHelperを使用して、実際に認証に使用する関数を生成する
-  const { authExecute, setErrorHandler, error, loading, } = useAuthHelper(
+  const { authExecute, error, setErrorHandler, loading } = useAuthHelper(
     signup,
     formValidation
   );
@@ -81,21 +101,19 @@ export const useSignup = () => {
   // GraphQLのエラーがあったら、ここでキャッチして、エラー処理を行う
   // 今回は、エラーメッセージを表示するだけ。
   useEffect(() => {
-    if(apolloError?.message) {
+    if (apolloError?.message) {
       setErrorHandler("main", apolloError.message);
     }
-  // eslint-disable-next-line
   }, [apolloError]);
 
   return {
     ref: {
       nameRef,
       emailRef,
-      passwordRef
+      passwordRef,
     },
     signup: authExecute,
     error,
-    loading
-  }
-}
-
+    loading,
+  };
+};

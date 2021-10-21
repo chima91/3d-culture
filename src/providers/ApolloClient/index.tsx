@@ -1,10 +1,14 @@
-import { ApolloProvider as Provider, ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloProvider as Provider,
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { PropsWithChildren } from "react";
-
 import { fireAuth } from "../../utils/Firebase/config";
 
-// GraphQL APIのエンドポイントを指定する
+// GraphQl APIのエンドポイントを指定する
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_END_POINT_ORIGIN,
 });
@@ -16,18 +20,17 @@ const authLink = setContext(async () => {
   // headersのプロパティは`Authorization`
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
   return { headers };
-  // return {
-  //   headers: {
-  //     "x-hasura-admin-secret": process.env.REACT_APP_HASURA_SECRET_KEY,
-  //   }
-  // }
 });
 
+// Apollo Clientのインスタンスをここで作成している。
 const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
-})
+
+  // Apollo Clientには強力なキャッシュ機能が搭載されています。
+  // Apollo Clientを使う理由にこのキャッシュ機能のために使うと言っても過言ではありません。
+  cache: new InMemoryCache(),
+});
 
 export const ApolloProvider = ({ children }: PropsWithChildren<{}>) => {
-  return <Provider client={apolloClient}>{children}</Provider>
-}
+  return <Provider client={apolloClient}>{children}</Provider>;
+};
