@@ -30,14 +30,14 @@ export const DashboardHeader = () => {
           未ログインであれば「ログインボタン」を表示
         */}
         {globalUser ? (
-          <>
+          <div className={styles.flex}>
             <Button variant="outlined" color="primary" href="/upload">
               アップロード
             </Button>
             <IconButton className={styles.profileIcon}>
               <Avatar />
             </IconButton>
-          </>
+          </div>
         ) : (
           <Button variant="outlined" color="primary" href="/login">
             ログイン
