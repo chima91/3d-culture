@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { storage } from "../../utils/Firebase/config";
 
 type UploadProps = {
@@ -27,17 +29,21 @@ export const useModelUpload = () => {
   const upload = async({ file, title, description, ownerId }: UploadProps) => {
     setLoading(true);
 
+    // モデルとサムネイルのそれぞれのuuidを生成する
+    const modelName = uuidv4();
+    const thumbName = uuidv4();
+
     // try-catch構文でPromise(アップロード処理)のエラーをキャッチする
     try {
       // モデルのアップロード処理。モデルは全て`models`と言う階層に保存される
       const modelUploadTask = await uploadToStorage(
-        file.model.name,
+        modelName,
         file.model,
         "models"
       );
       // 画像サムネイルのアップロード処理。サムネイルは全て`thumbnails`に保存される
       const thumbUploadTask = await uploadToStorage(
-        file.thumbnail.name,
+        thumbName,
         file.thumbnail,
         "thumbnails"
       );
