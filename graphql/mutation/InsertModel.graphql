@@ -1,0 +1,30 @@
+mutation MyMutation(
+  $id: String!
+  $title: String!
+  $description: String = ""
+  $model_url: String!
+  $thumbnail_url: String!
+  $owner_id: String!
+) {
+  insert_models_one(
+    object: {
+      id: $id
+      title: $title
+      description: $description
+      model_url: $model_url
+      thumbnail_url: $thumbnail_url
+      owner_id: $owner_id
+      views: 0
+    }
+  ) {
+    id
+    description
+    created_at
+    model_url
+    owner_id
+    thumbnail_url
+    title
+    updated_at
+    views
+  }
+}
