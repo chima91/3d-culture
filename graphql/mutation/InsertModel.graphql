@@ -1,4 +1,4 @@
-mutation MyMutation(
+mutation InsertModel(
   $id: String!
   $title: String!
   $description: String = ""
