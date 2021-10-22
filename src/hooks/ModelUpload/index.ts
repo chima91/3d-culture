@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { storage } from "../../utils/Firebase/config";
+import { useInsertModelMutation } from "../../utils/graphql/generated";
+import { useRecoilValue } from "recoil";
+import { GlobalUser } from "../../stores/User";
 
 type UploadProps = {
   file: {
@@ -17,6 +20,12 @@ export const useModelUpload = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
 
+  // モデルのメタデータを保存するためのGraphQL mutation
+  const [ mutation, { error: apolloError } ] = useInsertModelMutation();
+
+  // modelのownerIdのためにuserのidを取得する
+  const globalUser = useRecoilValue(GlobalUser);
+
   // Firebase Storageにファイルをアップロードする処理
   const uploadToStorage = (id: string, file: File, path: string) => {
     // ファイルから拡張子を抜き出す
@@ -27,11 +36,15 @@ export const useModelUpload = () => {
   };
 
   const upload = async({ file, title, description, ownerId }: UploadProps) => {
+    // ユーザが読み込まれていない、未ログインであれば処理を中断する
+    if(!globalUser?.id) return;
+
     setLoading(true);
 
-    // モデルとサムネイルのそれぞれのuuidを生成する
+    // モデルとサムネイルのファイル名, モデルのメタデータとしてのuuidを生成する
     const modelName = uuidv4();
     const thumbName = uuidv4();
+    const modelId = uuidv4();
 
     // try-catch構文でPromise(アップロード処理)のエラーをキャッチする
     try {
@@ -47,6 +60,21 @@ export const useModelUpload = () => {
         file.thumbnail,
         "thumbnails"
       );
+
+      // モデルのメタデータをHasura(Heroku??)に保存する
+      const res = await mutation({
+        variables: {
+          id: modelId,
+          title,
+          description,
+          model_url: modelUploadTask.ref.fullPath,
+          thumbnail_url: modelUploadTask.ref.fullPath,
+          owner_id: ownerId
+        }
+      });
+
+      // 全ての処理が終わったら、動画のメタデータを返す。
+      return res.data?.insert_models_one;
     } catch(err) {
       console.error(err);
       setError(new Error("エラーが発生しました。最初からやり直してください。"));
@@ -54,6 +82,14 @@ export const useModelUpload = () => {
       setLoading(false);
     }
   };
+
+  // ApolloClientのエラーをキャッチする
+  useEffect(() => {
+    if(apolloError) {
+      console.error(apolloError);
+      setError(new Error("エラーが発生しました。最初からやり直してください。"));
+    }
+  }, [apolloError]);
 
   return {
     upload,

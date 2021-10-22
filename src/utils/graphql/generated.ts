@@ -733,7 +733,7 @@ export enum Users_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-export type MyMutationMutationVariables = Exact<{
+export type InsertModelMutationVariables = Exact<{
   id: Scalars['String'];
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
@@ -743,7 +743,7 @@ export type MyMutationMutationVariables = Exact<{
 }>;
 
 
-export type MyMutationMutation = { __typename?: 'mutation_root', insert_models_one?: { __typename?: 'models', id: string, description: string, created_at: any, model_url: string, owner_id: string, thumbnail_url?: string | null | undefined, title: string, updated_at: any, views: number } | null | undefined };
+export type InsertModelMutation = { __typename?: 'mutation_root', insert_models_one?: { __typename?: 'models', id: string, description: string, created_at: any, model_url: string, owner_id: string, thumbnail_url?: string | null | undefined, title: string, updated_at: any, views: number } | null | undefined };
 
 export type InsertUserMutationVariables = Exact<{
   id: Scalars['String'];
@@ -762,8 +762,8 @@ export type UserByIdQueryVariables = Exact<{
 export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
 
 
-export const MyMutationDocument = gql`
-    mutation MyMutation($id: String!, $title: String!, $description: String = "", $model_url: String!, $thumbnail_url: String!, $owner_id: String!) {
+export const InsertModelDocument = gql`
+    mutation InsertModel($id: String!, $title: String!, $description: String = "", $model_url: String!, $thumbnail_url: String!, $owner_id: String!) {
   insert_models_one(
     object: {id: $id, title: $title, description: $description, model_url: $model_url, thumbnail_url: $thumbnail_url, owner_id: $owner_id, views: 0}
   ) {
@@ -779,20 +779,20 @@ export const MyMutationDocument = gql`
   }
 }
     `;
-export type MyMutationMutationFn = Apollo.MutationFunction<MyMutationMutation, MyMutationMutationVariables>;
+export type InsertModelMutationFn = Apollo.MutationFunction<InsertModelMutation, InsertModelMutationVariables>;
 
 /**
- * __useMyMutationMutation__
+ * __useInsertModelMutation__
  *
- * To run a mutation, you first call `useMyMutationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useMyMutationMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useInsertModelMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertModelMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [myMutationMutation, { data, loading, error }] = useMyMutationMutation({
+ * const [insertModelMutation, { data, loading, error }] = useInsertModelMutation({
  *   variables: {
  *      id: // value for 'id'
  *      title: // value for 'title'
@@ -803,13 +803,13 @@ export type MyMutationMutationFn = Apollo.MutationFunction<MyMutationMutation, M
  *   },
  * });
  */
-export function useMyMutationMutation(baseOptions?: Apollo.MutationHookOptions<MyMutationMutation, MyMutationMutationVariables>) {
+export function useInsertModelMutation(baseOptions?: Apollo.MutationHookOptions<InsertModelMutation, InsertModelMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<MyMutationMutation, MyMutationMutationVariables>(MyMutationDocument, options);
+        return Apollo.useMutation<InsertModelMutation, InsertModelMutationVariables>(InsertModelDocument, options);
       }
-export type MyMutationMutationHookResult = ReturnType<typeof useMyMutationMutation>;
-export type MyMutationMutationResult = Apollo.MutationResult<MyMutationMutation>;
-export type MyMutationMutationOptions = Apollo.BaseMutationOptions<MyMutationMutation, MyMutationMutationVariables>;
+export type InsertModelMutationHookResult = ReturnType<typeof useInsertModelMutation>;
+export type InsertModelMutationResult = Apollo.MutationResult<InsertModelMutation>;
+export type InsertModelMutationOptions = Apollo.BaseMutationOptions<InsertModelMutation, InsertModelMutationVariables>;
 export const InsertUserDocument = gql`
     mutation InsertUser($id: String!, $name: String!, $email: String!) {
   insert_users_one(
