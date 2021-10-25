@@ -10,7 +10,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
   // ユーザー情報取得用のQuery関数
   const [
     userQuery,
-    { data: apolloData, error: apolloError, loading: apolloLoding },
+    { data: apolloData, error: apolloError, loading: apolloLoading },
   ] = useUserByIdLazyQuery();
 
   // Recoilのユーザー情報の「Atom」とAuthenticationの「Atom」
@@ -27,7 +27,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
       // credentialにIDが格納されており
       if (credential) {
         // Apollo Clientがローディング中で、ユーザー情報を未取得であれば
-        if (!apolloLoding && !globalUser?.id) {
+        if (!apolloLoading && !globalUser?.id) {
           // ユーザー情報の取得開始
           setAccountLoaded(false);
           userQuery({ variables: { id: credential } });
@@ -44,7 +44,7 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
     // onAuthStateChangedのロードが終了したタイミングで、
     // ユーザー情報が取れていれば、Recoilを更新し、
     // 取れていなければ、Recoilをundefinedにする
-    if (authLoaded && !apolloLoding) {
+    if (authLoaded && !apolloLoading) {
       // Credentialにidが格納されていなければデータは格納できない。
       if (apolloData?.users_by_pk?.id && credential) {
         setGlobalUser(apolloData.users_by_pk);
