@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { storage } from "../../utils/Firebase/config";
-import { useInsertModelMutation } from "../../utils/graphql/generated";
+import { ModelsDocument, useInsertModelMutation } from "../../utils/graphql/generated";
 import { useRecoilValue } from "recoil";
 import { GlobalUser } from "../../stores/User";
 
@@ -21,7 +21,10 @@ export const useModelUpload = () => {
   const [error, setError] = useState<Error>();
 
   // モデルのメタデータを保存するためのGraphQL mutation
-  const [ mutation, { error: apolloError } ] = useInsertModelMutation();
+  const [mutation, { error: apolloError }] = useInsertModelMutation({
+    // キャッシュの更新を指定
+    refetchQueries: [{ query: ModelsDocument }],
+  });
 
   // modelのownerIdのためにuserのidを取得する
   const globalUser = useRecoilValue(GlobalUser);
