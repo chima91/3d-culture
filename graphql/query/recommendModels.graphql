@@ -1,0 +1,20 @@
+query RecommendModels($currentModelId: String!) {
+  models(where: { id: { _neq: $currentModelId } }) {
+    id
+    title
+    description
+    thumbnail_url
+    model_url
+    views
+    owner {
+      id
+      name
+      profile_photo_url
+      updated_at
+      email
+      created_at
+    }
+    created_at
+    updated_at
+  }
+}

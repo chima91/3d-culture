@@ -778,6 +778,13 @@ export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, updated_at: any, created_at: any, owner?: { __typename?: 'users', id: string, email: string, name: string, profile_photo_url: string, updated_at: any, created_at: any } | null | undefined }> };
 
+export type RecommendModelsQueryVariables = Exact<{
+  currentModelId: Scalars['String'];
+}>;
+
+
+export type RecommendModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, created_at: any, updated_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, updated_at: any, email: string, created_at: any } | null | undefined }> };
+
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -975,6 +982,56 @@ export function useModelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Mod
 export type ModelsQueryHookResult = ReturnType<typeof useModelsQuery>;
 export type ModelsLazyQueryHookResult = ReturnType<typeof useModelsLazyQuery>;
 export type ModelsQueryResult = Apollo.QueryResult<ModelsQuery, ModelsQueryVariables>;
+export const RecommendModelsDocument = gql`
+    query RecommendModels($currentModelId: String!) {
+  models(where: {id: {_neq: $currentModelId}}) {
+    id
+    title
+    description
+    thumbnail_url
+    model_url
+    views
+    owner {
+      id
+      name
+      profile_photo_url
+      updated_at
+      email
+      created_at
+    }
+    created_at
+    updated_at
+  }
+}
+    `;
+
+/**
+ * __useRecommendModelsQuery__
+ *
+ * To run a query within a React component, call `useRecommendModelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRecommendModelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRecommendModelsQuery({
+ *   variables: {
+ *      currentModelId: // value for 'currentModelId'
+ *   },
+ * });
+ */
+export function useRecommendModelsQuery(baseOptions: Apollo.QueryHookOptions<RecommendModelsQuery, RecommendModelsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecommendModelsQuery, RecommendModelsQueryVariables>(RecommendModelsDocument, options);
+      }
+export function useRecommendModelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecommendModelsQuery, RecommendModelsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecommendModelsQuery, RecommendModelsQueryVariables>(RecommendModelsDocument, options);
+        }
+export type RecommendModelsQueryHookResult = ReturnType<typeof useRecommendModelsQuery>;
+export type RecommendModelsLazyQueryHookResult = ReturnType<typeof useRecommendModelsLazyQuery>;
+export type RecommendModelsQueryResult = Apollo.QueryResult<RecommendModelsQuery, RecommendModelsQueryVariables>;
 export const UserByIdDocument = gql`
     query UserById($id: String!) {
   users_by_pk(id: $id) {
