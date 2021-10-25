@@ -1,0 +1,20 @@
+query ModelByPk($id: String!) {
+  models_by_pk(id: $id) {
+    id
+    title
+    thumbnail_url
+    model_url
+    views
+    description
+    owner {
+      id
+      name
+      profile_photo_url
+      email
+      updated_at
+      created_at
+    }
+    updated_at
+    created_at
+  }
+}

@@ -766,6 +766,13 @@ export type InsertUserMutationVariables = Exact<{
 
 export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
 
+export type ModelByPkQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ModelByPkQuery = { __typename?: 'query_root', models_by_pk?: { __typename?: 'models', id: string, title: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, description: string, updated_at: any, created_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, email: string, updated_at: any, created_at: any } | null | undefined } | null | undefined };
+
 export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -869,6 +876,56 @@ export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
 export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
+export const ModelByPkDocument = gql`
+    query ModelByPk($id: String!) {
+  models_by_pk(id: $id) {
+    id
+    title
+    thumbnail_url
+    model_url
+    views
+    description
+    owner {
+      id
+      name
+      profile_photo_url
+      email
+      updated_at
+      created_at
+    }
+    updated_at
+    created_at
+  }
+}
+    `;
+
+/**
+ * __useModelByPkQuery__
+ *
+ * To run a query within a React component, call `useModelByPkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useModelByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useModelByPkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useModelByPkQuery(baseOptions: Apollo.QueryHookOptions<ModelByPkQuery, ModelByPkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ModelByPkQuery, ModelByPkQueryVariables>(ModelByPkDocument, options);
+      }
+export function useModelByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ModelByPkQuery, ModelByPkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ModelByPkQuery, ModelByPkQueryVariables>(ModelByPkDocument, options);
+        }
+export type ModelByPkQueryHookResult = ReturnType<typeof useModelByPkQuery>;
+export type ModelByPkLazyQueryHookResult = ReturnType<typeof useModelByPkLazyQuery>;
+export type ModelByPkQueryResult = Apollo.QueryResult<ModelByPkQuery, ModelByPkQueryVariables>;
 export const ModelsDocument = gql`
     query Models {
   models {
