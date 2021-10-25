@@ -68,6 +68,8 @@ export type Models = {
   description: Scalars['String'];
   id: Scalars['String'];
   model_url: Scalars['String'];
+  /** An object relationship */
+  owner?: Maybe<Users>;
   owner_id: Scalars['String'];
   thumbnail_url?: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -120,6 +122,7 @@ export type Models_Bool_Exp = {
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   model_url?: Maybe<String_Comparison_Exp>;
+  owner?: Maybe<Users_Bool_Exp>;
   owner_id?: Maybe<String_Comparison_Exp>;
   thumbnail_url?: Maybe<String_Comparison_Exp>;
   title?: Maybe<String_Comparison_Exp>;
@@ -144,6 +147,7 @@ export type Models_Insert_Input = {
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   model_url?: Maybe<Scalars['String']>;
+  owner?: Maybe<Users_Obj_Rel_Insert_Input>;
   owner_id?: Maybe<Scalars['String']>;
   thumbnail_url?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -201,6 +205,7 @@ export type Models_Order_By = {
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   model_url?: Maybe<Order_By>;
+  owner?: Maybe<Users_Order_By>;
   owner_id?: Maybe<Order_By>;
   thumbnail_url?: Maybe<Order_By>;
   title?: Maybe<Order_By>;
@@ -669,6 +674,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: Maybe<Users_On_Conflict>;
+};
+
 /** on conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -757,7 +769,7 @@ export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_on
 export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, owner_id: string, views: number, updated_at: any, created_at: any }> };
+export type ModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, updated_at: any, created_at: any, owner?: { __typename?: 'users', id: string, email: string, name: string, profile_photo_url: string, updated_at: any, created_at: any } | null | undefined }> };
 
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -865,7 +877,14 @@ export const ModelsDocument = gql`
     description
     thumbnail_url
     model_url
-    owner_id
+    owner {
+      id
+      email
+      name
+      profile_photo_url
+      updated_at
+      created_at
+    }
     views
     updated_at
     created_at

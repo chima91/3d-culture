@@ -5,7 +5,14 @@ query Models {
     description
     thumbnail_url
     model_url
-    owner_id
+    owner {
+      id
+      email
+      name
+      profile_photo_url
+      updated_at
+      created_at
+    }
     views
     updated_at
     created_at
