@@ -1,0 +1,13 @@
+query Models {
+  models {
+    id
+    title
+    description
+    thumbnail_url
+    model_url
+    owner_id
+    views
+    updated_at
+    created_at
+  }
+}

@@ -754,6 +754,11 @@ export type InsertUserMutationVariables = Exact<{
 
 export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
 
+export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, owner_id: string, views: number, updated_at: any, created_at: any }> };
+
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -852,6 +857,48 @@ export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
 export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
+export const ModelsDocument = gql`
+    query Models {
+  models {
+    id
+    title
+    description
+    thumbnail_url
+    model_url
+    owner_id
+    views
+    updated_at
+    created_at
+  }
+}
+    `;
+
+/**
+ * __useModelsQuery__
+ *
+ * To run a query within a React component, call `useModelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useModelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useModelsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useModelsQuery(baseOptions?: Apollo.QueryHookOptions<ModelsQuery, ModelsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ModelsQuery, ModelsQueryVariables>(ModelsDocument, options);
+      }
+export function useModelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ModelsQuery, ModelsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ModelsQuery, ModelsQueryVariables>(ModelsDocument, options);
+        }
+export type ModelsQueryHookResult = ReturnType<typeof useModelsQuery>;
+export type ModelsLazyQueryHookResult = ReturnType<typeof useModelsLazyQuery>;
+export type ModelsQueryResult = Apollo.QueryResult<ModelsQuery, ModelsQueryVariables>;
 export const UserByIdDocument = gql`
     query UserById($id: String!) {
   users_by_pk(id: $id) {
