@@ -71,7 +71,7 @@ export const useModelUpload = () => {
           title,
           description,
           model_url: modelUploadTask.ref.fullPath,
-          thumbnail_url: modelUploadTask.ref.fullPath,
+          thumbnail_url: thumbUploadTask.ref.fullPath,
           owner_id: ownerId
         }
       });
