@@ -1,25 +1,32 @@
 import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@material-ui/core";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-import { Three, ThreeProp } from "../../../components/Three";
+import { Three } from "../../../components/Three";
 import useStyles from "./style";
 
-type CanvasAreaProps = {
-  title: string;
-  created: Date;
-  owner: string;
-  description: string;
-} & ThreeProp;
+export type CanvasAreaProps = {
+  title: string | undefined;
+  created: Date | undefined;
+  owner: string | undefined;
+  description: string | undefined;
+  fetcher: () => Promise<string | undefined>;
+};
 
-export const CanvasArea = ({ glbSource, title, created, owner, description }: CanvasAreaProps) => {
+export const CanvasArea = ({ title, created, owner, description, fetcher }: CanvasAreaProps) => {
   const styles = useStyles();
+  // モデルのダウンロードリンクURLを格納するためのステート
+  const [src, setSrc] = useState<string>();
+  useEffect(() => {
+    // Firebase Storageから動画のダウンロードリンクを取得する
+    fetcher().then(setSrc);
+  });
 
   return (
     <Card>
       {/* 3Dオブジェ表示エリア */}
       <CardContent className={styles.canvas}>
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
-          <Three glbSource={glbSource}/>
+          <Three glbSource={src!}/>
         </Suspense>
       </CardContent>
 
@@ -29,7 +36,7 @@ export const CanvasArea = ({ glbSource, title, created, owner, description }: Ca
           {title}
         </Typography>
         <Typography variant="body2" color="textSecondary">
-          {new Date(created).toLocaleDateString()}
+          {created ? new Date(created).toLocaleDateString() : ""}
         </Typography>
       </CardContent>
 
