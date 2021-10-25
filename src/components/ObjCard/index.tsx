@@ -1,22 +1,30 @@
 import { Avatar, Card, CardHeader, CardMedia } from "@material-ui/core";
+import { useEffect, useState } from "react";
 
 import useStyles from "./style";
 import { HeaderTitle, HeaderTitleProps } from "./HeaderTitle";
 import { SubHeaderContent, SubHeaderContentProps } from "./SubHeaderContent";
 
 export type ObjCardProps = {
-  imageUrl: string;
+  // imageUrl: string;
+  fetcher: () => Promise<string | undefined>;
 } & HeaderTitleProps & SubHeaderContentProps;
 
-export const ObjCard= ({ imageUrl, title, owner, created }: ObjCardProps) => {
+export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
   const styles = useStyles();
 
+  // 動画のサムネイルのURLを格納する
+  const [imageSrc, setImageSrc] = useState<string>();
+
+  useEffect(() => {
+    fetcher().then(setImageSrc);
+  });
+
   return (
-    // elevation={0}: Cardの影を削除する。 square: 丸みの除去
     <Card>
       <CardMedia
         className={styles.media}
-        image={imageUrl}
+        image={imageSrc || "/static/thumbnail/no-image.jpg"}
         title="Thumbnail"
       />
 
