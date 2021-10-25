@@ -5,13 +5,10 @@ import { useEffect } from "react";
 import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
-import useStyles from "./style";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery } from "../../utils/graphql/generated";
 
 export const Home = () => {
-  const styles = useStyles();
-
   const { data, error } = useModelsQuery();
 
   useEffect(() => {
