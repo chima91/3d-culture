@@ -1,6 +1,8 @@
 import { AppBar, Avatar, Button, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
 import { useRecoilValue } from "recoil";
+import { Link } from "react-router-dom";
 
 import { Logo } from "../../components/Logo";
 import { SearchBar } from "./SearchBar";
@@ -25,24 +27,24 @@ export const DashboardHeader = () => {
 
         <SearchBar />
 
-        {/*
-          ユーザーがログインしていれば、アップロードボタンとユーザーアバターを表示
-          未ログインであれば「ログインボタン」を表示
-        */}
-        {globalUser ? (
-          <div className={styles.flex}>
-            <Button variant="outlined" color="primary" href="/upload">
-              アップロード
+        <div className={styles.flex}>
+          {globalUser ? (
+            <>
+              <Link to="/upload">
+                <IconButton>
+                  <VideoCallIcon />
+                </IconButton>
+              </Link>
+              <IconButton className={styles.profileIcon}>
+                <Avatar />
+              </IconButton>
+            </>
+          ) : (
+            <Button variant="outlined" color="primary" href="/login">
+              ログイン
             </Button>
-            <IconButton className={styles.profileIcon}>
-              <Avatar />
-            </IconButton>
-          </div>
-        ) : (
-          <Button variant="outlined" color="primary" href="/login">
-            ログイン
-          </Button>
-        )}
+          )}
+        </div>
       </Toolbar>
     </AppBar>
   )
