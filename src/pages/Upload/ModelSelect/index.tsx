@@ -68,12 +68,12 @@ export const ModelSelect = ({
     <div className={styles.root}>
       {modelURL && (
         <div className={styles.full}>
-          <Typography className={styles.textPadding}>モデルファイル</Typography>
+          <Typography className={styles.textPadding}>モデルファイル：{modelFile?.name}</Typography>
         </div>
       )}
       {thumbURL && (
         <div className={styles.full}>
-          <Typography className={styles.textPadding}>サムネイルファイル</Typography>
+          <Typography className={styles.textPadding}>サムネイルファイル：{thumbFile?.name}</Typography>
         </div>
       )}
 
