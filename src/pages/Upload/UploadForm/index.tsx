@@ -18,10 +18,9 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
   // リダイレクト用関数
   const navigate = useNavigate();
 
-  // videoをアップロードする際の、ownerIdのためのuserId
+  // モデルをアップロードする際の、ownerIdのためのuserId
   const globalUser = useRecoilValue(GlobalUser);
 
-  // ユーザー入力を受け取る`ref`変数
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
 
@@ -36,7 +35,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
     setErrorMessage(undefined);
 
     if (!globalUser?.id) {
-      return setErrorMessage(new Error("ログインされていません。"));
+      return setErrorMessage(new Error("ログインしてください。"));
     }
 
     if (!modelFile || !thumbFile) {
@@ -108,7 +107,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
           disabled={loading}
           onClick={submit}
         >
-          {loading ? "アップロード中" : "動画をアップロード"}
+          {loading ? "アップロード中" : "モデル・サムネイルをアップロード"}
         </Button>
       </div>
     </>
