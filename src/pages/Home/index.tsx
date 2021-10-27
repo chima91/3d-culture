@@ -8,12 +8,19 @@ import { SNS } from "../../components/SNS";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery } from "../../utils/graphql/generated";
 
+import { GlobalUser } from "../../stores/User";
+import { useRecoilValue } from "recoil";
+
 export const Home = () => {
   const { data, error } = useModelsQuery();
 
   useEffect(() => {
     if(error) console.error(error);
   }, [error]);
+
+  // debug
+  const globalUser = useRecoilValue(GlobalUser);
+  console.log('globalUser(Home page):', globalUser);
 
   return (
     <Container>

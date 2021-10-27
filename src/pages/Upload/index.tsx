@@ -20,6 +20,10 @@ export const Upload = () => {
 
   const navigate = useNavigate();
 
+  // debug
+  console.log('accountLoaded(Upload page):', accountLoaded);
+  console.log('globalUser(Upload page):', globalUser);
+
   // アカウントが読み込まれていない、未ログインであれば`/login`へリダレクト
   useEffect(() => {
     if (accountLoaded) {
