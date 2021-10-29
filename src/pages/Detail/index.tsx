@@ -12,24 +12,26 @@ import { storage } from "../../utils/Firebase/config";
 
 export const Detail = () => {
   const styles = useStyles();
-  // URLから再生する動画のIDを取得
+  // URLから表示するモデルのIDを取得
   const { objId } = useParams();
-  // IDから再生する動画を取得
+  console.log('objId：', objId);
+  // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId,
-    },
-  });
-  // IDからリコメンドの動画を取得
+      id: objId
+    }
+  })
+  console.log('currentModel：', currentModel);
+  // IDからリコメンドのモデル群を取得
   const { data: recommendModels } = useRecommendModelsQuery({
     variables: {
       currentModelId: objId,
     },
   });
+  console.log('recommendModels：', recommendModels);
 
   return (
     <Container className={styles.root}>
-      {console.log("test")}
       <ModalQR />
       <SNS />
       <Grid container spacing={4}>

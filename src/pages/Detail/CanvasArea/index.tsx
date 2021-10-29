@@ -17,16 +17,17 @@ export const CanvasArea = ({ title, created, owner, description, fetcher }: Canv
   // モデルのダウンロードリンクURLを格納するためのステート
   const [src, setSrc] = useState<string>();
   useEffect(() => {
-    // Firebase Storageから動画のダウンロードリンクを取得する
+    // Firebase Storageからモデルのダウンロードリンクを取得する
     fetcher().then(setSrc);
   });
+  console.log('src(CanvasArea component)：', src);
 
   return (
     <Card>
       {/* 3Dオブジェ表示エリア */}
       <CardContent className={styles.canvas}>
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
-          <Three glbSource={src!}/>
+          {/* <Three glbSource={src!}/> */}
         </Suspense>
       </CardContent>
 
