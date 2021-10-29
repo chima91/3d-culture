@@ -1,11 +1,13 @@
 query ModelByPk($id: String!) {
   models_by_pk(id: $id) {
     id
+    description
     title
     thumbnail_url
     model_url
     views
-    description
+    created_at
+    updated_at
     owner {
       id
       name
@@ -14,7 +16,5 @@ query ModelByPk($id: String!) {
       updated_at
       created_at
     }
-    updated_at
-    created_at
   }
 }

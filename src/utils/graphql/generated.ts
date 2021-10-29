@@ -771,7 +771,7 @@ export type ModelByPkQueryVariables = Exact<{
 }>;
 
 
-export type ModelByPkQuery = { __typename?: 'query_root', models_by_pk?: { __typename?: 'models', id: string, title: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, description: string, updated_at: any, created_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, email: string, updated_at: any, created_at: any } | null | undefined } | null | undefined };
+export type ModelByPkQuery = { __typename?: 'query_root', models_by_pk?: { __typename?: 'models', id: string, description: string, title: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, created_at: any, updated_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, email: string, updated_at: any, created_at: any } | null | undefined } | null | undefined };
 
 export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -887,11 +887,13 @@ export const ModelByPkDocument = gql`
     query ModelByPk($id: String!) {
   models_by_pk(id: $id) {
     id
+    description
     title
     thumbnail_url
     model_url
     views
-    description
+    created_at
+    updated_at
     owner {
       id
       name
@@ -900,8 +902,6 @@ export const ModelByPkDocument = gql`
       updated_at
       created_at
     }
-    updated_at
-    created_at
   }
 }
     `;

@@ -8,7 +8,7 @@ module.exports = {
   },
   documents: [
     "graphql/query/*.graphql",
-    "graphql/mutation/*.graphql",
+    "graphql/mutation/*.graphql"
   ],
   generates: {
     "src/utils/graphql/generated.ts": {
