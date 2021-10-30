@@ -53,7 +53,7 @@ export const Detail = () => {
         </Grid>
         <Grid item xs={12} lg={4}>
           {recommendModels?.models.map((model) => (
-            <div className={styles.cardPadding}>
+            <div className={styles.cardPadding} key={model.id}>
               <Link
                 to={`/detail/${model.id}`}
                 style={{ textDecoration: "none" }}
