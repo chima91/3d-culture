@@ -17,6 +17,7 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizon
     // サムネイルのダウンロードリンクを取得する関数
     fetcher().then(setSrc);
   });
+  console.log('src(ObjHorizontal component)：', src);
 
   return (
     <Card className={`${styles.root} ${styles.transparent}`} elevation={0} square>
