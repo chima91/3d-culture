@@ -1,5 +1,5 @@
 import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@material-ui/core";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import { Three } from "../../../components/Three";
 import useStyles from "./style";
@@ -27,7 +27,11 @@ export const CanvasArea = ({ title, created, owner, description, fetcher }: Canv
       {/* 3Dオブジェ表示エリア */}
       <CardContent className={styles.canvas}>
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
-          {/* <Three glbSource={src!}/> */}
+          {src ? (
+            <Three glbSource={src}/>
+          ) : (
+            <></>
+          )}
         </Suspense>
       </CardContent>
 
