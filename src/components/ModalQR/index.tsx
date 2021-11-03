@@ -1,5 +1,5 @@
 import { Dialog, Button, DialogContent, DialogContentText, Divider } from "@material-ui/core";
-import CropFreeIcon from '@material-ui/icons/CropFree';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
 import { useState } from "react";
 
 import { QR } from "../QR";
@@ -11,7 +11,7 @@ export const ModalQR = () => {
 
   return(
     <>
-      <Button onClick={handleOpen} variant="outlined" color="secondary" endIcon={<CropFreeIcon />} style={{ marginBottom: 20}}>
+      <Button onClick={handleOpen} variant="outlined" color="secondary" endIcon={<QrCode2Icon />} style={{ marginBottom: 20}}>
         QRコード
       </Button>
       <Dialog onClose={handleClose} open={isOpen}>
