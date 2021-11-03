@@ -20,13 +20,9 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizon
 
   return (
     <Card className={`${styles.root} ${styles.transparent}`} elevation={0} square>
-      {src ? (
         <div className={styles.thumbnail}>
-          <CardMedia className={styles.media} image={src} title="Thumbnail" />
+          <CardMedia className={styles.media} image={src ? src : '/static/no-image.jpg'} title="Thumbnail" />
         </div>
-      ) : (
-        <></>
-      )}
       <CardHeader
         className={styles.contentPadding}
         title={<HeaderTitle title={title} />}
