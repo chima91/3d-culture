@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 // どのタイプのエラーなのかを管理するための型
 // main: 認証全体での、ネットワークエラーやそのサーバー側のエラーを格納
@@ -11,8 +12,11 @@ export type SetErrorFn = (name: ErrorState, message: string) => void;
 
 export const useAuthHelper = (
   executeProcess: () => Promise<void>,
-  formValidation: (setError: SetErrorFn) => boolean
+  formValidation: (setError: SetErrorFn) => boolean,
+  redirectTo?: string
 ) => {
+  const navigate = useNavigate();
+
   // 複数のエラーを同時に管理できるようにするためのstate
   // Mapは { key : value }の形でオブジェクトを管理できるJavascriptのデータ構造
   // ただのObjectと違い、便利なメソッドが用意されている。
@@ -41,13 +45,14 @@ export const useAuthHelper = (
     setLoading(true);
 
     try {
-      // 認証ロジックを実行
-      // 成功すれば、リダイレクト処理（この処理はここでは書いていない。）
+      // 認証ロジックを実行。成功すれば、リダイレクト処理
       await executeProcess();
+      // 処理が終了したら、ローディングはfalse
+      setLoading(false);
+      if (redirectTo) navigate(redirectTo);
     } catch(err: any) {
       // エラーがあれば、エラーをセットして処理を中断
       setErrorHandler("main", err.message);
-    } finally {
       // 処理が終了したら、ローディングはfalse
       setLoading(false);
     }
