@@ -6,14 +6,13 @@ import { HeaderTitle, HeaderTitleProps } from "./HeaderTitle";
 import { SubHeaderContent, SubHeaderContentProps } from "./SubHeaderContent";
 
 export type ObjCardProps = {
-  // imageUrl: string;
   fetcher: () => Promise<string | undefined>;
 } & HeaderTitleProps & SubHeaderContentProps;
 
 export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
   const styles = useStyles();
 
-  // 動画のサムネイルのURLを格納する
+  // モデルのサムネイルのURLを格納する
   const [imageSrc, setImageSrc] = useState<string>();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
     <Card>
       <CardMedia
         className={styles.media}
-        image={imageSrc || "/static/thumbnail/no-image.jpg"}
+        image={imageSrc || "/static/no-image.jpg"}
         title="Thumbnail"
       />
 
