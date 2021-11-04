@@ -1,4 +1,5 @@
-import { Dialog, DialogTitle, DialogContent, Grid, Divider, CircularProgress }  from "@material-ui/core";
+import { Dialog, DialogTitle, DialogContent, Grid, Divider, CircularProgress, IconButton }  from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close"
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,13 @@ export const Upload = () => {
 
   const navigate = useNavigate();
 
+  // Dialogクローズ用
+  const [ open, setOpen ] = useState<boolean>(true);
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/");
+  }
+
   // debug
   console.log('accountLoaded(Upload page):', accountLoaded);
   console.log('globalUser(Upload page):', globalUser);
@@ -35,7 +43,12 @@ export const Upload = () => {
 
   return (
     <Dialog fullWidth={true} maxWidth="md" open={true}>
-      <DialogTitle>3Dモデルのアップロード</DialogTitle>
+      <DialogTitle>
+        3Dモデルのアップロード
+        <IconButton>
+          <CloseIcon onClick={handleClose} />
+        </IconButton>
+      </DialogTitle>
       <Divider />
       <DialogContent className={styles.body}>
         {/* アカウントが存在すれば、アップロードコンポーネントを表示 */}
