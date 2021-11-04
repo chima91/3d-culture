@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/core";
 
 export default makeStyles({
   root: {
-    display: "flex",
+    // display: "flex",
     minHeight: 300,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   textPadding: {
     paddingTop: 20,
@@ -14,14 +14,12 @@ export default makeStyles({
   thumbnailContent: {
     paddingBottom: 30,
   },
-  full: {
-    width: "100%",
+  button: {
+    textAlign: "center",
+    margin: "30px 0"
   },
   thumbnail: {
     paddingTop: "56.25%",
     cursor: "pointer",
-  },
-  selectedThumb: {
-    border: "2px solid red",
   },
 });

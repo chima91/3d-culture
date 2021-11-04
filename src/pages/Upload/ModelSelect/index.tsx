@@ -67,13 +67,27 @@ export const ModelSelect = ({
   return (
     <div className={styles.root}>
       {modelURL && (
-        <div className={styles.full}>
+        <div>
           <Typography className={styles.textPadding}>モデルファイル：{modelFile?.name}</Typography>
         </div>
       )}
+      {!modelURL && (
+        <div className={styles.button}>
+          <Button variant="contained" color="primary" onClick={handleModelClick}>
+            モデルファイルを選択
+          </Button>
+        </div>
+      )}
       {thumbURL && (
-        <div className={styles.full}>
+        <div>
           <Typography className={styles.textPadding}>サムネイルファイル：{thumbFile?.name}</Typography>
+        </div>
+      )}
+      {!thumbURL && (
+        <div className={styles.button}>
+          <Button variant="contained" color="primary" onClick={handleThumbClick}>
+            サムネイルファイルを選択
+          </Button>
         </div>
       )}
 
@@ -83,17 +97,6 @@ export const ModelSelect = ({
       */}
       <input type="file" hidden ref={modelRef} onChange={selectModel} />
       <input type="file" hidden ref={thumbRef} onChange={selectThumb} />
-
-      {!modelURL && (
-        <Button variant="contained" color="primary" onClick={handleModelClick}>
-          モデルファイルを選択
-        </Button>
-      )}
-      {!thumbURL && (
-        <Button variant="contained" color="primary" onClick={handleThumbClick}>
-          サムネイルファイルを選択
-        </Button>
-      )}
     </div>
   );
 };
