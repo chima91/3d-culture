@@ -1,6 +1,6 @@
 import { AppBar, Avatar, Button, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { useRecoilValue } from "recoil";
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,7 @@ export const DashboardHeader = () => {
             <>
               <Link to="/upload">
                 <IconButton>
-                  <VideoCallIcon />
+                  <UploadFileIcon />
                 </IconButton>
               </Link>
               <IconButton className={styles.profileIcon}>
