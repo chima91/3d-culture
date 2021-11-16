@@ -22,7 +22,7 @@ export const Upload = () => {
   const navigate = useNavigate();
 
   // Dialogクローズ用
-  const [ open, setOpen ] = useState<boolean>(true);
+  const [ , setOpen ] = useState<boolean>(true);
   const handleClose = () => {
     setOpen(false);
     navigate("/");
