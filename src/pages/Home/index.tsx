@@ -31,10 +31,10 @@ export const Home = () => {
           <Grid item xs={3} key={model.id}>
             <Link to={`/detail/${model.id}`} style={{ textDecoration: "none" }}>
               <ObjCard
-                title={model.title}
-                owner={model.owner?.name || ''}
+                title={model.title || "No Title"}
+                owner={model.owner?.name || ""}
                 created={model.created_at}
-                fetcher={() => storage.ref(model.thumbnail_url!).getDownloadURL()}
+                fetcher={() => storage.ref(model.thumbnail_url || "").getDownloadURL()}
               />
             </Link>
           </Grid>

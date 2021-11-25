@@ -1,5 +1,5 @@
 query RecommendModels($currentModelId: String!) {
-  models(where: { id: { _neq: $currentModelId } }) {
+  models(where: { id: { _neq: $currentModelId } }, order_by: { views: desc }) {
     id
     title
     description
