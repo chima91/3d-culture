@@ -1,22 +1,42 @@
 import { Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery } from "../../utils/graphql/generated";
+import { PaginationWrapper } from "../../components/Pagination";
 
+// debug
 import { GlobalUser } from "../../stores/User";
 import { useRecoilValue } from "recoil";
 
 export const Home = () => {
+  // modelを取得するquery
   const { data, error } = useModelsQuery();
 
+  // エラーがあればコンソールに表示
   useEffect(() => {
     if(error) console.error(error);
   }, [error]);
+
+  // 検索条件がある場合は、data.modelsを絞り込み、modelsに結果を入れる(後で実装)
+  const models = data?.models;
+
+  // ページ制御
+  const COUNT_PER_PAGE = 8;
+  const [page, setPage] = useState(1);
+  const [startItem, setStartItem] = useState(0);
+  const handleChange = (value: number) => {
+    setPage(value);
+    setStartItem((value-1) * COUNT_PER_PAGE);
+  };
+  // データ(モデル)数と1ページあたりの表示件数から全ページ数を計算する
+  const totalPage = Math.floor(((models?.length || 0) - 1) / COUNT_PER_PAGE) + 1
+  // currentPageの開始モデルからCOUNT_PER_PAGE分のモデルを表示する
+  const pageItem = models?.slice(startItem, startItem + COUNT_PER_PAGE);
 
   // debug
   const globalUser = useRecoilValue(GlobalUser);
@@ -27,7 +47,8 @@ export const Home = () => {
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
-        {data?.models.map((model) => (
+        {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示する */}
+        {pageItem?.map((model) => (
           <Grid item xs={3} key={model.id}>
             <Link to={`/detail/${model.id}`} style={{ textDecoration: "none" }}>
               <ObjCard
@@ -40,6 +61,7 @@ export const Home = () => {
           </Grid>
         ))}
       </Grid>
+      <PaginationWrapper totalPage={totalPage} currentPage={page} handleChange={(value: number) => handleChange(value)} />
     </Container>
   )
 };
