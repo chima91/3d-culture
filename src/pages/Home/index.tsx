@@ -60,6 +60,7 @@ export const Home = () => {
                 title={model.title || "No Title"}
                 owner={model.owner?.name || ""}
                 created={model.created_at}
+                views={model.views}
                 fetcher={() => storage.ref(model.thumbnail_url || "").getDownloadURL()}
               />
             </Link>

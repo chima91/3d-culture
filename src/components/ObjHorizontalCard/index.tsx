@@ -9,7 +9,7 @@ export type ObjHorizontalCardProps = {
   fetcher: () => Promise<string | undefined>;
 } & HeaderTitleProps & SubHeaderContentProps;
 
-export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizontalCardProps) => {
+export const ObjHorizontalCard = ({ fetcher, title, owner, created, views }: ObjHorizontalCardProps) => {
   const styles = useStyles();
   // サムネイルのダウンロードリンクのステート
   const [src, setSrc] = useState<string>();
@@ -26,7 +26,7 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizon
       <CardHeader
         className={styles.contentPadding}
         title={<HeaderTitle title={title} />}
-        subheader={<SubHeaderContent owner={owner} created={created} />}
+        subheader={<SubHeaderContent owner={owner} created={created} views={views} />}
       />
     </Card>
   );
