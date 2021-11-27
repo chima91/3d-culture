@@ -1,6 +1,7 @@
 import { Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
@@ -8,10 +9,10 @@ import { SNS } from "../../components/SNS";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery } from "../../utils/graphql/generated";
 import { PaginationWrapper } from "../../components/Pagination";
+import { SearchWords } from "../../stores/SearchWords";
 
 // debug
 import { GlobalUser } from "../../stores/User";
-import { useRecoilValue } from "recoil";
 
 export const Home = () => {
   // modelを取得するquery
@@ -22,8 +23,12 @@ export const Home = () => {
     if(error) console.error(error);
   }, [error]);
 
-  // 検索条件がある場合は、data.modelsを絞り込み、modelsに結果を入れる(後で実装)
-  const models = data?.models;
+  // 検索キーワードがある場合は、data.modelsを絞り込み、modelsに結果を入れる
+  const searchWords = useRecoilValue(SearchWords);
+  const models = (searchWords && data) ?
+    data.models.filter(
+      (model) => model.title?.match(searchWords.title || '')
+    ) : data?.models;
 
   // ページ制御
   const COUNT_PER_PAGE = 8;
