@@ -41,6 +41,7 @@ export const Detail = () => {
             created={currentModel?.models_by_pk?.created_at}
             owner={currentModel?.models_by_pk?.owner?.name}
             description={currentModel?.models_by_pk?.description}
+            views={currentModel?.models_by_pk?.views}
             fetcher={async() => {
               if(currentModel?.models_by_pk?.model_url) {
                 return storage
@@ -62,6 +63,7 @@ export const Detail = () => {
                   title={model.title}
                   owner={model.owner?.name || ""}
                   created={model.created_at}
+                  views={model.views}
                   fetcher={() =>
                     storage.ref(model.thumbnail_url!).getDownloadURL()
                   }
