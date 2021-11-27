@@ -61,6 +61,154 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
+/** columns and relationships of "model_views" */
+export type Model_Views = {
+  __typename?: 'model_views';
+  id?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregated selection of "model_views" */
+export type Model_Views_Aggregate = {
+  __typename?: 'model_views_aggregate';
+  aggregate?: Maybe<Model_Views_Aggregate_Fields>;
+  nodes: Array<Model_Views>;
+};
+
+/** aggregate fields of "model_views" */
+export type Model_Views_Aggregate_Fields = {
+  __typename?: 'model_views_aggregate_fields';
+  avg?: Maybe<Model_Views_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Model_Views_Max_Fields>;
+  min?: Maybe<Model_Views_Min_Fields>;
+  stddev?: Maybe<Model_Views_Stddev_Fields>;
+  stddev_pop?: Maybe<Model_Views_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Model_Views_Stddev_Samp_Fields>;
+  sum?: Maybe<Model_Views_Sum_Fields>;
+  var_pop?: Maybe<Model_Views_Var_Pop_Fields>;
+  var_samp?: Maybe<Model_Views_Var_Samp_Fields>;
+  variance?: Maybe<Model_Views_Variance_Fields>;
+};
+
+
+/** aggregate fields of "model_views" */
+export type Model_Views_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Model_Views_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Model_Views_Avg_Fields = {
+  __typename?: 'model_views_avg_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "model_views". All fields are combined with a logical 'AND'. */
+export type Model_Views_Bool_Exp = {
+  _and?: Maybe<Array<Model_Views_Bool_Exp>>;
+  _not?: Maybe<Model_Views_Bool_Exp>;
+  _or?: Maybe<Array<Model_Views_Bool_Exp>>;
+  id?: Maybe<String_Comparison_Exp>;
+  views?: Maybe<Int_Comparison_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "model_views" */
+export type Model_Views_Inc_Input = {
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "model_views" */
+export type Model_Views_Insert_Input = {
+  id?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Model_Views_Max_Fields = {
+  __typename?: 'model_views_max_fields';
+  id?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Model_Views_Min_Fields = {
+  __typename?: 'model_views_min_fields';
+  id?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "model_views" */
+export type Model_Views_Mutation_Response = {
+  __typename?: 'model_views_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Model_Views>;
+};
+
+/** Ordering options when selecting data from "model_views". */
+export type Model_Views_Order_By = {
+  id?: Maybe<Order_By>;
+  views?: Maybe<Order_By>;
+};
+
+/** select columns of table "model_views" */
+export enum Model_Views_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Views = 'views'
+}
+
+/** input type for updating data in table "model_views" */
+export type Model_Views_Set_Input = {
+  id?: Maybe<Scalars['String']>;
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Model_Views_Stddev_Fields = {
+  __typename?: 'model_views_stddev_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Model_Views_Stddev_Pop_Fields = {
+  __typename?: 'model_views_stddev_pop_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Model_Views_Stddev_Samp_Fields = {
+  __typename?: 'model_views_stddev_samp_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Model_Views_Sum_Fields = {
+  __typename?: 'model_views_sum_fields';
+  views?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate var_pop on columns */
+export type Model_Views_Var_Pop_Fields = {
+  __typename?: 'model_views_var_pop_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Model_Views_Var_Samp_Fields = {
+  __typename?: 'model_views_var_samp_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Model_Views_Variance_Fields = {
+  __typename?: 'model_views_variance_fields';
+  views?: Maybe<Scalars['Float']>;
+};
+
 /** columns and relationships of "models" */
 export type Models = {
   __typename?: 'models';
@@ -320,6 +468,8 @@ export type Models_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "model_views" */
+  delete_model_views?: Maybe<Model_Views_Mutation_Response>;
   /** delete data from the table: "models" */
   delete_models?: Maybe<Models_Mutation_Response>;
   /** delete single row from the table: "models" */
@@ -328,6 +478,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "model_views" */
+  insert_model_views?: Maybe<Model_Views_Mutation_Response>;
+  /** insert a single row into the table: "model_views" */
+  insert_model_views_one?: Maybe<Model_Views>;
   /** insert data into the table: "models" */
   insert_models?: Maybe<Models_Mutation_Response>;
   /** insert a single row into the table: "models" */
@@ -336,6 +490,8 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "model_views" */
+  update_model_views?: Maybe<Model_Views_Mutation_Response>;
   /** update data of the table: "models" */
   update_models?: Maybe<Models_Mutation_Response>;
   /** update single row of the table: "models" */
@@ -344,6 +500,12 @@ export type Mutation_Root = {
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Model_ViewsArgs = {
+  where: Model_Views_Bool_Exp;
 };
 
 
@@ -372,6 +534,18 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Model_ViewsArgs = {
+  objects: Array<Model_Views_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Model_Views_OneArgs = {
+  object: Model_Views_Insert_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_ModelsArgs = {
   objects: Array<Models_Insert_Input>;
   on_conflict?: Maybe<Models_On_Conflict>;
@@ -396,6 +570,14 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: Maybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Model_ViewsArgs = {
+  _inc?: Maybe<Model_Views_Inc_Input>;
+  _set?: Maybe<Model_Views_Set_Input>;
+  where: Model_Views_Bool_Exp;
 };
 
 
@@ -446,6 +628,10 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "model_views" */
+  model_views: Array<Model_Views>;
+  /** fetch aggregated fields from the table: "model_views" */
+  model_views_aggregate: Model_Views_Aggregate;
   /** fetch data from the table: "models" */
   models: Array<Models>;
   /** fetch aggregated fields from the table: "models" */
@@ -458,6 +644,24 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootModel_ViewsArgs = {
+  distinct_on?: Maybe<Array<Model_Views_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Model_Views_Order_By>>;
+  where?: Maybe<Model_Views_Bool_Exp>;
+};
+
+
+export type Query_RootModel_Views_AggregateArgs = {
+  distinct_on?: Maybe<Array<Model_Views_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Model_Views_Order_By>>;
+  where?: Maybe<Model_Views_Bool_Exp>;
 };
 
 
@@ -508,6 +712,10 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "model_views" */
+  model_views: Array<Model_Views>;
+  /** fetch aggregated fields from the table: "model_views" */
+  model_views_aggregate: Model_Views_Aggregate;
   /** fetch data from the table: "models" */
   models: Array<Models>;
   /** fetch aggregated fields from the table: "models" */
@@ -520,6 +728,24 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Subscription_RootModel_ViewsArgs = {
+  distinct_on?: Maybe<Array<Model_Views_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Model_Views_Order_By>>;
+  where?: Maybe<Model_Views_Bool_Exp>;
+};
+
+
+export type Subscription_RootModel_Views_AggregateArgs = {
+  distinct_on?: Maybe<Array<Model_Views_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Model_Views_Order_By>>;
+  where?: Maybe<Model_Views_Bool_Exp>;
 };
 
 
@@ -766,6 +992,13 @@ export type InsertUserMutationVariables = Exact<{
 
 export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
 
+export type UpdateModelViewsMutationVariables = Exact<{
+  modelId: Scalars['String'];
+}>;
+
+
+export type UpdateModelViewsMutation = { __typename?: 'mutation_root', update_model_views?: { __typename?: 'model_views_mutation_response', returning: Array<{ __typename?: 'model_views', id?: string | null | undefined, views?: number | null | undefined }> } | null | undefined };
+
 export type ModelByPkQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -883,6 +1116,42 @@ export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
 export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
+export const UpdateModelViewsDocument = gql`
+    mutation updateModelViews($modelId: String!) {
+  update_model_views(where: {id: {_eq: $modelId}}, _inc: {views: 1}) {
+    returning {
+      id
+      views
+    }
+  }
+}
+    `;
+export type UpdateModelViewsMutationFn = Apollo.MutationFunction<UpdateModelViewsMutation, UpdateModelViewsMutationVariables>;
+
+/**
+ * __useUpdateModelViewsMutation__
+ *
+ * To run a mutation, you first call `useUpdateModelViewsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateModelViewsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateModelViewsMutation, { data, loading, error }] = useUpdateModelViewsMutation({
+ *   variables: {
+ *      modelId: // value for 'modelId'
+ *   },
+ * });
+ */
+export function useUpdateModelViewsMutation(baseOptions?: Apollo.MutationHookOptions<UpdateModelViewsMutation, UpdateModelViewsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateModelViewsMutation, UpdateModelViewsMutationVariables>(UpdateModelViewsDocument, options);
+      }
+export type UpdateModelViewsMutationHookResult = ReturnType<typeof useUpdateModelViewsMutation>;
+export type UpdateModelViewsMutationResult = Apollo.MutationResult<UpdateModelViewsMutation>;
+export type UpdateModelViewsMutationOptions = Apollo.BaseMutationOptions<UpdateModelViewsMutation, UpdateModelViewsMutationVariables>;
 export const ModelByPkDocument = gql`
     query ModelByPk($id: String!) {
   models_by_pk(id: $id) {
