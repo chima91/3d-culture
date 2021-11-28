@@ -21,15 +21,14 @@ export const CanvasArea = ({ title, created, owner, description, views, fetcher 
     // Firebase Storageからモデルのダウンロードリンクを取得する
     fetcher().then(setSrc);
   });
-  console.log('src(CanvasArea component)：', src);
 
   return (
     <Card>
       {/* 3Dオブジェ表示エリア */}
-      <CardContent className={styles.canvas}>
+      <CardContent className={styles.canvas} >
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
           {src ? (
-            <Three glbSource={src}/>
+            <Three glbSource={src} />
           ) : (
             <></>
           )}
