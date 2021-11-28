@@ -7,28 +7,39 @@ import { ObjHorizontalCard } from "../../components/ObjHorizontalCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
 import useStyles from "./style";
-import { useModelByPkQuery, useRecommendModelsQuery } from "../../utils/graphql/generated";
+import { useModelByPkQuery, useRecommendModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { storage } from "../../utils/Firebase/config";
 
 export const Detail = () => {
   const styles = useStyles();
   // URLから表示するモデルのIDを取得
   const { objId } = useParams();
-  console.log('objId：', objId);
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
       id: objId
     }
   })
-  console.log('currentModel：', currentModel);
   // IDからリコメンドのモデル群を取得
   const { data: recommendModels } = useRecommendModelsQuery({
     variables: {
       currentModelId: objId,
     },
   });
-  console.log('recommendModels：', recommendModels);
+
+  // 閲覧回数をカウントアップするmutation
+  const [ updateMutation, { error: apolloError } ] = useUpdateModelViewsMutation({
+    refetchQueries: [{ query: ModelsDocument }]
+  });
+  // 閲覧回数をカウントアップする関数
+  const onClickCard = async (id: string | undefined) => {
+    await updateMutation({
+      variables: {
+        modelId: id as string
+      }
+    });
+    if (apolloError) console.log(apolloError.message)
+  };
 
   return (
     <Container className={styles.root}>
@@ -41,6 +52,7 @@ export const Detail = () => {
             created={currentModel?.models_by_pk?.created_at}
             owner={currentModel?.models_by_pk?.owner?.name}
             description={currentModel?.models_by_pk?.description}
+            views={currentModel?.models_by_pk?.views}
             fetcher={async() => {
               if(currentModel?.models_by_pk?.model_url) {
                 return storage
@@ -62,9 +74,11 @@ export const Detail = () => {
                   title={model.title}
                   owner={model.owner?.name || ""}
                   created={model.created_at}
+                  views={model.views}
                   fetcher={() =>
                     storage.ref(model.thumbnail_url!).getDownloadURL()
                   }
+                  onClick={() => onClickCard(currentModel?.models_by_pk?.id)}
                 />
               </Link>
             </div>

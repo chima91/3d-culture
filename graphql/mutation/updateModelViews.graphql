@@ -1,0 +1,8 @@
+mutation updateModelViews($modelId: String!) {
+  update_model_views(where: { id: { _eq: $modelId } }, _inc: { views: 1 }) {
+    returning {
+      id
+      views
+    }
+  }
+}

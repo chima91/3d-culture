@@ -7,7 +7,7 @@ import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
 import { storage } from "../../utils/Firebase/config";
-import { useModelsQuery } from "../../utils/graphql/generated";
+import { useModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { PaginationWrapper } from "../../components/Pagination";
 import { SearchWords } from "../../stores/SearchWords";
 
@@ -43,6 +43,20 @@ export const Home = () => {
   // currentPageの開始モデルからCOUNT_PER_PAGE分のモデルを表示する
   const pageItem = models?.slice(startItem, startItem + COUNT_PER_PAGE);
 
+  // 閲覧回数をカウントアップするmutation
+  const [ updateMutation, { error: apolloError } ] = useUpdateModelViewsMutation({
+    refetchQueries: [{ query: ModelsDocument }]
+  });
+  // 閲覧回数をカウントアップする関数
+  const onClickCard = async (id: string | undefined) => {
+    await updateMutation({
+      variables: {
+        modelId: id as string
+      }
+    });
+    if (apolloError) console.log(apolloError.message)
+  };
+
   // debug
   const globalUser = useRecoilValue(GlobalUser);
   console.log('globalUser(Home page):', globalUser);
@@ -60,7 +74,9 @@ export const Home = () => {
                 title={model.title || "No Title"}
                 owner={model.owner?.name || ""}
                 created={model.created_at}
+                views={model.views}
                 fetcher={() => storage.ref(model.thumbnail_url || "").getDownloadURL()}
+                onClick={() => onClickCard(model.id)}
               />
             </Link>
           </Grid>
