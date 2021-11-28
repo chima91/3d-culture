@@ -78,7 +78,7 @@ export const Detail = () => {
                   fetcher={() =>
                     storage.ref(model.thumbnail_url!).getDownloadURL()
                   }
-                  onClick={() => onClickCard(currentModel?.models_by_pk?.id)}
+                  onClick={() => onClickCard(model.id)}
                 />
               </Link>
             </div>
