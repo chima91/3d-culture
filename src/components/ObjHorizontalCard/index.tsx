@@ -7,9 +7,10 @@ import useStyles from "./style";
 
 export type ObjHorizontalCardProps = {
   fetcher: () => Promise<string | undefined>;
+  onClick: () => void;
 } & HeaderTitleProps & SubHeaderContentProps;
 
-export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizontalCardProps) => {
+export const ObjHorizontalCard = ({ fetcher, title, owner, created, views, onClick }: ObjHorizontalCardProps) => {
   const styles = useStyles();
   // サムネイルのダウンロードリンクのステート
   const [src, setSrc] = useState<string>();
@@ -19,14 +20,14 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created }: ObjHorizon
   });
 
   return (
-    <Card className={`${styles.root} ${styles.transparent}`} elevation={0} square>
+    <Card className={`${styles.root} ${styles.transparent}`} elevation={0} square onClick={onClick}>
         <div className={styles.thumbnail}>
           <CardMedia className={styles.media} image={src ? src : '/static/no-image.jpg'} title="Thumbnail" />
         </div>
       <CardHeader
         className={styles.contentPadding}
         title={<HeaderTitle title={title} />}
-        subheader={<SubHeaderContent owner={owner} created={created} />}
+        subheader={<SubHeaderContent owner={owner} created={created} views={views} />}
       />
     </Card>
   );

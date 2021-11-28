@@ -7,9 +7,10 @@ import { SubHeaderContent, SubHeaderContentProps } from "./SubHeaderContent";
 
 export type ObjCardProps = {
   fetcher: () => Promise<string | undefined>;
+  onClick: () => void;
 } & HeaderTitleProps & SubHeaderContentProps;
 
-export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
+export const ObjCard= ({ fetcher, title, owner, created, views, onClick }: ObjCardProps) => {
   const styles = useStyles();
 
   // モデルのサムネイルのURLを格納する
@@ -20,7 +21,7 @@ export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
   });
 
   return (
-    <Card>
+    <Card onClick={onClick}>
       <CardMedia
         className={styles.media}
         image={imageSrc || "/static/no-image.jpg"}
@@ -30,7 +31,7 @@ export const ObjCard= ({ fetcher, title, owner, created }: ObjCardProps) => {
       <CardHeader
         avatar={<Avatar />}
         title={<HeaderTitle title={title} />}
-        subheader={<SubHeaderContent owner={owner} created={created} />}
+        subheader={<SubHeaderContent owner={owner} created={created} views={views} />}
       />
     </Card>
   );
