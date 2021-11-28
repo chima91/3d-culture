@@ -9,15 +9,9 @@ export default makeStyles({
     flex: 1,
     overflow: "hidden",
     marginLeft: 10,
-    "@media (max-width: 600px)": {
-      paddingLeft: 0
-    }
   },
   input: {
     width: "100%",
-    "@media (max-width: 600px)": {
-      display: "none"
-    }
   },
   searchIcon: {
     width: 80,
