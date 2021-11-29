@@ -31,6 +31,9 @@ export const Detail = () => {
       currentModelId: objId,
     },
   });
+  // リコメンドモデルの表示件数を一時的に6件に制限。後でページネーションやインフィニティスクロールを導入する。
+  const MODELS_DISP_MAX = 6;
+  const recoModels = recommendModels?.models.slice(0, MODELS_DISP_MAX);
 
   // 閲覧回数をカウントアップするmutation
   const [ updateMutation, { error: apolloError } ] = useUpdateModelViewsMutation({
@@ -104,7 +107,7 @@ export const Detail = () => {
           />
         </Grid>
         <Grid item xs={12} lg={4}>
-          {recommendModels?.models.map((model) => (
+          {recoModels?.map((model) => (
             <div className={styles.cardPadding} key={model.id}>
               <Link
                 to={`/detail/${model.id}`}
