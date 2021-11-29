@@ -1,13 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
 export default makeStyles({
-  paddingHorizontalLess: {
-    paddingLeft: 0,
-    paddingRight: 0,
-  },
-  transparent: {
-    backgroundColor: "transparent",
-  },
   descPadding: {
     paddingLeft: 56
   },
@@ -15,5 +8,9 @@ export default makeStyles({
     maxWidth: "1000px",
     height: "450px",
     backgroundColor: "#282828"
-  }
+  },
+  channelBtn: {
+    display: "flex",
+    marginLeft: 15
+  },
 });
