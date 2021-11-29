@@ -474,6 +474,10 @@ export type Mutation_Root = {
   delete_models?: Maybe<Models_Mutation_Response>;
   /** delete single row from the table: "models" */
   delete_models_by_pk?: Maybe<Models>;
+  /** delete data from the table: "subscribers" */
+  delete_subscribers?: Maybe<Subscribers_Mutation_Response>;
+  /** delete single row from the table: "subscribers" */
+  delete_subscribers_by_pk?: Maybe<Subscribers>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -486,6 +490,10 @@ export type Mutation_Root = {
   insert_models?: Maybe<Models_Mutation_Response>;
   /** insert a single row into the table: "models" */
   insert_models_one?: Maybe<Models>;
+  /** insert data into the table: "subscribers" */
+  insert_subscribers?: Maybe<Subscribers_Mutation_Response>;
+  /** insert a single row into the table: "subscribers" */
+  insert_subscribers_one?: Maybe<Subscribers>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -496,6 +504,10 @@ export type Mutation_Root = {
   update_models?: Maybe<Models_Mutation_Response>;
   /** update single row of the table: "models" */
   update_models_by_pk?: Maybe<Models>;
+  /** update data of the table: "subscribers" */
+  update_subscribers?: Maybe<Subscribers_Mutation_Response>;
+  /** update single row of the table: "subscribers" */
+  update_subscribers_by_pk?: Maybe<Subscribers>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -518,6 +530,19 @@ export type Mutation_RootDelete_ModelsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Models_By_PkArgs = {
   id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_SubscribersArgs = {
+  where: Subscribers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Subscribers_By_PkArgs = {
+  subscribe_id: Scalars['String'];
+  userid: Scalars['String'];
 };
 
 
@@ -560,6 +585,20 @@ export type Mutation_RootInsert_Models_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_SubscribersArgs = {
+  objects: Array<Subscribers_Insert_Input>;
+  on_conflict?: Maybe<Subscribers_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Subscribers_OneArgs = {
+  object: Subscribers_Insert_Input;
+  on_conflict?: Maybe<Subscribers_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
   on_conflict?: Maybe<Users_On_Conflict>;
@@ -594,6 +633,20 @@ export type Mutation_RootUpdate_Models_By_PkArgs = {
   _inc?: Maybe<Models_Inc_Input>;
   _set?: Maybe<Models_Set_Input>;
   pk_columns: Models_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_SubscribersArgs = {
+  _set?: Maybe<Subscribers_Set_Input>;
+  where: Subscribers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Subscribers_By_PkArgs = {
+  _set?: Maybe<Subscribers_Set_Input>;
+  pk_columns: Subscribers_Pk_Columns_Input;
 };
 
 
@@ -638,6 +691,12 @@ export type Query_Root = {
   models_aggregate: Models_Aggregate;
   /** fetch data from the table: "models" using primary key columns */
   models_by_pk?: Maybe<Models>;
+  /** An array relationship */
+  subscribers: Array<Subscribers>;
+  /** An aggregate relationship */
+  subscribers_aggregate: Subscribers_Aggregate;
+  /** fetch data from the table: "subscribers" using primary key columns */
+  subscribers_by_pk?: Maybe<Subscribers>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -688,6 +747,30 @@ export type Query_RootModels_By_PkArgs = {
 };
 
 
+export type Query_RootSubscribersArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+export type Query_RootSubscribers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+export type Query_RootSubscribers_By_PkArgs = {
+  subscribe_id: Scalars['String'];
+  userid: Scalars['String'];
+};
+
+
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -710,6 +793,182 @@ export type Query_RootUsers_By_PkArgs = {
   id: Scalars['String'];
 };
 
+/** columns and relationships of "subscribers" */
+export type Subscribers = {
+  __typename?: 'subscribers';
+  created_at: Scalars['timestamptz'];
+  subscribe_id: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  /** An object relationship */
+  user: Users;
+  /** An object relationship */
+  userByUserid: Users;
+  userid: Scalars['String'];
+};
+
+/** aggregated selection of "subscribers" */
+export type Subscribers_Aggregate = {
+  __typename?: 'subscribers_aggregate';
+  aggregate?: Maybe<Subscribers_Aggregate_Fields>;
+  nodes: Array<Subscribers>;
+};
+
+/** aggregate fields of "subscribers" */
+export type Subscribers_Aggregate_Fields = {
+  __typename?: 'subscribers_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Subscribers_Max_Fields>;
+  min?: Maybe<Subscribers_Min_Fields>;
+};
+
+
+/** aggregate fields of "subscribers" */
+export type Subscribers_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Subscribers_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "subscribers" */
+export type Subscribers_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Subscribers_Max_Order_By>;
+  min?: Maybe<Subscribers_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "subscribers" */
+export type Subscribers_Arr_Rel_Insert_Input = {
+  data: Array<Subscribers_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Subscribers_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "subscribers". All fields are combined with a logical 'AND'. */
+export type Subscribers_Bool_Exp = {
+  _and?: Maybe<Array<Subscribers_Bool_Exp>>;
+  _not?: Maybe<Subscribers_Bool_Exp>;
+  _or?: Maybe<Array<Subscribers_Bool_Exp>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  subscribe_id?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  user?: Maybe<Users_Bool_Exp>;
+  userByUserid?: Maybe<Users_Bool_Exp>;
+  userid?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "subscribers" */
+export enum Subscribers_Constraint {
+  /** unique or primary key constraint */
+  SubscribersPkey = 'subscribers_pkey'
+}
+
+/** input type for inserting data into table "subscribers" */
+export type Subscribers_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  subscribe_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user?: Maybe<Users_Obj_Rel_Insert_Input>;
+  userByUserid?: Maybe<Users_Obj_Rel_Insert_Input>;
+  userid?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Subscribers_Max_Fields = {
+  __typename?: 'subscribers_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  subscribe_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  userid?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "subscribers" */
+export type Subscribers_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  subscribe_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  userid?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Subscribers_Min_Fields = {
+  __typename?: 'subscribers_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  subscribe_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  userid?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "subscribers" */
+export type Subscribers_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  subscribe_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  userid?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "subscribers" */
+export type Subscribers_Mutation_Response = {
+  __typename?: 'subscribers_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Subscribers>;
+};
+
+/** on conflict condition type for table "subscribers" */
+export type Subscribers_On_Conflict = {
+  constraint: Subscribers_Constraint;
+  update_columns?: Array<Subscribers_Update_Column>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "subscribers". */
+export type Subscribers_Order_By = {
+  created_at?: Maybe<Order_By>;
+  subscribe_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user?: Maybe<Users_Order_By>;
+  userByUserid?: Maybe<Users_Order_By>;
+  userid?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: subscribers */
+export type Subscribers_Pk_Columns_Input = {
+  subscribe_id: Scalars['String'];
+  userid: Scalars['String'];
+};
+
+/** select columns of table "subscribers" */
+export enum Subscribers_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  SubscribeId = 'subscribe_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Userid = 'userid'
+}
+
+/** input type for updating data in table "subscribers" */
+export type Subscribers_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  subscribe_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  userid?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "subscribers" */
+export enum Subscribers_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  SubscribeId = 'subscribe_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Userid = 'userid'
+}
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "model_views" */
@@ -722,6 +981,12 @@ export type Subscription_Root = {
   models_aggregate: Models_Aggregate;
   /** fetch data from the table: "models" using primary key columns */
   models_by_pk?: Maybe<Models>;
+  /** An array relationship */
+  subscribers: Array<Subscribers>;
+  /** An aggregate relationship */
+  subscribers_aggregate: Subscribers_Aggregate;
+  /** fetch data from the table: "subscribers" using primary key columns */
+  subscribers_by_pk?: Maybe<Subscribers>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -772,6 +1037,30 @@ export type Subscription_RootModels_By_PkArgs = {
 };
 
 
+export type Subscription_RootSubscribersArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+export type Subscription_RootSubscribers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+export type Subscription_RootSubscribers_By_PkArgs = {
+  subscribe_id: Scalars['String'];
+  userid: Scalars['String'];
+};
+
+
 export type Subscription_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -815,7 +1104,55 @@ export type Users = {
   id: Scalars['String'];
   name: Scalars['String'];
   profile_photo_url: Scalars['String'];
+  /** An array relationship */
+  subscribers: Array<Subscribers>;
+  /** An array relationship */
+  subscribersByUserid: Array<Subscribers>;
+  /** An aggregate relationship */
+  subscribersByUserid_aggregate: Subscribers_Aggregate;
+  /** An aggregate relationship */
+  subscribers_aggregate: Subscribers_Aggregate;
   updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "users" */
+export type UsersSubscribersArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersSubscribersByUseridArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersSubscribersByUserid_AggregateArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersSubscribers_AggregateArgs = {
+  distinct_on?: Maybe<Array<Subscribers_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Subscribers_Order_By>>;
+  where?: Maybe<Subscribers_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -850,6 +1187,8 @@ export type Users_Bool_Exp = {
   id?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   profile_photo_url?: Maybe<String_Comparison_Exp>;
+  subscribers?: Maybe<Subscribers_Bool_Exp>;
+  subscribersByUserid?: Maybe<Subscribers_Bool_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -866,6 +1205,8 @@ export type Users_Insert_Input = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   profile_photo_url?: Maybe<Scalars['String']>;
+  subscribers?: Maybe<Subscribers_Arr_Rel_Insert_Input>;
+  subscribersByUserid?: Maybe<Subscribers_Arr_Rel_Insert_Input>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -921,6 +1262,8 @@ export type Users_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   profile_photo_url?: Maybe<Order_By>;
+  subscribersByUserid_aggregate?: Maybe<Subscribers_Aggregate_Order_By>;
+  subscribers_aggregate?: Maybe<Subscribers_Aggregate_Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -992,6 +1335,22 @@ export type InsertUserMutationVariables = Exact<{
 
 export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
 
+export type DeleteSubscribeMutationVariables = Exact<{
+  subscribe_id: Scalars['String'];
+  userid: Scalars['String'];
+}>;
+
+
+export type DeleteSubscribeMutation = { __typename?: 'mutation_root', delete_subscribers_by_pk?: { __typename?: 'subscribers', userid: string, subscribe_id: string } | null | undefined };
+
+export type InsertSubscribeMutationVariables = Exact<{
+  userid: Scalars['String'];
+  subscribe_id: Scalars['String'];
+}>;
+
+
+export type InsertSubscribeMutation = { __typename?: 'mutation_root', insert_subscribers_one?: { __typename?: 'subscribers', userid: string, subscribe_id: string } | null | undefined };
+
 export type UpdateModelViewsMutationVariables = Exact<{
   modelId: Scalars['String'];
 }>;
@@ -1011,7 +1370,7 @@ export type UserByIdQueryVariables = Exact<{
 }>;
 
 
-export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
+export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any, subscribersByUserid: Array<{ __typename?: 'subscribers', subscribe_id: string }> } | null | undefined };
 
 export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1024,6 +1383,13 @@ export type RecommendModelsQueryVariables = Exact<{
 
 
 export type RecommendModelsQuery = { __typename?: 'query_root', models: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, created_at: any, updated_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, updated_at: any, email: string, created_at: any } | null | undefined }> };
+
+export type SubscribersQueryVariables = Exact<{
+  ownerid: Scalars['String'];
+}>;
+
+
+export type SubscribersQuery = { __typename?: 'query_root', subscribers: Array<{ __typename?: 'subscribers', userid: string }> };
 
 
 export const InsertModelDocument = gql`
@@ -1116,6 +1482,76 @@ export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
 export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
+export const DeleteSubscribeDocument = gql`
+    mutation deleteSubscribe($subscribe_id: String!, $userid: String!) {
+  delete_subscribers_by_pk(subscribe_id: $subscribe_id, userid: $userid) {
+    userid
+    subscribe_id
+  }
+}
+    `;
+export type DeleteSubscribeMutationFn = Apollo.MutationFunction<DeleteSubscribeMutation, DeleteSubscribeMutationVariables>;
+
+/**
+ * __useDeleteSubscribeMutation__
+ *
+ * To run a mutation, you first call `useDeleteSubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteSubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteSubscribeMutation, { data, loading, error }] = useDeleteSubscribeMutation({
+ *   variables: {
+ *      subscribe_id: // value for 'subscribe_id'
+ *      userid: // value for 'userid'
+ *   },
+ * });
+ */
+export function useDeleteSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<DeleteSubscribeMutation, DeleteSubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteSubscribeMutation, DeleteSubscribeMutationVariables>(DeleteSubscribeDocument, options);
+      }
+export type DeleteSubscribeMutationHookResult = ReturnType<typeof useDeleteSubscribeMutation>;
+export type DeleteSubscribeMutationResult = Apollo.MutationResult<DeleteSubscribeMutation>;
+export type DeleteSubscribeMutationOptions = Apollo.BaseMutationOptions<DeleteSubscribeMutation, DeleteSubscribeMutationVariables>;
+export const InsertSubscribeDocument = gql`
+    mutation InsertSubscribe($userid: String!, $subscribe_id: String!) {
+  insert_subscribers_one(object: {userid: $userid, subscribe_id: $subscribe_id}) {
+    userid
+    subscribe_id
+  }
+}
+    `;
+export type InsertSubscribeMutationFn = Apollo.MutationFunction<InsertSubscribeMutation, InsertSubscribeMutationVariables>;
+
+/**
+ * __useInsertSubscribeMutation__
+ *
+ * To run a mutation, you first call `useInsertSubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertSubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertSubscribeMutation, { data, loading, error }] = useInsertSubscribeMutation({
+ *   variables: {
+ *      userid: // value for 'userid'
+ *      subscribe_id: // value for 'subscribe_id'
+ *   },
+ * });
+ */
+export function useInsertSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<InsertSubscribeMutation, InsertSubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertSubscribeMutation, InsertSubscribeMutationVariables>(InsertSubscribeDocument, options);
+      }
+export type InsertSubscribeMutationHookResult = ReturnType<typeof useInsertSubscribeMutation>;
+export type InsertSubscribeMutationResult = Apollo.MutationResult<InsertSubscribeMutation>;
+export type InsertSubscribeMutationOptions = Apollo.BaseMutationOptions<InsertSubscribeMutation, InsertSubscribeMutationVariables>;
 export const UpdateModelViewsDocument = gql`
     mutation updateModelViews($modelId: String!) {
   update_model_views(where: {id: {_eq: $modelId}}, _inc: {views: 1}) {
@@ -1211,6 +1647,9 @@ export const UserByIdDocument = gql`
     profile_photo_url
     created_at
     updated_at
+    subscribersByUserid {
+      subscribe_id
+    }
   }
 }
     `;
@@ -1341,3 +1780,38 @@ export function useRecommendModelsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type RecommendModelsQueryHookResult = ReturnType<typeof useRecommendModelsQuery>;
 export type RecommendModelsLazyQueryHookResult = ReturnType<typeof useRecommendModelsLazyQuery>;
 export type RecommendModelsQueryResult = Apollo.QueryResult<RecommendModelsQuery, RecommendModelsQueryVariables>;
+export const SubscribersDocument = gql`
+    query Subscribers($ownerid: String!) {
+  subscribers(where: {subscribe_id: {_eq: $ownerid}}) {
+    userid
+  }
+}
+    `;
+
+/**
+ * __useSubscribersQuery__
+ *
+ * To run a query within a React component, call `useSubscribersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubscribersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubscribersQuery({
+ *   variables: {
+ *      ownerid: // value for 'ownerid'
+ *   },
+ * });
+ */
+export function useSubscribersQuery(baseOptions: Apollo.QueryHookOptions<SubscribersQuery, SubscribersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubscribersQuery, SubscribersQueryVariables>(SubscribersDocument, options);
+      }
+export function useSubscribersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubscribersQuery, SubscribersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubscribersQuery, SubscribersQueryVariables>(SubscribersDocument, options);
+        }
+export type SubscribersQueryHookResult = ReturnType<typeof useSubscribersQuery>;
+export type SubscribersLazyQueryHookResult = ReturnType<typeof useSubscribersLazyQuery>;
+export type SubscribersQueryResult = Apollo.QueryResult<SubscribersQuery, SubscribersQueryVariables>;
