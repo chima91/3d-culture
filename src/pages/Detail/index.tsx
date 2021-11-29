@@ -96,6 +96,9 @@ export const Detail = () => {
             owner={currentModel?.models_by_pk?.owner?.name}
             description={currentModel?.models_by_pk?.description}
             views={currentModel?.models_by_pk?.views}
+            subscribers={subscribers?.subscribers.length || 0}
+            isCurrentModelByOthers={isCurrentModelByOthers || false}
+            isSubscribed={isSubscribed}
             fetcher={async() => {
               if(currentModel?.models_by_pk?.model_url) {
                 return storage
@@ -104,6 +107,8 @@ export const Detail = () => {
               }
               return undefined;
             }}
+            onSubscribe={() => { onSubscribe(globalUser?.id || '', currentModel?.models_by_pk?.owner?.id || '') }}
+            onUnSubscribe={() => { onUnSubscribe(globalUser?.id || '', currentModel?.models_by_pk?.owner?.id || '') }}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
