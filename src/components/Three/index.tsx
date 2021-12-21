@@ -10,7 +10,8 @@ export const Three = ({ glbSource }: ThreeProp) => {
 
   return (
     <Fiber.Canvas>
-      <Drei.PerspectiveCamera makeDefault fov={15} />
+      {/* fov(field of view)とは、視点を動かさずに見える範囲(視野角)のことで、数値が大きいほど広い範囲が見えるようになるが、遠くは見えにくくなる。 */}
+      <Drei.PerspectiveCamera makeDefault fov={60} />
       <Drei.OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
       <Drei.Stage>
         <group dispose={null}>
