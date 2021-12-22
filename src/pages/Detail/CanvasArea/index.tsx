@@ -1,4 +1,6 @@
-import { Avatar, Card, CardContent, CardHeader, Divider, Typography } from "@material-ui/core";
+import { Avatar, Card, CardContent, CardHeader, Divider, Typography, Button } from "@material-ui/core";
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
 
 import { Three } from "../../../components/Three";
@@ -10,10 +12,27 @@ export type CanvasAreaProps = {
   owner: string | undefined;
   description: string | undefined;
   views: number | undefined;
+  subscribers: number | undefined;  // 被登録者数
+  isCurrentModelByOthers: boolean;  // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
+  isSubscribed: boolean;  // チャンネル登録済みかどうか
+  onSubscribe: () => any;  // チャンネル登録処理
+  onUnSubscribe: () => any;  // チャンネル登録解除処理
   fetcher: () => Promise<string | undefined>;
 };
 
-export const CanvasArea = ({ title, created, owner, description, views, fetcher }: CanvasAreaProps) => {
+export const CanvasArea = ({
+  title,
+  created,
+  owner,
+  description,
+  views,
+  subscribers,
+  isCurrentModelByOthers,
+  isSubscribed,
+  onSubscribe,
+  onUnSubscribe,
+  fetcher
+}: CanvasAreaProps) => {
   const styles = useStyles();
   // モデルのダウンロードリンクURLを格納するためのステート
   const [src, setSrc] = useState<string>();
@@ -49,7 +68,33 @@ export const CanvasArea = ({ title, created, owner, description, views, fetcher 
       <CardHeader
         avatar={<Avatar />}
         title={owner}
+        subheader={`チャンネル登録者数：${subscribers || 0}人`}
       />
+
+      {/* チャンネル登録/解除エリア */}
+      {isCurrentModelByOthers &&
+      <div className={styles.channelBtn}>
+        {isSubscribed ? (
+          <Button
+            variant="contained"
+            color="default"
+            onClick={onUnSubscribe}
+            startIcon={<CancelIcon />}
+          >
+            チャンネル登録解除
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={onSubscribe}
+            startIcon={<AddCircleIcon />}
+          >
+            チャンネル登録
+          </Button>
+        )}
+      </div>
+    }
 
       {/* 博物館の方の説明文エリア */}
       <CardContent className={styles.descPadding}>
