@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import { Signout } from "./pages/Signout";
 import { Signup } from "./pages/Signup";
 import { Upload } from "./pages/Upload";
+import { Channels } from "./pages/Channels";
 
 export const RootRouter = () => {
   return useRoutes([
@@ -17,7 +18,8 @@ export const RootRouter = () => {
       element: <HomeLayout />,
       children: [
         { path: '/', element: <Home /> },
-        { path: '/upload', element: <Upload /> }
+        { path: 'upload', element: <Upload /> },
+        { path: 'channels', element: <Channels /> },
       ],
     },
     {
