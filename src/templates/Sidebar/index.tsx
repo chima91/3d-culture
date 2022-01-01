@@ -1,13 +1,16 @@
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-import MuseumIcon from '@material-ui/icons/Museum';
+import SubscriptionsIcon from "@material-ui/icons/Subscriptions"
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
+import { GlobalUser } from "../../stores/User";
 import useStyles from "./style";
 
 export const Sidebar = () => {
   const styles = useStyles();
+
+  const globalUser = useRecoilValue(GlobalUser);
 
   return (
     <List className={styles.root} component="nav">
@@ -17,20 +20,14 @@ export const Sidebar = () => {
         </ListItemIcon>
         <ListItemText primary="ホーム" />
       </ListItem>
-
-      <ListItem button>
-        <ListItemIcon>
-          <WhatshotIcon />
-        </ListItemIcon>
-        <ListItemText primary="トレンド" />
-      </ListItem>
-
-      <ListItem button>
-        <ListItemIcon>
-          <MuseumIcon />
-        </ListItemIcon>
-        <ListItemText primary="博物館一覧" />
-      </ListItem>
+      {globalUser?.id && (
+        <ListItem button component={Link} to="/channels">
+          <ListItemIcon>
+            <SubscriptionsIcon />
+          </ListItemIcon>
+          <ListItemText primary="登録チャンネル" />
+        </ListItem>
+      )}
     </List>
   )
 }
