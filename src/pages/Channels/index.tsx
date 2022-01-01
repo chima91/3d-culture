@@ -10,7 +10,6 @@ import { storage } from "../../utils/Firebase/config";
 import { useChannelListQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { useUnSubscribe } from "../../hooks/Channel/useUnSubscribe";
 import useStyles from "./style";
-import { style } from "@mui/system";
 
 export const Channels = () => {
   const styles = useStyles();
