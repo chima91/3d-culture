@@ -255,10 +255,37 @@ export type Models_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "models" */
+export type Models_Aggregate_Order_By = {
+  avg?: Maybe<Models_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Models_Max_Order_By>;
+  min?: Maybe<Models_Min_Order_By>;
+  stddev?: Maybe<Models_Stddev_Order_By>;
+  stddev_pop?: Maybe<Models_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Models_Stddev_Samp_Order_By>;
+  sum?: Maybe<Models_Sum_Order_By>;
+  var_pop?: Maybe<Models_Var_Pop_Order_By>;
+  var_samp?: Maybe<Models_Var_Samp_Order_By>;
+  variance?: Maybe<Models_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "models" */
+export type Models_Arr_Rel_Insert_Input = {
+  data: Array<Models_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: Maybe<Models_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Models_Avg_Fields = {
   __typename?: 'models_avg_fields';
   views?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "models" */
+export type Models_Avg_Order_By = {
+  views?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "models". All fields are combined with a logical 'AND'. */
@@ -317,6 +344,19 @@ export type Models_Max_Fields = {
   views?: Maybe<Scalars['Int']>;
 };
 
+/** order by max() on columns of table "models" */
+export type Models_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  model_url?: Maybe<Order_By>;
+  owner_id?: Maybe<Order_By>;
+  thumbnail_url?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  views?: Maybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Models_Min_Fields = {
   __typename?: 'models_min_fields';
@@ -329,6 +369,19 @@ export type Models_Min_Fields = {
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   views?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "models" */
+export type Models_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  model_url?: Maybe<Order_By>;
+  owner_id?: Maybe<Order_By>;
+  thumbnail_url?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  views?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "models" */
@@ -407,10 +460,20 @@ export type Models_Stddev_Fields = {
   views?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev() on columns of table "models" */
+export type Models_Stddev_Order_By = {
+  views?: Maybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Models_Stddev_Pop_Fields = {
   __typename?: 'models_stddev_pop_fields';
   views?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "models" */
+export type Models_Stddev_Pop_Order_By = {
+  views?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -419,10 +482,20 @@ export type Models_Stddev_Samp_Fields = {
   views?: Maybe<Scalars['Float']>;
 };
 
+/** order by stddev_samp() on columns of table "models" */
+export type Models_Stddev_Samp_Order_By = {
+  views?: Maybe<Order_By>;
+};
+
 /** aggregate sum on columns */
 export type Models_Sum_Fields = {
   __typename?: 'models_sum_fields';
   views?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "models" */
+export type Models_Sum_Order_By = {
+  views?: Maybe<Order_By>;
 };
 
 /** update columns of table "models" */
@@ -453,16 +526,31 @@ export type Models_Var_Pop_Fields = {
   views?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_pop() on columns of table "models" */
+export type Models_Var_Pop_Order_By = {
+  views?: Maybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Models_Var_Samp_Fields = {
   __typename?: 'models_var_samp_fields';
   views?: Maybe<Scalars['Float']>;
 };
 
+/** order by var_samp() on columns of table "models" */
+export type Models_Var_Samp_Order_By = {
+  views?: Maybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Models_Variance_Fields = {
   __typename?: 'models_variance_fields';
   views?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "models" */
+export type Models_Variance_Order_By = {
+  views?: Maybe<Order_By>;
 };
 
 /** mutation root */
@@ -798,11 +886,11 @@ export type Subscribers = {
   __typename?: 'subscribers';
   created_at: Scalars['timestamptz'];
   subscribe_id: Scalars['String'];
+  /** An object relationship */
+  subscribed: Users;
+  /** An object relationship */
+  subscription: Users;
   updated_at: Scalars['timestamptz'];
-  /** An object relationship */
-  user: Users;
-  /** An object relationship */
-  userByUserid: Users;
   userid: Scalars['String'];
 };
 
@@ -849,9 +937,9 @@ export type Subscribers_Bool_Exp = {
   _or?: Maybe<Array<Subscribers_Bool_Exp>>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   subscribe_id?: Maybe<String_Comparison_Exp>;
+  subscribed?: Maybe<Users_Bool_Exp>;
+  subscription?: Maybe<Users_Bool_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-  user?: Maybe<Users_Bool_Exp>;
-  userByUserid?: Maybe<Users_Bool_Exp>;
   userid?: Maybe<String_Comparison_Exp>;
 };
 
@@ -865,9 +953,9 @@ export enum Subscribers_Constraint {
 export type Subscribers_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   subscribe_id?: Maybe<Scalars['String']>;
+  subscribed?: Maybe<Users_Obj_Rel_Insert_Input>;
+  subscription?: Maybe<Users_Obj_Rel_Insert_Input>;
   updated_at?: Maybe<Scalars['timestamptz']>;
-  user?: Maybe<Users_Obj_Rel_Insert_Input>;
-  userByUserid?: Maybe<Users_Obj_Rel_Insert_Input>;
   userid?: Maybe<Scalars['String']>;
 };
 
@@ -925,9 +1013,9 @@ export type Subscribers_On_Conflict = {
 export type Subscribers_Order_By = {
   created_at?: Maybe<Order_By>;
   subscribe_id?: Maybe<Order_By>;
+  subscribed?: Maybe<Users_Order_By>;
+  subscription?: Maybe<Users_Order_By>;
   updated_at?: Maybe<Order_By>;
-  user?: Maybe<Users_Order_By>;
-  userByUserid?: Maybe<Users_Order_By>;
   userid?: Maybe<Order_By>;
 };
 
@@ -1113,6 +1201,10 @@ export type Users = {
   /** An aggregate relationship */
   subscribers_aggregate: Subscribers_Aggregate;
   updated_at: Scalars['timestamptz'];
+  /** An array relationship */
+  usersModelArrayRelation: Array<Models>;
+  /** An aggregate relationship */
+  usersModelArrayRelation_aggregate: Models_Aggregate;
 };
 
 
@@ -1155,6 +1247,26 @@ export type UsersSubscribers_AggregateArgs = {
   where?: Maybe<Subscribers_Bool_Exp>;
 };
 
+
+/** columns and relationships of "users" */
+export type UsersUsersModelArrayRelationArgs = {
+  distinct_on?: Maybe<Array<Models_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Models_Order_By>>;
+  where?: Maybe<Models_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersUsersModelArrayRelation_AggregateArgs = {
+  distinct_on?: Maybe<Array<Models_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Models_Order_By>>;
+  where?: Maybe<Models_Bool_Exp>;
+};
+
 /** aggregated selection of "users" */
 export type Users_Aggregate = {
   __typename?: 'users_aggregate';
@@ -1190,6 +1302,7 @@ export type Users_Bool_Exp = {
   subscribers?: Maybe<Subscribers_Bool_Exp>;
   subscribersByUserid?: Maybe<Subscribers_Bool_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  usersModelArrayRelation?: Maybe<Models_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -1208,6 +1321,7 @@ export type Users_Insert_Input = {
   subscribers?: Maybe<Subscribers_Arr_Rel_Insert_Input>;
   subscribersByUserid?: Maybe<Subscribers_Arr_Rel_Insert_Input>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+  usersModelArrayRelation?: Maybe<Models_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -1265,6 +1379,7 @@ export type Users_Order_By = {
   subscribersByUserid_aggregate?: Maybe<Subscribers_Aggregate_Order_By>;
   subscribers_aggregate?: Maybe<Subscribers_Aggregate_Order_By>;
   updated_at?: Maybe<Order_By>;
+  usersModelArrayRelation_aggregate?: Maybe<Models_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -1358,19 +1473,19 @@ export type UpdateModelViewsMutationVariables = Exact<{
 
 export type UpdateModelViewsMutation = { __typename?: 'mutation_root', update_model_views?: { __typename?: 'model_views_mutation_response', returning: Array<{ __typename?: 'model_views', id?: string | null | undefined, views?: number | null | undefined }> } | null | undefined };
 
+export type ChannelListQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ChannelListQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', name: string, subscribersByUserid: Array<{ __typename?: 'subscribers', subscribed: { __typename?: 'users', name: string, id: string, profile_photo_url: string, usersModelArrayRelation: Array<{ __typename?: 'models', id: string, title: string, description: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, created_at: any, updated_at: any }> } }> } | null | undefined };
+
 export type ModelByPkQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
 export type ModelByPkQuery = { __typename?: 'query_root', models_by_pk?: { __typename?: 'models', id: string, description: string, title: string, thumbnail_url?: string | null | undefined, model_url: string, views: number, created_at: any, updated_at: any, owner?: { __typename?: 'users', id: string, name: string, profile_photo_url: string, email: string, updated_at: any, created_at: any } | null | undefined } | null | undefined };
-
-export type UserByIdQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any, subscribersByUserid: Array<{ __typename?: 'subscribers', subscribe_id: string }> } | null | undefined };
 
 export type ModelsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1390,6 +1505,13 @@ export type SubscribersQueryVariables = Exact<{
 
 
 export type SubscribersQuery = { __typename?: 'query_root', subscribers: Array<{ __typename?: 'subscribers', userid: string }> };
+
+export type UserByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type UserByIdQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any, subscribersByUserid: Array<{ __typename?: 'subscribers', subscribe_id: string }> } | null | undefined };
 
 
 export const InsertModelDocument = gql`
@@ -1588,6 +1710,58 @@ export function useUpdateModelViewsMutation(baseOptions?: Apollo.MutationHookOpt
 export type UpdateModelViewsMutationHookResult = ReturnType<typeof useUpdateModelViewsMutation>;
 export type UpdateModelViewsMutationResult = Apollo.MutationResult<UpdateModelViewsMutation>;
 export type UpdateModelViewsMutationOptions = Apollo.BaseMutationOptions<UpdateModelViewsMutation, UpdateModelViewsMutationVariables>;
+export const ChannelListDocument = gql`
+    query ChannelList($id: String!) {
+  users_by_pk(id: $id) {
+    name
+    subscribersByUserid(order_by: {created_at: desc_nulls_last}) {
+      subscribed {
+        name
+        id
+        profile_photo_url
+        usersModelArrayRelation(order_by: {created_at: desc_nulls_last}, limit: 3) {
+          id
+          title
+          description
+          thumbnail_url
+          model_url
+          views
+          created_at
+          updated_at
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useChannelListQuery__
+ *
+ * To run a query within a React component, call `useChannelListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useChannelListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useChannelListQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useChannelListQuery(baseOptions: Apollo.QueryHookOptions<ChannelListQuery, ChannelListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ChannelListQuery, ChannelListQueryVariables>(ChannelListDocument, options);
+      }
+export function useChannelListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ChannelListQuery, ChannelListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ChannelListQuery, ChannelListQueryVariables>(ChannelListDocument, options);
+        }
+export type ChannelListQueryHookResult = ReturnType<typeof useChannelListQuery>;
+export type ChannelListLazyQueryHookResult = ReturnType<typeof useChannelListLazyQuery>;
+export type ChannelListQueryResult = Apollo.QueryResult<ChannelListQuery, ChannelListQueryVariables>;
 export const ModelByPkDocument = gql`
     query ModelByPk($id: String!) {
   models_by_pk(id: $id) {
@@ -1638,49 +1812,6 @@ export function useModelByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type ModelByPkQueryHookResult = ReturnType<typeof useModelByPkQuery>;
 export type ModelByPkLazyQueryHookResult = ReturnType<typeof useModelByPkLazyQuery>;
 export type ModelByPkQueryResult = Apollo.QueryResult<ModelByPkQuery, ModelByPkQueryVariables>;
-export const UserByIdDocument = gql`
-    query UserById($id: String!) {
-  users_by_pk(id: $id) {
-    id
-    name
-    email
-    profile_photo_url
-    created_at
-    updated_at
-    subscribersByUserid {
-      subscribe_id
-    }
-  }
-}
-    `;
-
-/**
- * __useUserByIdQuery__
- *
- * To run a query within a React component, call `useUserByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useUserByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useUserByIdQuery(baseOptions: Apollo.QueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
-      }
-export function useUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
-        }
-export type UserByIdQueryHookResult = ReturnType<typeof useUserByIdQuery>;
-export type UserByIdLazyQueryHookResult = ReturnType<typeof useUserByIdLazyQuery>;
-export type UserByIdQueryResult = Apollo.QueryResult<UserByIdQuery, UserByIdQueryVariables>;
 export const ModelsDocument = gql`
     query Models {
   models(order_by: {created_at: desc}) {
@@ -1815,3 +1946,46 @@ export function useSubscribersLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type SubscribersQueryHookResult = ReturnType<typeof useSubscribersQuery>;
 export type SubscribersLazyQueryHookResult = ReturnType<typeof useSubscribersLazyQuery>;
 export type SubscribersQueryResult = Apollo.QueryResult<SubscribersQuery, SubscribersQueryVariables>;
+export const UserByIdDocument = gql`
+    query UserById($id: String!) {
+  users_by_pk(id: $id) {
+    id
+    name
+    email
+    profile_photo_url
+    created_at
+    updated_at
+    subscribersByUserid {
+      subscribe_id
+    }
+  }
+}
+    `;
+
+/**
+ * __useUserByIdQuery__
+ *
+ * To run a query within a React component, call `useUserByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUserByIdQuery(baseOptions: Apollo.QueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
+      }
+export function useUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
+        }
+export type UserByIdQueryHookResult = ReturnType<typeof useUserByIdQuery>;
+export type UserByIdLazyQueryHookResult = ReturnType<typeof useUserByIdLazyQuery>;
+export type UserByIdQueryResult = Apollo.QueryResult<UserByIdQuery, UserByIdQueryVariables>;
