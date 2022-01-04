@@ -44,7 +44,7 @@ export const AvatarSelect = ({currentAvatarUrl, avatarFile, setAvatarFile}: Avat
       <div className={styles.button}>
         <input type="file" hidden ref={inputRef} onChange={selectedFile} />
         <Button variant="contained" color="primary" onClick={handleClick}>
-          画像を変更
+          画像を選択
         </Button>
       </div>
     </div>

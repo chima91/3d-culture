@@ -11,6 +11,7 @@ import { Signout } from "./pages/Signout";
 import { Signup } from "./pages/Signup";
 import { Upload } from "./pages/Upload";
 import { Channels } from "./pages/Channels";
+import { Profile } from "./pages/Profile";
 
 export const RootRouter = () => {
   return useRoutes([
@@ -19,6 +20,7 @@ export const RootRouter = () => {
       children: [
         { path: '/', element: <Home /> },
         { path: 'upload', element: <Upload /> },
+        { path: 'profile', element: <Profile /> },
         { path: 'channels', element: <Channels /> },
       ],
     },
