@@ -32,7 +32,7 @@ export const UserMenu = ({
       >
         <MenuItem>{name}</MenuItem>
         <Divider />
-        <MenuItem onClick={() => gotoPage("/")}>プロフィール編集</MenuItem>
+        <MenuItem onClick={() => gotoPage("/profile")}>プロフィール編集</MenuItem>
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <ExitToAppRounded fontSize="small" />
