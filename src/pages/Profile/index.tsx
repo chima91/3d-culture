@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 import { AvatarSelect } from './AvatarSelect';
+import { UploadForm } from './UploadForm';
 import useStyles from './style';
 
 export const Profile = () => {
