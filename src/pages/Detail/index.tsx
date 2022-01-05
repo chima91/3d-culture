@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Avatar, Container, Grid } from "@material-ui/core";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -94,6 +94,7 @@ export const Detail = () => {
             title={currentModel?.models_by_pk?.title}
             created={currentModel?.models_by_pk?.created_at}
             owner={currentModel?.models_by_pk?.owner?.name}
+            avatar={<Avatar src={currentModel?.models_by_pk?.owner?.profile_photo_url} />}
             description={currentModel?.models_by_pk?.description}
             views={currentModel?.models_by_pk?.views}
             subscribers={subscribers?.subscribers.length || 0}
