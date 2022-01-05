@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Avatar, Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
@@ -77,6 +77,7 @@ export const Home = () => {
                 views={model.views}
                 fetcher={() => storage.ref(model.thumbnail_url || "").getDownloadURL()}
                 onClick={() => onClickCard(model.id)}
+                avatar={<Avatar src={model.owner?.profile_photo_url || ""} />}
               />
             </Link>
           </Grid>
