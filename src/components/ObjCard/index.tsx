@@ -1,4 +1,4 @@
-import { Avatar, Card, CardHeader, CardMedia } from "@material-ui/core";
+import { Card, CardHeader, CardMedia } from "@material-ui/core";
 import { useEffect, useState } from "react";
 
 import useStyles from "./style";
@@ -8,9 +8,10 @@ import { SubHeaderContent, SubHeaderContentProps } from "./SubHeaderContent";
 export type ObjCardProps = {
   fetcher: () => Promise<string | undefined>;
   onClick: () => void;
+  avatar?: React.ReactNode;
 } & HeaderTitleProps & SubHeaderContentProps;
 
-export const ObjCard= ({ fetcher, title, owner, created, views, onClick }: ObjCardProps) => {
+export const ObjCard= ({ fetcher, onClick, avatar, title, owner, created, views }: ObjCardProps) => {
   const styles = useStyles();
 
   // モデルのサムネイルのURLを格納する
@@ -29,7 +30,7 @@ export const ObjCard= ({ fetcher, title, owner, created, views, onClick }: ObjCa
       />
 
       <CardHeader
-        avatar={<Avatar />}
+        avatar={avatar}
         title={<HeaderTitle title={title} />}
         subheader={<SubHeaderContent owner={owner} created={created} views={views} />}
       />
