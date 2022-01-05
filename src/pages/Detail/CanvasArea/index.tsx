@@ -1,4 +1,4 @@
-import { Avatar, Card, CardContent, CardHeader, Divider, Typography, Button } from "@material-ui/core";
+import { Card, CardContent, CardHeader, Divider, Typography, Button } from "@material-ui/core";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
@@ -10,6 +10,7 @@ export type CanvasAreaProps = {
   title: string | undefined;
   created: Date | undefined;
   owner: string | undefined;
+  avatar: React.ReactNode | undefined;
   description: string | undefined;
   views: number | undefined;
   subscribers: number | undefined;  // 被登録者数
@@ -24,6 +25,7 @@ export const CanvasArea = ({
   title,
   created,
   owner,
+  avatar,
   description,
   views,
   subscribers,
@@ -66,7 +68,7 @@ export const CanvasArea = ({
 
       {/* 投稿者情報エリア */}
       <CardHeader
-        avatar={<Avatar />}
+        avatar={avatar}
         title={owner}
         subheader={`チャンネル登録者数：${subscribers || 0}人`}
       />
