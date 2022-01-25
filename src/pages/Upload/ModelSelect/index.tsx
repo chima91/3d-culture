@@ -1,4 +1,4 @@
-import { Button, Typography } from "@material-ui/core";
+import { Button, CardMedia, Divider, Typography } from "@material-ui/core";
 import { useState, useRef, ChangeEvent, useEffect, Dispatch, SetStateAction } from "react";
 
 import useStyles from "./style";
@@ -64,30 +64,30 @@ export const ModelSelect = ({
 
   return (
     <div className={styles.root}>
-      {!modelURL && (
-        <div className={styles.button}>
-          <Button variant="contained" color="primary" onClick={handleModelClick}>
-            モデルファイルを選択
-          </Button>
-        </div>
-      )}
       {modelURL && (
         <div>
           <Typography className={styles.textPadding}>モデルファイル：{modelFile?.name}</Typography>
         </div>
       )}
-      {!thumbURL && (
-        <div className={styles.button}>
-          <Button variant="contained" color="primary" onClick={handleThumbClick}>
-            サムネイルファイルを選択
-          </Button>
-        </div>
-      )}
+      <div className={styles.button}>
+        <Button variant="contained" color="primary" onClick={handleModelClick}>
+          モデルファイルを選択
+        </Button>
+      </div>
+
+      <Divider />
+
       {thumbURL && (
         <div>
           <Typography className={styles.textPadding}>サムネイルファイル：{thumbFile?.name}</Typography>
+          <CardMedia className={styles.thumbnail} image={thumbURL} />
         </div>
       )}
+      <div className={styles.button}>
+        <Button variant="contained" color="primary" onClick={handleThumbClick}>
+          サムネイルファイルを選択
+        </Button>
+      </div>
 
       {/* selectModel, selectThumbには、onChangeからChangeEvent<HTMLInputElement>という型の引数が渡される。 */}
       <input type="file" hidden ref={modelRef} onChange={selectModel} />

@@ -11,15 +11,11 @@ export default makeStyles({
     paddingTop: 20,
     paddingBottom: 10,
   },
-  thumbnailContent: {
-    paddingBottom: 30,
-  },
   button: {
     textAlign: "center",
     margin: "30px 0"
   },
   thumbnail: {
-    paddingTop: "56.25%",
-    cursor: "pointer",
+    paddingTop: "56.25%", // アスペクト比が16:9
   },
 });
