@@ -27,10 +27,10 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
   // エラーを表示する用のステート
   const [errorMessage, setErrorMessage] = useState<Error>();
 
-  // 動画をアップロードするためのHooks
+  // モデルやタイトル, 説明文をアップロードするためのHooks
   const { upload, loading, error: uploadError } = useModelUpload();
 
-  // 「動画をアップロード」ボタンをクリックしたら実行する関数
+  // アップロードボタンをクリックしたら実行する関数
   const submit = () => {
     setErrorMessage(undefined);
 
@@ -55,7 +55,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
       description: descRef.current?.value,
       ownerId: globalUser.id,
     }).then((data) => {
-      // 動画のアップロードが成功すれば、`home`URLにリダイレクト
+      // アップロードが成功したら、`/` にリダイレクト
       if (data?.id) {
         navigate("/");
       }
@@ -107,7 +107,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
           disabled={loading}
           onClick={submit}
         >
-          {loading ? "アップロード中" : "モデル・サムネイルをアップロード"}
+          {loading ? "アップロード中" : "アップロードする"}
         </Button>
       </div>
     </>
