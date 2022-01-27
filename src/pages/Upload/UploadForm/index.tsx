@@ -27,24 +27,16 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
   // エラーを表示する用のステート
   const [errorMessage, setErrorMessage] = useState<Error>();
 
-  // モデルやタイトル, 説明文をアップロードするためのHooks
+  // モデルやタイトル, 説明文をアップロードするためのカスタムフックを使用
   const { upload, loading, error: uploadError } = useModelUpload();
 
   // アップロードボタンをクリックしたら実行する関数
   const submit = () => {
     setErrorMessage(undefined);
 
-    if (!globalUser?.id) {
-      return setErrorMessage(new Error("ログインしてください。"));
-    }
-
-    if (!modelFile || !thumbFile) {
-      return setErrorMessage(new Error("ファイルを選択してください。"));
-    }
-
-    if (!titleRef.current?.value) {
-      return setErrorMessage(new Error("タイトルを入力してください。"));
-    }
+    if (!globalUser?.id) return setErrorMessage(new Error("ログインしてください。"));
+    if (!modelFile || !thumbFile) return setErrorMessage(new Error("ファイルを選択してください。"));
+    if (!titleRef.current?.value) return setErrorMessage(new Error("タイトルを入力してください。"));
 
     upload({
       file: {
@@ -62,7 +54,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
     });
   };
 
-  // Hooksからのエラーを受け取り、画面表示用のエラーステートに渡す。
+  // カスタムフックからのエラーを受け取り、画面表示用のエラーステートに渡す。
   useEffect(() => {
     setErrorMessage(uploadError);
   }, [uploadError]);

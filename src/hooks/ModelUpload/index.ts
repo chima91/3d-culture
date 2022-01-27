@@ -8,8 +8,8 @@ import { GlobalUser } from "../../stores/User";
 
 type UploadProps = {
   file: {
-    thumbnail: File;
     model: File;
+    thumbnail: File;
   };
   title: string;
   description?: string;
@@ -33,8 +33,7 @@ export const useModelUpload = () => {
   const uploadToStorage = (id: string, file: File, path: string) => {
     // ファイルから拡張子を抜き出す
     const exe = file.name.split('.').pop();
-    // `ref`でファイルのパスを指定する。PCのディレクトリと同じ考え方。ref('models/model.glb')とすれば、modelsという階層にmodel.glbを作成する
-    // putでファイルのアップロードを実際に行う。`ref`で指定したパスに対して、ファイルの実態をアップロードする
+    // ref('models/test.glb')というふうにパスを指定し、put()で実際にファイルのアップロードを行う。
     return storage.ref(`${path}/${id}.${exe}`).put(file);
   };
 
@@ -44,27 +43,25 @@ export const useModelUpload = () => {
 
     setLoading(true);
 
-    // モデルとサムネイルのファイル名, モデルのメタデータとしてのuuidを生成する
+    // モデルファイル名, サムネイルファイル名, modelsテーブルidカラム, のuuidを生成する
     const modelName = uuidv4();
     const thumbName = uuidv4();
     const modelId = uuidv4();
 
     // try-catch構文でPromise(アップロード処理)のエラーをキャッチする
     try {
-      // モデルのアップロード処理。モデルは全て`models`と言う階層に保存される
       const modelUploadTask = await uploadToStorage(
         modelName,
         file.model,
         "models"
       );
-      // 画像サムネイルのアップロード処理。サムネイルは全て`thumbnails`に保存される
       const thumbUploadTask = await uploadToStorage(
         thumbName,
         file.thumbnail,
         "thumbnails"
       );
 
-      // モデルのメタデータをHasura(Heroku??)に保存する
+      // モデルのメタデータをHasuraを通してHerokuのPostgreSQLに保存する
       const res = await mutation({
         variables: {
           id: modelId,
@@ -76,7 +73,7 @@ export const useModelUpload = () => {
         }
       });
 
-      // 全ての処理が終わったら、動画のメタデータを返す。
+      // 全ての処理が終わったら、モデルのメタデータを返す。
       return res.data?.insert_models_one;
     } catch(err) {
       console.error(err);
