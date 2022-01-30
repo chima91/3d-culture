@@ -1,11 +1,15 @@
-import { Button, TextField, Typography } from "@material-ui/core";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
-import { useRecoilValue } from "recoil";
+/**
+ * @prettier
+ */
 
-import { useModelUpload } from "../../../hooks/ModelUpload";
-import { GlobalUser } from "../../../stores/User";
-import useStyles from "./style";
+import { Button, TextField, Typography } from '@material-ui/core';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useRecoilValue } from 'recoil';
+
+import { useModelUpload } from '../../../hooks/ModelUpload';
+import { GlobalUser } from '../../../stores/User';
+import useStyles from './style';
 
 export type UploadFormProps = {
   modelFile: File | undefined;
@@ -27,24 +31,19 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
   // エラーを表示する用のステート
   const [errorMessage, setErrorMessage] = useState<Error>();
 
-  // 動画をアップロードするためのHooks
+  // モデルやタイトル, 説明文をアップロードするためのカスタムフックを使用
   const { upload, loading, error: uploadError } = useModelUpload();
 
-  // 「動画をアップロード」ボタンをクリックしたら実行する関数
+  // アップロードボタンをクリックしたら実行する関数
   const submit = () => {
     setErrorMessage(undefined);
 
-    if (!globalUser?.id) {
-      return setErrorMessage(new Error("ログインしてください。"));
-    }
-
-    if (!modelFile || !thumbFile) {
-      return setErrorMessage(new Error("ファイルを選択してください。"));
-    }
-
-    if (!titleRef.current?.value) {
-      return setErrorMessage(new Error("タイトルを入力してください。"));
-    }
+    if (!globalUser?.id)
+      return setErrorMessage(new Error('ログインしてください。'));
+    if (!modelFile || !thumbFile)
+      return setErrorMessage(new Error('ファイルを選択してください。'));
+    if (!titleRef.current?.value)
+      return setErrorMessage(new Error('タイトルを入力してください。'));
 
     upload({
       file: {
@@ -55,14 +54,14 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
       description: descRef.current?.value,
       ownerId: globalUser.id,
     }).then((data) => {
-      // 動画のアップロードが成功すれば、`home`URLにリダイレクト
+      // アップロードが成功したら、`/` にリダイレクト
       if (data?.id) {
-        navigate("/");
+        navigate('/');
       }
     });
   };
 
-  // Hooksからのエラーを受け取り、画面表示用のエラーステートに渡す。
+  // カスタムフックからのエラーを受け取り、画面表示用のエラーステートに渡す。
   useEffect(() => {
     setErrorMessage(uploadError);
   }, [uploadError]);
@@ -70,21 +69,21 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
   return (
     <>
       <label className={styles.label}>
-        <Typography variant="body2">タイトル</Typography>
+        <Typography variant='body2'>タイトル</Typography>
         <TextField
-          size="small"
+          size='small'
           fullWidth
-          variant="outlined"
+          variant='outlined'
           inputRef={titleRef}
         />
       </label>
 
       <label className={styles.label}>
-        <Typography variant="body2">説明</Typography>
+        <Typography variant='body2'>説明</Typography>
         <TextField
-          size="small"
+          size='small'
           fullWidth
-          variant="outlined"
+          variant='outlined'
           multiline
           rows={4}
           inputRef={descRef}
@@ -95,19 +94,19 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
         // エラーがあれば表示
         errorMessage?.message && (
           <label className={styles.label}>
-            <Typography color="error">{errorMessage.message}</Typography>
+            <Typography color='error'>{errorMessage.message}</Typography>
           </label>
         )
       }
 
       <div className={styles.button}>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           disabled={loading}
           onClick={submit}
         >
-          {loading ? "アップロード中" : "モデル・サムネイルをアップロード"}
+          {loading ? 'アップロード中' : 'アップロードする'}
         </Button>
       </div>
     </>
