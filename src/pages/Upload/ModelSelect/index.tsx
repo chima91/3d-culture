@@ -1,7 +1,18 @@
-import { Button, CardMedia, Divider, Typography } from "@material-ui/core";
-import { useState, useRef, ChangeEvent, useEffect, Dispatch, SetStateAction } from "react";
+/**
+ * @prettier
+ */
 
-import useStyles from "./style";
+import { Button, CardMedia, Divider, Typography } from '@material-ui/core';
+import {
+  useState,
+  useRef,
+  ChangeEvent,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react';
+
+import useStyles from './style';
 
 export type ModelSelectProps = {
   modelFile: File | undefined;
@@ -66,11 +77,13 @@ export const ModelSelect = ({
     <div className={styles.root}>
       {modelURL && (
         <div>
-          <Typography className={styles.textPadding}>モデルファイル：{modelFile?.name}</Typography>
+          <Typography className={styles.textPadding}>
+            モデルファイル：{modelFile?.name}
+          </Typography>
         </div>
       )}
       <div className={styles.button}>
-        <Button variant="contained" color="primary" onClick={handleModelClick}>
+        <Button variant='contained' color='primary' onClick={handleModelClick}>
           モデルファイルを選択
         </Button>
       </div>
@@ -79,19 +92,21 @@ export const ModelSelect = ({
 
       {thumbURL && (
         <div>
-          <Typography className={styles.textPadding}>サムネイルファイル：{thumbFile?.name}</Typography>
+          <Typography className={styles.textPadding}>
+            サムネイルファイル：{thumbFile?.name}
+          </Typography>
           <CardMedia className={styles.thumbnail} image={thumbURL} />
         </div>
       )}
       <div className={styles.button}>
-        <Button variant="contained" color="primary" onClick={handleThumbClick}>
+        <Button variant='contained' color='primary' onClick={handleThumbClick}>
           サムネイルファイルを選択
         </Button>
       </div>
 
       {/* selectModel, selectThumbには、onChangeからChangeEvent<HTMLInputElement>という型の引数が渡される。 */}
-      <input type="file" hidden ref={modelRef} onChange={selectModel} />
-      <input type="file" hidden ref={thumbRef} onChange={selectThumb} />
+      <input type='file' hidden ref={modelRef} onChange={selectModel} />
+      <input type='file' hidden ref={thumbRef} onChange={selectThumb} />
     </div>
   );
 };

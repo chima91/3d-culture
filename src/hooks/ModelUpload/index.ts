@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+/**
+ * @prettier
+ */
 
-import { storage } from "../../utils/Firebase/config";
-import { ModelsDocument, useInsertModelMutation } from "../../utils/graphql/generated";
-import { useRecoilValue } from "recoil";
-import { GlobalUser } from "../../stores/User";
+import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+import { storage } from '../../utils/Firebase/config';
+import {
+  ModelsDocument,
+  useInsertModelMutation,
+} from '../../utils/graphql/generated';
+import { useRecoilValue } from 'recoil';
+import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   file: {
@@ -37,9 +44,9 @@ export const useModelUpload = () => {
     return storage.ref(`${path}/${id}.${exe}`).put(file);
   };
 
-  const upload = async({ file, title, description, ownerId }: UploadProps) => {
+  const upload = async ({ file, title, description, ownerId }: UploadProps) => {
     // ユーザが読み込まれていない、未ログインであれば処理を中断する
-    if(!globalUser?.id) return;
+    if (!globalUser?.id) return;
 
     setLoading(true);
 
@@ -53,12 +60,12 @@ export const useModelUpload = () => {
       const modelUploadTask = await uploadToStorage(
         modelName,
         file.model,
-        "models"
+        'models',
       );
       const thumbUploadTask = await uploadToStorage(
         thumbName,
         file.thumbnail,
-        "thumbnails"
+        'thumbnails',
       );
 
       // モデルのメタデータをHasuraを通してHerokuのPostgreSQLに保存する
@@ -69,15 +76,15 @@ export const useModelUpload = () => {
           description,
           model_url: modelUploadTask.ref.fullPath,
           thumbnail_url: thumbUploadTask.ref.fullPath,
-          owner_id: ownerId
-        }
+          owner_id: ownerId,
+        },
       });
 
       // 全ての処理が終わったら、モデルのメタデータを返す。
       return res.data?.insert_models_one;
-    } catch(err) {
+    } catch (err) {
       console.error(err);
-      setError(new Error("エラーが発生しました。最初からやり直してください。"));
+      setError(new Error('エラーが発生しました。最初からやり直してください。'));
     } finally {
       setLoading(false);
     }
@@ -85,15 +92,15 @@ export const useModelUpload = () => {
 
   // ApolloClientのエラーをキャッチする
   useEffect(() => {
-    if(apolloError) {
+    if (apolloError) {
       console.error(apolloError);
-      setError(new Error("エラーが発生しました。最初からやり直してください。"));
+      setError(new Error('エラーが発生しました。最初からやり直してください。'));
     }
   }, [apolloError]);
 
   return {
     upload,
     loading,
-    error
-  }
+    error,
+  };
 };
