@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, Divider, Typography, Button } from "@mat
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
+// test
+import { Obj_Mtl_Test } from "../../../components/Obj_Mtl_test";
 
 import { Three } from "../../../components/Three";
 import useStyles from "./style";
@@ -49,7 +51,11 @@ export const CanvasArea = ({
       <CardContent className={styles.canvas} >
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
           {src ? (
-            <Three glbSource={src} />
+            <>
+              {/* <Three glbSource={src} /> */}
+              {/* test */}
+              <Obj_Mtl_Test />
+            </>
           ) : (
             <></>
           )}
