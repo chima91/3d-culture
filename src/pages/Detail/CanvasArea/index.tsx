@@ -2,10 +2,9 @@ import { Card, CardContent, CardHeader, Divider, Typography, Button } from "@mat
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
-// test
-import { Obj_Mtl_Test } from "../../../components/Obj_Mtl_test";
 
 import { Three } from "../../../components/Three";
+// import { glbThree } from "../../../components/glbThree";
 import useStyles from "./style";
 
 export type CanvasAreaProps = {
@@ -44,6 +43,9 @@ export const CanvasArea = ({
     // Firebase Storageからモデルのダウンロードリンクを取得する
     fetcher().then(setSrc);
   });
+  // debug
+  const mo = '/static/No508SUEMURA.obj';
+  const ma = '/static/No508SUEMURA.mtl';
 
   return (
     <Card>
@@ -54,7 +56,7 @@ export const CanvasArea = ({
             <>
               {/* <Three glbSource={src} /> */}
               {/* test */}
-              <Obj_Mtl_Test />
+              <Three modelSrc={mo} mtlSrc={ma} />
             </>
           ) : (
             <></>

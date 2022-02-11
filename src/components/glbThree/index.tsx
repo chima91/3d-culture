@@ -1,15 +1,12 @@
 import * as Fiber from "@react-three/fiber";
 import * as Drei from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader"
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
-export const Obj_Mtl_Test = () => {
-  const materials = useLoader(MTLLoader, '/static/No508SUEMUR.mtl');
-  const object = useLoader(OBJLoader, '/static/No508SUEMURA.obj', loader => {
-    materials.preload()
-    loader.setMaterials(materials)
-  })
+export type ThreeProp = {
+  glbSrc: string;
+}
+
+export const glbThree = ({ glbSrc }: ThreeProp) => {
+  const { scene } = Drei.useGLTF(glbSrc);
 
   return (
     <Fiber.Canvas>
@@ -18,7 +15,7 @@ export const Obj_Mtl_Test = () => {
       <Drei.OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
       <Drei.Stage>
         <group dispose={null}>
-          <primitive scale={[10, 10, 10]} object={object} />
+          <primitive scale={[10, 10, 10]} object={scene} />
         </group>
       </Drei.Stage>
     </Fiber.Canvas>
