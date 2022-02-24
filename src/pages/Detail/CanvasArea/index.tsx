@@ -3,8 +3,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
 
-import { Three } from "../../../components/Three";
-// import { glbThree } from "../../../components/glbThree";
+import { Three } from "../../../components/Three"
 import useStyles from "./style";
 
 export type CanvasAreaProps = {
@@ -43,9 +42,6 @@ export const CanvasArea = ({
     // Firebase Storageからモデルのダウンロードリンクを取得する
     fetcher().then(setSrc);
   });
-  // debug
-  const mo = '/static/No508SUEMURA.obj';
-  const ma = '/static/No508SUEMURA.mtl';
 
   return (
     <Card>
@@ -54,9 +50,7 @@ export const CanvasArea = ({
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
           {src ? (
             <>
-              {/* <Three glbSource={src} /> */}
-              {/* test */}
-              <Three modelSrc={mo} mtlSrc={ma} />
+              <Three glbSrc={src} />
             </>
           ) : (
             <></>
