@@ -2,11 +2,11 @@ import * as Fiber from "@react-three/fiber";
 import * as Drei from "@react-three/drei";
 
 export type ThreeProp = {
-  glbSource: string;
+  glbSrc: string;
 }
 
-export const Three = ({ glbSource }: ThreeProp) => {
-  const { scene } = Drei.useGLTF(glbSource);
+export const Three = ({ glbSrc }: ThreeProp) => {
+  const { scene } = Drei.useGLTF(glbSrc);
 
   return (
     <Fiber.Canvas>

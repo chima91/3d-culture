@@ -3,7 +3,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
 
-import { Three } from "../../../components/Three";
+import { Three } from "../../../components/Three"
 import useStyles from "./style";
 
 export type CanvasAreaProps = {
@@ -49,7 +49,9 @@ export const CanvasArea = ({
       <CardContent className={styles.canvas} >
         <Suspense fallback={<div style={{ color: "white", textAlign: "center", marginTop: 100 }}>Now Loading...</div>}>
           {src ? (
-            <Three glbSource={src} />
+            <>
+              <Three glbSrc={src} />
+            </>
           ) : (
             <></>
           )}
