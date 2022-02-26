@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
+import { GoogleForm } from "../../components/GoogleForm";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { PaginationWrapper } from "../../components/Pagination";
@@ -65,6 +66,7 @@ export const Home = () => {
     <Container>
       <ModalQR />
       <SNS />
+      <GoogleForm />
       <Grid container spacing={2}>
         {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示する */}
         {pageItem?.map((model) => (
