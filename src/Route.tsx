@@ -35,7 +35,8 @@ export const RootRouter = () => {
       element: <SimpleLayout />,
       children: [
         { path: 'login', element: <Login /> },
-        { path: 'signup', element: <Signup /> },
+        // 一般の人が新規アカウントを作成できないよう一旦コメントアウトする(2/28)
+        // { path: 'signup', element: <Signup /> },
         { path: 'signout', element: <Signout /> },
         { path: 'forget', element: <ForgetPassForm /> },
         { path: '404', element: <div>Not Found</div> },
