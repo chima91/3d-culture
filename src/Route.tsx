@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import { Signout } from "./pages/Signout";
 import { Signup } from "./pages/Signup";
 import { Upload } from "./pages/Upload";
+import { ModelUpdate } from "./pages/ModelUpdate";
 import { Channels } from "./pages/Channels";
 import { Profile } from "./pages/Profile";
 
@@ -28,7 +29,8 @@ export const RootRouter = () => {
       element: <SideLessHomeLayout />,
       children: [
         { path: 'detail', element: <Navigate to='/' /> },
-        { path: 'detail/:objId', element: <Detail /> }
+        { path: 'detail/:objId', element: <Detail /> },
+        { path: 'detail/:objId/update', element: <ModelUpdate /> },
       ],
     },
     {

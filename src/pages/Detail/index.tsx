@@ -83,6 +83,8 @@ export const Detail = () => {
     ).length === 1
   // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
   const isCurrentModelByOthers = (globalUser?.id && globalUser.id !== currentModel?.models_by_pk?.owner?.id)
+  // ログイン中のユーザーと、表示中モデルの投稿者が同じかどうか
+  const isCurrentModelByMine = (globalUser?.id && globalUser.id === currentModel?.models_by_pk?.owner?.id)
 
   return (
     <Container className={styles.root}>
@@ -91,6 +93,7 @@ export const Detail = () => {
       <Grid container spacing={4}>
         <Grid item xs={12} lg={8}>
           <CanvasArea
+            modelId={currentModel?.models_by_pk?.id}
             title={currentModel?.models_by_pk?.title}
             created={currentModel?.models_by_pk?.created_at}
             owner={currentModel?.models_by_pk?.owner?.name}
@@ -99,6 +102,7 @@ export const Detail = () => {
             views={currentModel?.models_by_pk?.views}
             subscribers={subscribers?.subscribers.length || 0}
             isCurrentModelByOthers={isCurrentModelByOthers || false}
+            isCurrentModelByMine={isCurrentModelByMine || false}
             isSubscribed={isSubscribed}
             fetcher={async() => {
               if(currentModel?.models_by_pk?.model_url) {

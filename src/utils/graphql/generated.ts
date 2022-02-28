@@ -1466,6 +1466,17 @@ export type InsertSubscribeMutationVariables = Exact<{
 
 export type InsertSubscribeMutation = { __typename?: 'mutation_root', insert_subscribers_one?: { __typename?: 'subscribers', userid: string, subscribe_id: string } | null | undefined };
 
+export type UpdateModelMutationVariables = Exact<{
+  id: Scalars['String'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  model_url: Scalars['String'];
+  thumbnail_url: Scalars['String'];
+}>;
+
+
+export type UpdateModelMutation = { __typename?: 'mutation_root', update_models_by_pk?: { __typename?: 'models', id: string, title: string, model_url: string, thumbnail_url?: string | null | undefined, created_at: any, updated_at: any, owner?: { __typename?: 'users', id: string } | null | undefined } | null | undefined };
+
 export type UpdateModelViewsMutationVariables = Exact<{
   modelId: Scalars['String'];
 }>;
@@ -1683,6 +1694,54 @@ export function useInsertSubscribeMutation(baseOptions?: Apollo.MutationHookOpti
 export type InsertSubscribeMutationHookResult = ReturnType<typeof useInsertSubscribeMutation>;
 export type InsertSubscribeMutationResult = Apollo.MutationResult<InsertSubscribeMutation>;
 export type InsertSubscribeMutationOptions = Apollo.BaseMutationOptions<InsertSubscribeMutation, InsertSubscribeMutationVariables>;
+export const UpdateModelDocument = gql`
+    mutation updateModel($id: String!, $title: String!, $description: String = "", $model_url: String!, $thumbnail_url: String!) {
+  update_models_by_pk(
+    pk_columns: {id: $id}
+    _set: {title: $title, description: $description, model_url: $model_url, thumbnail_url: $thumbnail_url}
+  ) {
+    id
+    title
+    model_url
+    thumbnail_url
+    created_at
+    updated_at
+    owner {
+      id
+    }
+  }
+}
+    `;
+export type UpdateModelMutationFn = Apollo.MutationFunction<UpdateModelMutation, UpdateModelMutationVariables>;
+
+/**
+ * __useUpdateModelMutation__
+ *
+ * To run a mutation, you first call `useUpdateModelMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateModelMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateModelMutation, { data, loading, error }] = useUpdateModelMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      title: // value for 'title'
+ *      description: // value for 'description'
+ *      model_url: // value for 'model_url'
+ *      thumbnail_url: // value for 'thumbnail_url'
+ *   },
+ * });
+ */
+export function useUpdateModelMutation(baseOptions?: Apollo.MutationHookOptions<UpdateModelMutation, UpdateModelMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateModelMutation, UpdateModelMutationVariables>(UpdateModelDocument, options);
+      }
+export type UpdateModelMutationHookResult = ReturnType<typeof useUpdateModelMutation>;
+export type UpdateModelMutationResult = Apollo.MutationResult<UpdateModelMutation>;
+export type UpdateModelMutationOptions = Apollo.BaseMutationOptions<UpdateModelMutation, UpdateModelMutationVariables>;
 export const UpdateModelViewsDocument = gql`
     mutation updateModelViews($modelId: String!) {
   update_model_views(where: {id: {_eq: $modelId}}, _inc: {views: 1}) {

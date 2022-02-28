@@ -2,11 +2,13 @@ import { Card, CardContent, CardHeader, Divider, Typography, Button } from "@mat
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
+import { Link } from "react-router-dom";
 
 import { Three } from "../../../components/Three"
 import useStyles from "./style";
 
 export type CanvasAreaProps = {
+  modelId: string | undefined;
   title: string | undefined;
   created: Date | undefined;
   owner: string | undefined;
@@ -15,6 +17,7 @@ export type CanvasAreaProps = {
   views: number | undefined;
   subscribers: number | undefined;  // 被登録者数
   isCurrentModelByOthers: boolean;  // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
+  isCurrentModelByMine: boolean;  // ログイン中のユーザーと、表示中モデルの投稿者が同じかどうか
   isSubscribed: boolean;  // チャンネル登録済みかどうか
   onSubscribe: () => any;  // チャンネル登録処理
   onUnSubscribe: () => any;  // チャンネル登録解除処理
@@ -22,6 +25,7 @@ export type CanvasAreaProps = {
 };
 
 export const CanvasArea = ({
+  modelId,
   title,
   created,
   owner,
@@ -30,6 +34,7 @@ export const CanvasArea = ({
   views,
   subscribers,
   isCurrentModelByOthers,
+  isCurrentModelByMine,
   isSubscribed,
   onSubscribe,
   onUnSubscribe,
@@ -75,35 +80,48 @@ export const CanvasArea = ({
         subheader={`チャンネル登録者数：${subscribers || 0}人`}
       />
 
-      {/* チャンネル登録/解除エリア */}
+      {/* チャンネル登録or解除エリア */}
       {isCurrentModelByOthers &&
-      <div className={styles.channelBtn}>
-        {isSubscribed ? (
-          <Button
-            variant="contained"
-            color="default"
-            onClick={onUnSubscribe}
-            startIcon={<CancelIcon />}
-          >
-            チャンネル登録解除
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={onSubscribe}
-            startIcon={<AddCircleIcon />}
-          >
-            チャンネル登録
-          </Button>
-        )}
-      </div>
-    }
+        <div className={styles.channelBtn}>
+          {isSubscribed ? (
+            <Button
+              variant="contained"
+              color="default"
+              onClick={onUnSubscribe}
+              startIcon={<CancelIcon />}
+            >
+              チャンネル登録解除
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={onSubscribe}
+              startIcon={<AddCircleIcon />}
+            >
+              チャンネル登録
+            </Button>
+          )}
+        </div>
+      }
 
       {/* 博物館の方の説明文エリア */}
       <CardContent className={styles.descPadding}>
         <Typography>{description}</Typography>
       </CardContent>
+
+      {/* モデル編集エリア */}
+      { isCurrentModelByMine &&
+        <Link to={`/detail/${modelId}/update`} style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ margin: 50 }}
+          >
+            編集する
+          </Button>
+        </Link>
+      }
     </Card>
   );
 };
