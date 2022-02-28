@@ -1,9 +1,19 @@
-import { Button, Typography } from "@material-ui/core";
-import { useState, useRef, ChangeEvent, useEffect, Dispatch, SetStateAction } from "react";
+/**
+ * @prettier
+ */
 
-import useStyles from "./style";
+import { Button, CardMedia, Divider, Typography } from '@material-ui/core';
+import {
+  useState,
+  useRef,
+  ChangeEvent,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 
-// ModelSelectコンポーネントのpropsとして、引数を型定義する
+import useStyles from './style';
+
 export type ModelSelectProps = {
   modelFile: File | undefined;
   thumbFile: File | undefined;
@@ -11,7 +21,6 @@ export type ModelSelectProps = {
   setThumbFile: Dispatch<SetStateAction<File | undefined>>;
 };
 
-// 親コンポーネントから、ModelSelectに渡される引数
 export const ModelSelect = ({
   modelFile,
   thumbFile,
@@ -26,7 +35,7 @@ export const ModelSelect = ({
   // サムネイルの画像URLを格納
   const [thumbURL, setThumbURL] = useState<string>();
 
-  // ファイルを選択した後に、`setFile`を使用して`file`に選択されたファイルを格納。
+  // ファイルを選択した後に、setModelFile, setThumbFileを使用し、選択されたファイルをmodelFile, ThumbFileに格納。
   const selectModel = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files?.length) {
       setModelFile(event.currentTarget.files[0]);
@@ -48,11 +57,11 @@ export const ModelSelect = ({
     thumbRef.current?.click();
   };
 
+  // 現状(2022/1/22)、modelURL, thumbURLは使われていない。
   useEffect(() => {
     // ファイルが空の場合は、実行しない
     if (modelFile) {
-      // URL.createObjectURLは、ファイルを引数に受け取り、<video>タグで読み込み可能なローカルURLを生成します。
-      // URL.createObjectURLで生成されたURLを<video>のsrcにわたすことでファイルを動画で表示できます。
+      // URL.createObjectURL()静的メソッドは、ファイルを引数に受け取り、ファイルを表すローカルURLを生成する。
       const mURL = URL.createObjectURL(modelFile);
       setModelURL(mURL);
     }
@@ -68,35 +77,36 @@ export const ModelSelect = ({
     <div className={styles.root}>
       {modelURL && (
         <div>
-          <Typography className={styles.textPadding}>モデルファイル：{modelFile?.name}</Typography>
+          <Typography className={styles.textPadding}>
+            モデルファイル：{modelFile?.name}
+          </Typography>
         </div>
       )}
-      {!modelURL && (
-        <div className={styles.button}>
-          <Button variant="contained" color="primary" onClick={handleModelClick}>
-            モデルファイルを選択
-          </Button>
-        </div>
-      )}
+      <div className={styles.button}>
+        <Button variant='contained' color='primary' onClick={handleModelClick}>
+          モデルファイルを選択
+        </Button>
+      </div>
+
+      <Divider />
+
       {thumbURL && (
         <div>
-          <Typography className={styles.textPadding}>サムネイルファイル：{thumbFile?.name}</Typography>
+          <Typography className={styles.textPadding}>
+            サムネイルファイル：{thumbFile?.name}
+          </Typography>
+          <CardMedia className={styles.thumbnail} image={thumbURL} />
         </div>
       )}
-      {!thumbURL && (
-        <div className={styles.button}>
-          <Button variant="contained" color="primary" onClick={handleThumbClick}>
-            サムネイルファイルを選択
-          </Button>
-        </div>
-      )}
+      <div className={styles.button}>
+        <Button variant='contained' color='primary' onClick={handleThumbClick}>
+          サムネイルファイルを選択
+        </Button>
+      </div>
 
-      {/*
-        <input/>の入力値が変更されたら、onChangeが実行されます。
-        selectedFileには、onChangeからChangeEvent<HTMLInputElement>という型の引数が渡されます。
-      */}
-      <input type="file" hidden ref={modelRef} onChange={selectModel} />
-      <input type="file" hidden ref={thumbRef} onChange={selectThumb} />
+      {/* selectModel, selectThumbには、onChangeからChangeEvent<HTMLInputElement>という型の引数が渡される。 */}
+      <input type='file' hidden ref={modelRef} onChange={selectModel} />
+      <input type='file' hidden ref={thumbRef} onChange={selectThumb} />
     </div>
   );
 };
