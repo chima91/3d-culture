@@ -1,3 +1,7 @@
+/**
+ * @prettier
+ */
+
 import { Card, CardHeader, CardMedia } from "@material-ui/core";
 import { useState, useEffect } from "react";
 
@@ -20,10 +24,10 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created, views, onCli
   });
 
   return (
-    <Card className={`${styles.root} ${styles.transparent}`} elevation={0} square onClick={onClick}>
-        <div className={styles.thumbnail}>
-          <CardMedia className={styles.media} image={src ? src : '/static/no-image.jpg'} title="Thumbnail" />
-        </div>
+    <Card className={styles.root} elevation={0} square onClick={onClick}>
+      <div className={styles.thumbnail}>
+        <CardMedia className={styles.media} image={src ? src : '/static/no-image.jpg'} title="Thumbnail" />
+      </div>
       <CardHeader
         className={styles.contentPadding}
         title={<HeaderTitle title={title} />}

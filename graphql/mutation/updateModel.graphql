@@ -1,0 +1,13 @@
+mutation updateModel($id: String!, $title: String!, $description: String = "", $model_url: String!, $thumbnail_url: String!) {
+  update_models_by_pk(pk_columns: {id: $id}, _set: {title: $title, description: $description, model_url: $model_url, thumbnail_url: $thumbnail_url}) {
+    id
+    title
+    model_url
+    thumbnail_url
+    created_at
+    updated_at
+    owner {
+      id
+    }
+  }
+}
