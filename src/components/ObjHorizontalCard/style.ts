@@ -3,8 +3,6 @@ import { makeStyles } from "@material-ui/core";
 export default makeStyles({
   root: {
     display: "flex",
-  },
-  transparent: {
     backgroundColor: "transparent",
   },
   thumbnail: {
@@ -14,6 +12,7 @@ export default makeStyles({
     paddingTop: "56.25%", // 16:9
   },
   contentPadding: {
+    width: "50%",
     paddingTop: 0,
     paddingRight: 0,
     paddingBottom: 0,

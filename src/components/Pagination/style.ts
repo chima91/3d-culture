@@ -4,7 +4,7 @@ export default makeStyles({
   stack: {
     backgroundColor: "transparent",
     width: "100%",
-    paddingTop: "1rem",
+    padding: "1rem",
     textAlign: "center",
   },
   pagination: {
