@@ -72,7 +72,8 @@ export const DashboardHeader = () => {
           </>
         }
 
-        <div className={styles.flex}>
+        {/* 一時的に、一般の人が新規垢作成・ログインできないようコメントアウト(22/03/07) */}
+        {/* <div className={styles.flex}>
           {globalUser ? (
             <>
               <Link to="/upload">
@@ -90,7 +91,7 @@ export const DashboardHeader = () => {
               ログイン
             </Button>
           )}
-        </div>
+        </div> */}
       </Toolbar>
     </AppBar>
   )

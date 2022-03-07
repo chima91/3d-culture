@@ -8,7 +8,7 @@ import { ForgetPassForm } from "./pages/ForgetPassForm";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Signout } from "./pages/Signout";
-import { Signup } from "./pages/Signup";
+// import { Signup } from "./pages/Signup";
 import { Upload } from "./pages/Upload";
 import { ModelUpdate } from "./pages/ModelUpdate";
 import { Channels } from "./pages/Channels";
