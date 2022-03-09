@@ -22,6 +22,10 @@ export const ObjHorizontalCard = ({ fetcher, title, owner, created, views, onCli
     // サムネイルのダウンロードリンクを取得する関数
     fetcher().then(setSrc);
   });
+  // モデルのタイトルが10文字を超える場合は省略する
+  if(title.length > 10) {
+    title = title.slice(0, 10) + '...';
+  }
 
   return (
     <Card className={styles.root} elevation={0} square onClick={onClick}>

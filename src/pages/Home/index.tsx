@@ -73,7 +73,7 @@ export const Home = () => {
           <Grid item xs={12} md={6} lg={3} key={model.id}>
             <Link to={`/detail/${model.id}`} style={{ textDecoration: "none" }}>
               <ObjCard
-                title={(model.title.length > 10) ? model.title.slice(0, 10)+"..." : model.title}
+                title={model.title}
                 owner={model.owner?.name || ""}
                 created={model.created_at}
                 views={model.views}
