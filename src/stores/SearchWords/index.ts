@@ -1,15 +1,15 @@
-import { atom } from "recoil";
+/**
+ * @prettier
+ */
 
-import { Models } from "../../utils/graphql/generated";
+import { atom } from 'recoil';
 
-export type SearchWordsType =
-  Pick<
-    Models,
-    | "title"
-  >
-  | undefined;
+import { Models } from '../../utils/graphql/generated';
+
+// Pick<T, K>は既に存在するT型からKで選択した一部のプロパティのみを含んだ新たな型を構築するUtility Types。
+export type SearchWordsType = Pick<Models, 'title'> | undefined;
 
 export const SearchWords = atom<SearchWordsType>({
-  key: "SearchWords",
+  key: 'SearchWords',
   default: undefined,
 });
