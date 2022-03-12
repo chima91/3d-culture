@@ -1,3 +1,7 @@
+/**
+ * @prettier
+ */
+
 import { Avatar, Container, Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -12,9 +16,6 @@ import { useModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../
 import { PaginationWrapper } from "../../components/Pagination";
 import { SearchWords } from "../../stores/SearchWords";
 
-// debug
-import { GlobalUser } from "../../stores/User";
-
 export const Home = () => {
   // modelを取得するquery
   const { data, error } = useModelsQuery();
@@ -24,7 +25,7 @@ export const Home = () => {
     if(error) console.error(error);
   }, [error]);
 
-  // 検索キーワードがある場合は、data.modelsを絞り込み、modelsに結果を入れる
+  // 検索ワードがある(recoil(SearchWords)がundefinedではない)場合は、data.modelsを絞り込み、modelsに結果を入れる
   const searchWords = useRecoilValue(SearchWords);
   const models = (searchWords && data) ?
     data.models.filter(
@@ -57,10 +58,6 @@ export const Home = () => {
     });
     if (apolloError) console.log(apolloError.message)
   };
-
-  // debug
-  const globalUser = useRecoilValue(GlobalUser);
-  console.log('globalUser(Home page):', globalUser);
 
   return (
     <Container>
