@@ -6,7 +6,7 @@ import { IconButton, InputBase, Paper } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useRef } from "react";
 import { useRecoilState } from "recoil";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useStyles from "./style";
 import { SearchWords } from "../../../stores/SearchWords";
@@ -17,18 +17,18 @@ export const SearchBar = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchWords, setSearchWords] = useRecoilState(SearchWords);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // 検索ボタンクリックで、入力された検索キーワードをrecoilに反映しつつ、`/`にredirect
-  const handleClickSearch = () => {
+  const handleClickSearch = async() => {
     const keyword = inputRef.current?.value;
     if (keyword) {
-      setSearchWords({ title: keyword });
+      await setSearchWords({ title: keyword });
     } else {
-      setSearchWords(undefined);
+      await setSearchWords(undefined);
     }
 
-    // navigate('/');
+    navigate('/');
   };
 
   return (
