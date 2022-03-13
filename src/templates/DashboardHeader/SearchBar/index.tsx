@@ -20,15 +20,15 @@ export const SearchBar = () => {
   const navigate = useNavigate();
 
   // 検索ボタンクリックで、入力された検索キーワードをrecoilに反映しつつ、`/`にredirect
-  const handleClickSearch = async() => {
+  const handleClickSearch = () => {
     const keyword = inputRef.current?.value;
     if (keyword) {
-      await setSearchWords({ title: keyword });
+      setSearchWords({ title: keyword });
     } else {
-      await setSearchWords(undefined);
+      setSearchWords(undefined);
     }
 
-    navigate('/');
+    setTimeout(() => navigate('/'), 100);
   };
 
   return (
