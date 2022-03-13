@@ -65,7 +65,9 @@ export const Home = () => {
       <SNS />
       <GoogleForm />
       <Grid container spacing={2}>
-        {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示する */}
+        {/* 検索ワードで絞り込んだ結果、該当するモデルがなかった場合にメッセージを表示 */}
+        {!pageItem?.length && <p>該当するモデルがありませんでした。</p>}
+        {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示 */}
         {pageItem?.map((model) => (
           <Grid item xs={12} md={6} lg={3} key={model.id}>
             <Link to={`/detail/${model.id}`} style={{ textDecoration: "none" }}>
