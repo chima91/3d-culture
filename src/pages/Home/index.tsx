@@ -10,7 +10,6 @@ import { useRecoilValue } from "recoil";
 import { ObjCard } from "../../components/ObjCard";
 import { ModalQR } from "../../components/ModalQR";
 import { SNS } from "../../components/SNS";
-import { GoogleForm } from "../../components/GoogleForm";
 import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { PaginationWrapper } from "../../components/Pagination";
@@ -63,7 +62,6 @@ export const Home = () => {
     <Container>
       <ModalQR />
       <SNS />
-      <GoogleForm />
       <Grid container spacing={2}>
         {/* 検索ワードで絞り込んだ結果、該当するモデルがなかった場合にメッセージを表示 */}
         {!pageItem?.length && <p>該当するモデルがありませんでした。</p>}
