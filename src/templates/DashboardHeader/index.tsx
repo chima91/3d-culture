@@ -31,7 +31,7 @@ export const DashboardHeader = () => {
   };
 
   // レスポンシブ対応
-  const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+  const isDesktop: boolean = useMediaQuery({ minWidth: 768 })
   // Dialog用のステートと関数
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
