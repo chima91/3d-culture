@@ -42,6 +42,8 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
       return setErrorMessage(new Error('ログインしてください。'));
     if (!modelFile || !thumbFile)
       return setErrorMessage(new Error('ファイルを選択してください。'));
+    if (!modelFile.name.match('.glb$'))
+      return setErrorMessage(new Error('モデルファイルは、.glb形式のものを選択してください。'));
     if (!titleRef.current?.value)
       return setErrorMessage(new Error('タイトルを入力してください。'));
 
