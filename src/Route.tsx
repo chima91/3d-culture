@@ -13,6 +13,7 @@ import { Upload } from "./pages/Upload";
 import { ModelUpdate } from "./pages/ModelUpdate";
 import { Channels } from "./pages/Channels";
 import { Profile } from "./pages/Profile";
+import { NotFound } from "./pages/NotFound";
 
 export const RootRouter = () => {
   return useRoutes([
@@ -40,7 +41,7 @@ export const RootRouter = () => {
         // { path: 'signup', element: <Signup /> },
         // { path: 'signout', element: <Signout /> },
         // { path: 'forget', element: <ForgetPassForm /> },
-        { path: '404', element: <div>Not Found</div> },
+        { path: '404', element: <NotFound /> },
       ]
     },
     { path: '*', element: <Navigate to='/404' /> }
