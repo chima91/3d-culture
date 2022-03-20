@@ -45,7 +45,7 @@ export const Upload = () => {
     <Dialog fullWidth={true} maxWidth="md" open={true}>
       <DialogTitle>
         3Dモデルのアップロード
-        <IconButton onClick={handleClose} >
+        <IconButton className={styles.closeButton} onClick={handleClose} >
           <CloseIcon />
         </IconButton>
       </DialogTitle>

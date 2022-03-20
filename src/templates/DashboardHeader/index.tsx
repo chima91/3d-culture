@@ -31,7 +31,7 @@ export const DashboardHeader = () => {
   };
 
   // レスポンシブ対応
-  const isDesktop = useMediaQuery({ query: '(min-width: 768px)' })
+  const isDesktop: boolean = useMediaQuery({ minWidth: 768 })
   // Dialog用のステートと関数
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -72,8 +72,7 @@ export const DashboardHeader = () => {
           </>
         }
 
-        {/* 一時的に、一般の人が新規垢作成・ログインできないようコメントアウト(22/03/07) */}
-        {/* <div className={styles.flex}>
+        <div className={styles.flex}>
           {globalUser ? (
             <>
               <Link to="/upload">
@@ -91,7 +90,7 @@ export const DashboardHeader = () => {
               ログイン
             </Button>
           )}
-        </div> */}
+        </div>
       </Toolbar>
     </AppBar>
   )
