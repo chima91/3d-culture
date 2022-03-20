@@ -10,7 +10,7 @@ export const Logo = () => {
       <img
         className={styles.root}
         src="/static/logo.png"
-        alt="Culpticon Logo"
+        alt="Culpticon"
       />
     </Link>
   )
