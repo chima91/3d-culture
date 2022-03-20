@@ -72,7 +72,7 @@ export const DashboardHeader = () => {
           </>
         }
 
-        <div className={styles.flex}>
+        {/* <div className={styles.flex}>
           {globalUser ? (
             <>
               <Link to="/upload">
@@ -90,7 +90,7 @@ export const DashboardHeader = () => {
               ログイン
             </Button>
           )}
-        </div>
+        </div> */}
       </Toolbar>
     </AppBar>
   )
