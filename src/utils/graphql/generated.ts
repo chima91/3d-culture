@@ -273,7 +273,7 @@ export type Models_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "models" */
 export type Models_Arr_Rel_Insert_Input = {
   data: Array<Models_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: Maybe<Models_On_Conflict>;
 };
 
@@ -393,7 +393,7 @@ export type Models_Mutation_Response = {
   returning: Array<Models>;
 };
 
-/** on conflict condition type for table "models" */
+/** on_conflict condition type for table "models" */
 export type Models_On_Conflict = {
   constraint: Models_Constraint;
   update_columns?: Array<Models_Update_Column>;
@@ -926,7 +926,7 @@ export type Subscribers_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "subscribers" */
 export type Subscribers_Arr_Rel_Insert_Input = {
   data: Array<Subscribers_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: Maybe<Subscribers_On_Conflict>;
 };
 
@@ -1002,7 +1002,7 @@ export type Subscribers_Mutation_Response = {
   returning: Array<Subscribers>;
 };
 
-/** on conflict condition type for table "subscribers" */
+/** on_conflict condition type for table "subscribers" */
 export type Subscribers_On_Conflict = {
   constraint: Subscribers_Constraint;
   update_columns?: Array<Subscribers_Update_Column>;
@@ -1358,11 +1358,11 @@ export type Users_Mutation_Response = {
 /** input type for inserting object relation for remote table "users" */
 export type Users_Obj_Rel_Insert_Input = {
   data: Users_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: Maybe<Users_On_Conflict>;
 };
 
-/** on conflict condition type for table "users" */
+/** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
   update_columns?: Array<Users_Update_Column>;
@@ -1449,6 +1449,13 @@ export type InsertUserMutationVariables = Exact<{
 
 
 export type InsertUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, name: string, email: string, profile_photo_url: string, created_at: any, updated_at: any } | null | undefined };
+
+export type DeleteModelMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteModelMutation = { __typename?: 'mutation_root', delete_models_by_pk?: { __typename?: 'models', id: string } | null | undefined };
 
 export type DeleteSubscribeMutationVariables = Exact<{
   subscribe_id: Scalars['String'];
@@ -1624,6 +1631,39 @@ export function useInsertUserMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertUserMutationHookResult = ReturnType<typeof useInsertUserMutation>;
 export type InsertUserMutationResult = Apollo.MutationResult<InsertUserMutation>;
 export type InsertUserMutationOptions = Apollo.BaseMutationOptions<InsertUserMutation, InsertUserMutationVariables>;
+export const DeleteModelDocument = gql`
+    mutation deleteModel($id: String!) {
+  delete_models_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteModelMutationFn = Apollo.MutationFunction<DeleteModelMutation, DeleteModelMutationVariables>;
+
+/**
+ * __useDeleteModelMutation__
+ *
+ * To run a mutation, you first call `useDeleteModelMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteModelMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteModelMutation, { data, loading, error }] = useDeleteModelMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteModelMutation(baseOptions?: Apollo.MutationHookOptions<DeleteModelMutation, DeleteModelMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteModelMutation, DeleteModelMutationVariables>(DeleteModelDocument, options);
+      }
+export type DeleteModelMutationHookResult = ReturnType<typeof useDeleteModelMutation>;
+export type DeleteModelMutationResult = Apollo.MutationResult<DeleteModelMutation>;
+export type DeleteModelMutationOptions = Apollo.BaseMutationOptions<DeleteModelMutation, DeleteModelMutationVariables>;
 export const DeleteSubscribeDocument = gql`
     mutation deleteSubscribe($subscribe_id: String!, $userid: String!) {
   delete_subscribers_by_pk(subscribe_id: $subscribe_id, userid: $userid) {
