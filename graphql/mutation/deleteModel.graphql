@@ -1,0 +1,5 @@
+mutation deleteModel($id: String!) {
+  delete_models_by_pk(id: $id) {
+    id
+  }
+}

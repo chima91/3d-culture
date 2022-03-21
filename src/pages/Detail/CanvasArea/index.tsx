@@ -2,9 +2,10 @@ import { Card, CardContent, CardHeader, Divider, Typography, Button } from "@mat
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { useEffect, useState, Suspense } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Three } from "../../../components/Three"
+import { useModelDelete } from "../../../hooks/ModelDelete";
 import useStyles from "./style";
 
 export type CanvasAreaProps = {
@@ -47,6 +48,19 @@ export const CanvasArea = ({
     // Firebase Storageからモデルのダウンロードリンクを取得する
     fetcher().then(setSrc);
   });
+
+  // モデルを削除するmutation
+  const navigate = useNavigate();
+  const { modelDelete, apolloError } = useModelDelete();
+  const handleModelDelete = async (id: string) => {
+    await modelDelete({
+      id: id
+    });
+    navigate("/");
+    if (apolloError) {
+      console.log(apolloError.message);
+    }
+  }
 
   return (
     <Card>
@@ -108,17 +122,18 @@ export const CanvasArea = ({
         <Typography>{description}</Typography>
       </CardContent>
 
-      {/* モデル編集エリア */}
+      {/* モデル編集 & 削除エリア */}
       { isCurrentModelByMine &&
-        <Link to={`/detail/${modelId}/update`} style={{ textDecoration: "none" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ margin: 50 }}
-          >
-            編集する
+        <div style={{ margin: 30, marginTop: 50 }}>
+          <Link to={`/detail/${modelId}/update`} style={{ textDecoration: "none" }}>
+            <Button variant="contained" color="primary">
+              編集する
+            </Button>
+          </Link>
+          <Button variant="contained" color="secondary" style={{ marginLeft: 10 }} onClick={() => handleModelDelete(modelId!)}>
+            削除する
           </Button>
-        </Link>
+        </div>
       }
     </Card>
   );
