@@ -14,6 +14,7 @@ import { storage } from "../../utils/Firebase/config";
 import { useModelsQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { PaginationWrapper } from "../../components/Pagination";
 import { SearchWords } from "../../stores/SearchWords";
+import { GoogleForm } from "../../components/GoogleForm";
 
 export const Home = () => {
   // modelを取得するquery
@@ -60,6 +61,7 @@ export const Home = () => {
 
   return (
     <Container>
+      <GoogleForm />
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
