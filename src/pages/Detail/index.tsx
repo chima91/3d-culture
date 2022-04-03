@@ -13,7 +13,6 @@ import { SNS } from "../../components/SNS";
 import useStyles from "./style";
 import { useModelByPkQuery, useRecommendModelsQuery, useSubscribersQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
 import { storage } from "../../utils/Firebase/config";
-import Head from "../../components/Head";
 
 export const Detail = () => {
   const styles = useStyles();
@@ -89,7 +88,6 @@ export const Detail = () => {
 
   return (
     <Container className={styles.root}>
-      <Head title={currentModel?.models_by_pk?.title} imgUrl={currentModel?.models_by_pk?.thumbnail_url} />
       <ModalQR />
       <SNS />
       <Grid container spacing={4}>
