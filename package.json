@@ -46,6 +46,7 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.1"
   },
@@ -54,7 +55,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "codegen": "graphql-codegen --require dotenv/config --config script/codegen.js dotenv_config_path=.env"
+    "codegen": "graphql-codegen --require dotenv/config --config script/codegen.js dotenv_config_path=.env",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": [
@@ -77,5 +79,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
