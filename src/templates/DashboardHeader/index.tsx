@@ -1,5 +1,4 @@
 import { AppBar, Avatar, Button, IconButton, Toolbar, Dialog, DialogContent } from "@material-ui/core";
-// import MenuIcon from "@material-ui/icons/Menu";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SearchIcon from "@material-ui/icons/Search";
 import { useRecoilValue } from "recoil";
@@ -16,7 +15,8 @@ import { UserMenu} from "./UserMenu";
 export const DashboardHeader = () => {
   const styles = useStyles();
   const globalUser = useRecoilValue(GlobalUser);
-  // ユーザーメニューポップアップ追加
+
+  // ユーザーメニューポップアップ
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleUsermenuClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -45,9 +45,6 @@ export const DashboardHeader = () => {
     <AppBar color="inherit" elevation={1}>
       <Toolbar className={styles.between}>
         <div className={styles.flex}>
-          {/* <IconButton>
-            <MenuIcon />
-          </IconButton> */}
           <div className={styles.logo}>
             <Logo />
           </div>
@@ -72,7 +69,7 @@ export const DashboardHeader = () => {
           </>
         }
 
-        {/* <div className={styles.flex}>
+        <div className={styles.flex}>
           {globalUser ? (
             <>
               <Link to="/upload">
@@ -90,7 +87,7 @@ export const DashboardHeader = () => {
               ログイン
             </Button>
           )}
-        </div> */}
+        </div>
       </Toolbar>
     </AppBar>
   )

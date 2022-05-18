@@ -4,11 +4,11 @@ import { HomeLayout } from "./layouts/Home";
 import { SideLessHomeLayout } from "./layouts/SidelessHome";
 import { SimpleLayout } from "./layouts/Simple";
 import { Detail } from "./pages/Detail";
-// import { ForgetPassForm } from "./pages/ForgetPassForm";
+import { ForgetPassForm } from "./pages/ForgetPassForm";
 import { Home } from "./pages/Home";
-// import { Login } from "./pages/Login";
-// import { Signout } from "./pages/Signout";
-// import { Signup } from "./pages/Signup";
+import { Login } from "./pages/Login";
+import { Signout } from "./pages/Signout";
+import { Signup } from "./pages/Signup";
 import { Upload } from "./pages/Upload";
 import { ModelUpdate } from "./pages/ModelUpdate";
 import { Channels } from "./pages/Channels";
@@ -37,10 +37,10 @@ export const RootRouter = () => {
     {
       element: <SimpleLayout />,
       children: [
-        // { path: 'login', element: <Login /> },
-        // { path: 'signup', element: <Signup /> },
-        // { path: 'signout', element: <Signout /> },
-        // { path: 'forget', element: <ForgetPassForm /> },
+        { path: 'login', element: <Login /> },
+        { path: 'signup', element: <Signup /> },
+        { path: 'signout', element: <Signout /> },
+        { path: 'forget', element: <ForgetPassForm /> },
         { path: '404', element: <NotFound /> },
       ]
     },
