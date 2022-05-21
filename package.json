@@ -1,5 +1,5 @@
 {
-  "name": "3d-test_react",
+  "name": "3d-culture",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -42,8 +42,7 @@
     "recoil": "^0.4.1",
     "three": "^0.132.2",
     "typescript": "^4.4.2",
-    "uuid": "^8.3.2",
-    "web-vitals": "^1.1.2"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
