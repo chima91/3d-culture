@@ -3,7 +3,7 @@ bracketSameLine: false
 bracketSpacing: true
 jsxSingleQuote: true
 printWidth: 80
-requirePragma: true
+requirePragma: false
 semi: true
 singleQuote: true
 tabWidth: 2
