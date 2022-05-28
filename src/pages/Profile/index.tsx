@@ -1,4 +1,12 @@
-import { Dialog, DialogContent, DialogTitle, Divider, IconButton, Grid, CircularProgress } from '@material-ui/core';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  IconButton,
+  Grid,
+  CircularProgress,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +35,7 @@ export const Profile = () => {
   useEffect(() => {
     if (accountLoaded) {
       if (!globalUser?.id) {
-        navigate("/login");
+        navigate('/login');
       }
     }
   }, [accountLoaded, globalUser?.id]);
@@ -36,11 +44,11 @@ export const Profile = () => {
   const [open, setOpen] = useState<boolean>(true);
   const handleClose = () => {
     setOpen(false);
-    navigate("/");
+    navigate('/');
   };
 
   return (
-    <Dialog fullWidth={true} maxWidth="md" open={open} onClose={handleClose} >
+    <Dialog fullWidth maxWidth='md' open={open} onClose={handleClose}>
       <DialogTitle>
         プロフィール
         <IconButton className={styles.closeButton} onClick={handleClose}>
@@ -57,7 +65,7 @@ export const Profile = () => {
             <Grid xs item>
               {/* ステートをpropsとして渡す */}
               <AvatarSelect
-                currentAvatarUrl={globalUser.profile_photo_url||undefined}
+                currentAvatarUrl={globalUser.profile_photo_url || undefined}
                 avatarFile={avatarFile}
                 setAvatarFile={setAvatarFile}
               />
@@ -70,7 +78,7 @@ export const Profile = () => {
           </Grid>
         ) : (
           // アカウントが存在しなければ、ローディングコンポーネントを表示
-          <Grid container justifyContent="center">
+          <Grid container justifyContent='center'>
             <CircularProgress size={50} />
           </Grid>
         )}

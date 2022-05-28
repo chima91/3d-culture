@@ -1,10 +1,10 @@
-import { useEffect, PropsWithChildren } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { GlobalUser } from "../../stores/User";
-import { useUserByIdLazyQuery } from "../../utils/graphql/generated";
-import { AuthCredential } from "../../stores/AuthCredential";
-import { AuthCredentialLoaded } from "../../stores/AuthCredentialLoaded";
-import { AccountLoaded } from "../../stores/AccountLoaded";
+import { useEffect, PropsWithChildren } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { GlobalUser } from '../../stores/User';
+import { useUserByIdLazyQuery } from '../../utils/graphql/generated';
+import { AuthCredential } from '../../stores/AuthCredential';
+import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
+import { AccountLoaded } from '../../stores/AccountLoaded';
 
 export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
   // ユーザー情報取得用のQuery関数
@@ -32,10 +32,8 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
           setAccountLoaded(false);
           userQuery({ variables: { id: credential } });
         }
-      } else {
-        if (globalUser?.id) {
-          setGlobalUser(undefined);
-        }
+      } else if (globalUser?.id) {
+        setGlobalUser(undefined);
       }
     }
   }, [credential, authLoaded]);
@@ -48,10 +46,8 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
       // Credentialにidが格納されていなければデータは格納できない。
       if (apolloData?.users_by_pk?.id && credential) {
         setGlobalUser(apolloData.users_by_pk);
-      } else {
-        if (globalUser?.id) {
-          setGlobalUser(undefined);
-        }
+      } else if (globalUser?.id) {
+        setGlobalUser(undefined);
       }
       // Accountのローディングを完了
       setAccountLoaded(true);
@@ -67,5 +63,5 @@ export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
     }
   }, [apolloError]);
 
-  return <>{children}</>;
+  return { children };
 };
