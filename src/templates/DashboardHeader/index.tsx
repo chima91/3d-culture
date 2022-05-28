@@ -1,17 +1,25 @@
-import { AppBar, Avatar, Button, IconButton, Toolbar, Dialog, DialogContent } from "@material-ui/core";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  IconButton,
+  Toolbar,
+  Dialog,
+  DialogContent,
+} from '@material-ui/core';
 // import MenuIcon from "@material-ui/icons/Menu";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import SearchIcon from "@material-ui/icons/Search";
-import { useRecoilValue } from "recoil";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, MouseEvent } from "react";
+import SearchIcon from '@material-ui/icons/Search';
+import { useRecoilValue } from 'recoil';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, MouseEvent } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { Logo } from "../../components/Logo";
-import { SearchBar } from "./SearchBar";
-import useStyles from "./style";
-import { GlobalUser } from "../../stores/User";
-import { UserMenu} from "./UserMenu";
+import { Logo } from '../../components/Logo';
+import { SearchBar } from './SearchBar';
+import useStyles from './style';
+import { GlobalUser } from '../../stores/User';
+import { UserMenu } from './UserMenu';
 
 export const DashboardHeader = () => {
   const styles = useStyles();
@@ -27,11 +35,11 @@ export const DashboardHeader = () => {
   };
   const handleLogout = () => {
     setAnchorEl(null);
-    navigate("/signout");
+    navigate('/signout');
   };
 
   // レスポンシブ対応
-  const isDesktop: boolean = useMediaQuery({ minWidth: 768 })
+  const isDesktop: boolean = useMediaQuery({ minWidth: 768 });
   // Dialog用のステートと関数
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -42,7 +50,7 @@ export const DashboardHeader = () => {
   };
 
   return (
-    <AppBar color="inherit" elevation={1}>
+    <AppBar color='inherit' elevation={1}>
       <Toolbar className={styles.between}>
         <div className={styles.flex}>
           {/* <IconButton>
@@ -56,21 +64,23 @@ export const DashboardHeader = () => {
         {/* 768px以上の時は、そのままSearchBarを表示 */}
         {isDesktop && <SearchBar />}
         {/* 768px未満の時は、DialogとしてSearchBarを表示 */}
-        {!isDesktop &&
+        {!isDesktop && (
           <>
-            <IconButton onClick={handleClickOpen}><SearchIcon /></IconButton>
+            <IconButton onClick={handleClickOpen}>
+              <SearchIcon />
+            </IconButton>
             <Dialog
-              fullWidth={true}
+              fullWidth
               open={open}
               onClose={handleClose}
-              aria-labelledby="responsive-dialog-title"
+              aria-labelledby='responsive-dialog-title'
             >
               <DialogContent>
                 <SearchBar />
               </DialogContent>
             </Dialog>
           </>
-        }
+        )}
 
         {/* <div className={styles.flex}>
           {globalUser ? (
@@ -93,5 +103,5 @@ export const DashboardHeader = () => {
         </div> */}
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
