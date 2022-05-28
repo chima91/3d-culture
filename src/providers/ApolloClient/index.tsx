@@ -3,10 +3,10 @@ import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { PropsWithChildren } from "react";
-import { fireAuth } from "../../utils/Firebase/config";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { PropsWithChildren } from 'react';
+import { fireAuth } from '../../utils/Firebase/config';
 
 // GraphQl APIのエンドポイントを指定する
 const httpLink = createHttpLink({
@@ -31,6 +31,6 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const ApolloProvider = ({ children }: PropsWithChildren<{}>) => {
-  return <Provider client={apolloClient}>{children}</Provider>;
-};
+export const ApolloProvider = ({ children }: PropsWithChildren<{}>) => (
+  <Provider client={apolloClient}>{children}</Provider>
+);

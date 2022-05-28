@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-import { PropsWithChildren } from "react";
-import { useSetRecoilState } from "recoil";
-import { AuthCredential } from "../../stores/AuthCredential";
-import { AuthCredentialLoaded } from "../../stores/AuthCredentialLoaded";
-import { fireAuth } from "../../utils/Firebase/config";
+import { useEffect, PropsWithChildren } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { AuthCredential } from '../../stores/AuthCredential';
+import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
+import { fireAuth } from '../../utils/Firebase/config';
 
 export const AuthStateListener = ({ children }: PropsWithChildren<{}>) => {
   const setCredential = useSetRecoilState(AuthCredential);
@@ -23,5 +22,5 @@ export const AuthStateListener = ({ children }: PropsWithChildren<{}>) => {
     // この場合、AuthStateListenerはProviderとしてアプリケーションのRootで呼んでいるのでアプリケーションを閉じたときに実行される
     return unsubscriber;
   });
-  return <>{children}</>;
+  return { children };
 };

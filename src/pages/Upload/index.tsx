@@ -1,14 +1,22 @@
-import { Dialog, DialogTitle, DialogContent, Grid, Divider, CircularProgress, IconButton }  from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close"
-import { useRecoilValue } from "recoil";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Grid,
+  Divider,
+  CircularProgress,
+  IconButton,
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { UploadForm } from "./UploadForm";
-import { ModelSelect } from "./ModelSelect";
-import useStyles from "./style";
-import { AccountLoaded } from "../../stores/AccountLoaded";
-import { GlobalUser } from "../../stores/User";
+import { UploadForm } from './UploadForm';
+import { ModelSelect } from './ModelSelect';
+import useStyles from './style';
+import { AccountLoaded } from '../../stores/AccountLoaded';
+import { GlobalUser } from '../../stores/User';
 
 export const Upload = () => {
   const styles = useStyles();
@@ -16,17 +24,17 @@ export const Upload = () => {
   const accountLoaded = useRecoilValue(AccountLoaded);
   const globalUser = useRecoilValue(GlobalUser);
 
-  const [ modelFile, setModelFile ] = useState<File>();
-  const [ thumbFile, setThumbFile ] = useState<File>();
+  const [modelFile, setModelFile] = useState<File>();
+  const [thumbFile, setThumbFile] = useState<File>();
 
   const navigate = useNavigate();
 
   // Dialogクローズ用
-  const [ , setOpen ] = useState<boolean>(true);
+  const [, setOpen] = useState<boolean>(true);
   const handleClose = () => {
     setOpen(false);
-    navigate("/");
-  }
+    navigate('/');
+  };
 
   // debug
   console.log('accountLoaded(Upload page):', accountLoaded);
@@ -36,16 +44,16 @@ export const Upload = () => {
   useEffect(() => {
     if (accountLoaded) {
       if (!globalUser?.id) {
-        navigate("/login");
+        navigate('/login');
       }
     }
   }, [accountLoaded, globalUser?.id]);
 
   return (
-    <Dialog fullWidth={true} maxWidth="md" open={true}>
+    <Dialog fullWidth maxWidth='md' open>
       <DialogTitle>
         3Dモデルのアップロード
-        <IconButton className={styles.closeButton} onClick={handleClose} >
+        <IconButton className={styles.closeButton} onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -55,16 +63,21 @@ export const Upload = () => {
         {globalUser?.id ? (
           <Grid container spacing={4}>
             <Grid xs item>
-              <ModelSelect modelFile={modelFile} thumbFile={thumbFile} setModelFile={setModelFile} setThumbFile={setThumbFile} />
+              <ModelSelect
+                modelFile={modelFile}
+                thumbFile={thumbFile}
+                setModelFile={setModelFile}
+                setThumbFile={setThumbFile}
+              />
             </Grid>
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
             <Grid xs item>
-              <UploadForm  modelFile={modelFile} thumbFile={thumbFile} />
+              <UploadForm modelFile={modelFile} thumbFile={thumbFile} />
             </Grid>
           </Grid>
         ) : (
           // ローディングコンポーネント表示
-          <Grid container justifyContent="center">
+          <Grid container justifyContent='center'>
             <CircularProgress size={50} />
           </Grid>
         )}
