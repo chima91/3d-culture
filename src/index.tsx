@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import { RecoilRoot } from 'recoil';
 import { RootRouter } from './Route';
-import GlobalStyle from './GlobalStyle';
 import { AuthStateListener } from './providers/AuthStateListener';
 import { GlobalAccount } from './providers/GlobalAccount';
 import { ApolloProvider } from './providers/ApolloClient';
@@ -27,8 +26,6 @@ ReactDOM.render(
               <BrowserRouter>
                 {/* ブラウザの違いを吸収し、どのデバイスでも同じように表示する用のCSSを使用する */}
                 <CssBaseline />
-                {/* アプリ全体の特殊なグローバルスタリング */}
-                <GlobalStyle />
                 {/* ルーティング用のメインコンポーネント */}
                 <RootRouter />
               </BrowserRouter>
