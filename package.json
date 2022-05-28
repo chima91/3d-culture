@@ -68,16 +68,6 @@
     "commit": "cz",
     "prepare": "husky install"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "prettier"
-    ],
-    "rules": {
-      "react-hooks/exhaustive-deps": "off"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
