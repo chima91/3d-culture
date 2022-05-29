@@ -1,4 +1,7 @@
-import { useDeleteModelMutation, ModelsDocument } from "../../utils/graphql/generated";
+import {
+  useDeleteModelMutation,
+  ModelsDocument,
+} from '../../utils/graphql/generated';
 
 type ModelDeleteProps = {
   id: string;
@@ -14,14 +17,14 @@ export const useModelDelete = () => {
       try {
         await mutation({
           variables: {
-            id: id
-          }
+            id,
+          },
         });
         if (apolloError) {
           console.log(apolloError.message);
         }
       } catch (e) {
-        new Error("モデルの削除に失敗")
+        new Error('モデルの削除に失敗');
       }
     }
   };
@@ -29,5 +32,5 @@ export const useModelDelete = () => {
   return {
     modelDelete,
     apolloError,
-  }
-}
+  };
+};

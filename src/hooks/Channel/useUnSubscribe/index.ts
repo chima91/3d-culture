@@ -1,8 +1,8 @@
 import {
   useDeleteSubscribeMutation,
   SubscribersDocument,
-  UserByIdDocument
-} from "../../../utils/graphql/generated";
+  UserByIdDocument,
+} from '../../../utils/graphql/generated';
 
 type UnSubscribeProps = {
   userid: string;
@@ -19,14 +19,14 @@ export const useUnSubscribe = () => {
       try {
         await deleteSubscription({
           variables: {
-            userid: userid,
-            subscribe_id: subscribeId
-          }
+            userid,
+            subscribe_id: subscribeId,
+          },
         });
 
         if (error) console.log(error.message);
       } catch (e) {
-        new Error("チャンネル登録の解除に失敗しました。");
+        new Error('チャンネル登録の解除に失敗しました。');
       }
     }
   };

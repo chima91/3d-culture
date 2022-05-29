@@ -5,12 +5,12 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useRecoilValue } from 'recoil';
 import { storage } from '../../utils/Firebase/config';
 import {
   ModelsDocument,
   useInsertModelMutation,
 } from '../../utils/graphql/generated';
-import { useRecoilValue } from 'recoil';
 import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {

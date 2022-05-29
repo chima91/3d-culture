@@ -1,18 +1,24 @@
-import { Avatar, Container, Grid } from "@material-ui/core";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { GlobalUser } from "../../stores/User";
-import { useSubscribe } from "../../hooks/Channel/useSubscribe";
-import { useUnSubscribe } from "../../hooks/Channel/useUnSubscribe";
+import { Avatar, Container, Grid } from '@material-ui/core';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { GlobalUser } from '../../stores/User';
+import { useSubscribe } from '../../hooks/Channel/useSubscribe';
+import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
 
-import { CanvasArea } from "./CanvasArea";
-import { ObjHorizontalCard } from "../../components/ObjHorizontalCard";
-import { ModalQR } from "../../components/ModalQR";
-import { SNS } from "../../components/SNS";
-import useStyles from "./style";
-import { useModelByPkQuery, useRecommendModelsQuery, useSubscribersQuery, useUpdateModelViewsMutation, ModelsDocument } from "../../utils/graphql/generated";
-import { storage } from "../../utils/Firebase/config";
+import { CanvasArea } from './CanvasArea';
+import { ObjHorizontalCard } from '../../components/ObjHorizontalCard';
+import { ModalQR } from '../../components/ModalQR';
+import { SNS } from '../../components/SNS';
+import useStyles from './style';
+import {
+  useModelByPkQuery,
+  useRecommendModelsQuery,
+  useSubscribersQuery,
+  useUpdateModelViewsMutation,
+  ModelsDocument,
+} from '../../utils/graphql/generated';
+import { storage } from '../../utils/Firebase/config';
 
 export const Detail = () => {
   const styles = useStyles();
@@ -22,9 +28,9 @@ export const Detail = () => {
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId
-    }
-  })
+      id: objId,
+    },
+  });
   // IDからリコメンドのモデル群を取得
   const { data: recommendModels } = useRecommendModelsQuery({
     variables: {
@@ -36,55 +42,57 @@ export const Detail = () => {
   const recoModels = recommendModels?.models.slice(0, MODELS_DISP_MAX);
 
   // 閲覧回数をカウントアップするmutation
-  const [ updateMutation, { error: apolloError } ] = useUpdateModelViewsMutation({
-    refetchQueries: [{ query: ModelsDocument }]
+  const [updateMutation, { error: apolloError }] = useUpdateModelViewsMutation({
+    refetchQueries: [{ query: ModelsDocument }],
   });
   // 閲覧回数をカウントアップする関数
   const onClickCard = async (id: string | undefined) => {
     await updateMutation({
       variables: {
-        modelId: id as string
-      }
+        modelId: id as string,
+      },
     });
-    if (apolloError) console.log(apolloError.message)
+    if (apolloError) console.log(apolloError.message);
   };
 
   // モデル投稿者の登録者数を取得する
   const { data: subscribers } = useSubscribersQuery({
     variables: {
-      ownerid: currentModel?.models_by_pk?.owner?.id || ''
-    }
-  })
+      ownerid: currentModel?.models_by_pk?.owner?.id || '',
+    },
+  });
   // チャンネル登録する
   const { subscribe, error: insError } = useSubscribe();
   const onSubscribe = async (userid: string, subscribeId: string) => {
     await subscribe({
-      userid: userid,
-      subscribeId: subscribeId
+      userid,
+      subscribeId,
     });
-    if (insError) console.log(insError.message)
-  }
+    if (insError) console.log(insError.message);
+  };
   // チャンネル登録を解除する
   const { unsubscribe, error: delError } = useUnSubscribe();
   const onUnSubscribe = async (userid: string, subscribeId: string) => {
     await unsubscribe({
-      userid: userid,
-      subscribeId: subscribeId
+      userid,
+      subscribeId,
     });
     if (delError) console.log(delError.message);
-  }
+  };
   // チャンネル登録済みユーザーを取得し、表示中のモデル投稿者が含まれるか調べる
   // ユーザー情報から登録済みチャンネルIDの配列を取得
   const globalUser = useRecoilValue(GlobalUser);
   // 表示中のモデル投稿者のチャンネルをログイン中のユーザーが登録しているか
   const isSubscribed =
     globalUser?.subscribersByUserid?.filter(
-      (sub) => sub.subscribe_id === currentModel?.models_by_pk?.owner?.id
-    ).length === 1
+      (sub) => sub.subscribe_id === currentModel?.models_by_pk?.owner?.id,
+    ).length === 1;
   // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
-  const isCurrentModelByOthers = (globalUser?.id && globalUser.id !== currentModel?.models_by_pk?.owner?.id)
+  const isCurrentModelByOthers =
+    globalUser?.id && globalUser.id !== currentModel?.models_by_pk?.owner?.id;
   // ログイン中のユーザーと、表示中モデルの投稿者が同じかどうか
-  const isCurrentModelByMine = (globalUser?.id && globalUser.id === currentModel?.models_by_pk?.owner?.id)
+  const isCurrentModelByMine =
+    globalUser?.id && globalUser.id === currentModel?.models_by_pk?.owner?.id;
 
   return (
     <Container className={styles.root}>
@@ -97,23 +105,37 @@ export const Detail = () => {
             title={currentModel?.models_by_pk?.title}
             created={currentModel?.models_by_pk?.created_at}
             owner={currentModel?.models_by_pk?.owner?.name}
-            avatar={<Avatar src={currentModel?.models_by_pk?.owner?.profile_photo_url} />}
+            avatar={
+              <Avatar
+                src={currentModel?.models_by_pk?.owner?.profile_photo_url}
+              />
+            }
             description={currentModel?.models_by_pk?.description}
             views={currentModel?.models_by_pk?.views}
             subscribers={subscribers?.subscribers.length || 0}
             isCurrentModelByOthers={isCurrentModelByOthers || false}
             isCurrentModelByMine={isCurrentModelByMine || false}
             isSubscribed={isSubscribed}
-            fetcher={async() => {
-              if(currentModel?.models_by_pk?.model_url) {
+            fetcher={async () => {
+              if (currentModel?.models_by_pk?.model_url) {
                 return storage
                   .ref(currentModel.models_by_pk.model_url)
                   .getDownloadURL();
               }
               return undefined;
             }}
-            onSubscribe={() => { onSubscribe(globalUser?.id || '', currentModel?.models_by_pk?.owner?.id || '') }}
-            onUnSubscribe={() => { onUnSubscribe(globalUser?.id || '', currentModel?.models_by_pk?.owner?.id || '') }}
+            onSubscribe={() => {
+              onSubscribe(
+                globalUser?.id || '',
+                currentModel?.models_by_pk?.owner?.id || '',
+              );
+            }}
+            onUnSubscribe={() => {
+              onUnSubscribe(
+                globalUser?.id || '',
+                currentModel?.models_by_pk?.owner?.id || '',
+              );
+            }}
           />
         </Grid>
         <Grid item xs={12} lg={4}>
@@ -121,11 +143,11 @@ export const Detail = () => {
             <div className={styles.cardPadding} key={model.id}>
               <Link
                 to={`/detail/${model.id}`}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: 'none' }}
               >
                 <ObjHorizontalCard
                   title={model.title}
-                  owner={model.owner?.name || ""}
+                  owner={model.owner?.name || ''}
                   created={model.created_at}
                   views={model.views}
                   fetcher={() =>
@@ -140,4 +162,4 @@ export const Detail = () => {
       </Grid>
     </Container>
   );
-}
+};

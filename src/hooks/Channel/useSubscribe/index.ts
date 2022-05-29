@@ -1,13 +1,13 @@
 import {
   useInsertSubscribeMutation,
   SubscribersDocument,
-  UserByIdDocument
-} from "../../../utils/graphql/generated";
+  UserByIdDocument,
+} from '../../../utils/graphql/generated';
 
 type SubscribeProps = {
   userid: string;
   subscribeId: string;
-}
+};
 
 export const useSubscribe = () => {
   const [insertSubscription, { data, error }] = useInsertSubscribeMutation({
@@ -19,13 +19,13 @@ export const useSubscribe = () => {
       try {
         await insertSubscription({
           variables: {
-            userid: userid,
-            subscribe_id: subscribeId
-          }
+            userid,
+            subscribe_id: subscribeId,
+          },
         });
         if (error) console.log(error.message);
       } catch (e) {
-        new Error("チャンネル登録に失敗しました。")
+        new Error('チャンネル登録に失敗しました。');
       }
     }
   };
