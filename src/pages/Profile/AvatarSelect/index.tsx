@@ -1,5 +1,12 @@
-import { Button, CardMedia } from "@material-ui/core";
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Button, CardMedia } from '@material-ui/core';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import useStyles from './style';
 
@@ -9,11 +16,15 @@ export type AvatarSelectProps = {
   setAvatarFile: Dispatch<SetStateAction<File | undefined>>;
 };
 
-export const AvatarSelect = ({currentAvatarUrl, avatarFile, setAvatarFile}: AvatarSelectProps) => {
+export const AvatarSelect = ({
+  currentAvatarUrl,
+  avatarFile,
+  setAvatarFile,
+}: AvatarSelectProps) => {
   const styles = useStyles();
 
   // 画像表示用のURLを格納。URLは文字列 == string型
-  const [avatarURL, setAvatarURL] = useState<string>(currentAvatarUrl || "");
+  const [avatarURL, setAvatarURL] = useState<string>(currentAvatarUrl || '');
 
   // ユーザがファイルを選択したら、`setAvatarFile`を使用して`avatarFile`に選択されたファイルを格納する。
   const selectedFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +40,7 @@ export const AvatarSelect = ({currentAvatarUrl, avatarFile, setAvatarFile}: Avat
   useEffect(() => {
     // ファイルが空の場合は、実行しない
     if (avatarFile) {
-      const avatarURL = URL.createObjectURL(avatarFile);
-      setAvatarURL(avatarURL);
+      setAvatarURL(URL.createObjectURL(avatarFile));
     }
   }, [avatarFile]);
 
@@ -38,12 +48,16 @@ export const AvatarSelect = ({currentAvatarUrl, avatarFile, setAvatarFile}: Avat
     <div className={styles.root}>
       {avatarURL && (
         <div className={styles.full}>
-          <CardMedia component="img" src={avatarURL || ""} className={styles.avatarFigure} />
+          <CardMedia
+            component='img'
+            src={avatarURL || ''}
+            className={styles.avatarFigure}
+          />
         </div>
       )}
       <div className={styles.button}>
-        <input type="file" hidden ref={inputRef} onChange={selectedFile} />
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <input type='file' hidden ref={inputRef} onChange={selectedFile} />
+        <Button variant='contained' color='primary' onClick={handleClick}>
           画像を選択
         </Button>
       </div>

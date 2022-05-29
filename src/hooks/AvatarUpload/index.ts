@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
-import { storage } from "../../utils/Firebase/config";
-import { UserByIdDocument, useUpdateUserMutation } from "../../utils/graphql/generated";
-import { GlobalUser } from "../../stores/User";
+import { storage } from '../../utils/Firebase/config';
+import {
+  UserByIdDocument,
+  useUpdateUserMutation,
+} from '../../utils/graphql/generated';
+import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   file: {
@@ -12,7 +15,7 @@ type UploadProps = {
   name: string;
   description?: string;
   userId: string;
-}
+};
 
 export const useAvatarUpload = () => {
   const [loading, setLoading] = useState(false);
@@ -31,12 +34,11 @@ export const useAvatarUpload = () => {
     if (file) {
       const exe = file.name.split('.').pop();
       return storage.ref(`${path}/${id}.${exe}`).put(file);
-    } else {
-      return null;
     }
+    return null;
   };
 
-  const upload = async({ file, name, description, userId }: UploadProps) => {
+  const upload = async ({ file, name, description, userId }: UploadProps) => {
     // ユーザが読み込まれていない、未ログインであれば処理を中断する
     if (!globalUser?.id) return;
 
@@ -48,31 +50,35 @@ export const useAvatarUpload = () => {
     // try-catch構文でPromise(アップロード処理)のエラーをキャッチする
     try {
       // avatarのアップロード処理
-      const avatarUploadTask = await uploadStorage(avatarName, file.avatar, "avatars");
+      const avatarUploadTask = await uploadStorage(
+        avatarName,
+        file.avatar,
+        'avatars',
+      );
 
       // avatar URLの取得
-      let avatarURL: string = "";
+      let avatarURL = '';
       if (avatarUploadTask) {
         avatarURL = await avatarUploadTask.ref.getDownloadURL();
       } else {
-        avatarURL = globalUser.profile_photo_url || "";
+        avatarURL = globalUser.profile_photo_url || '';
       }
 
       // avatarのメタデータを保存する
       const res = await mutation({
         variables: {
           id: userId,
-          name: name,
+          name,
           profile_photo_url: avatarURL,
-        }
+        },
       });
 
       // 全ての処理が終わったら、avatarのメタデータを返す
       return res.data?.update_users_by_pk;
-    } catch(err) {
+    } catch (err) {
       // アップロードの途中でエラーが発生したら、処理を中断して、ここに記述する処理が行われる
       console.error(err);
-      setError(new Error("エラーが発生しました。最初からやり直してください。"));
+      setError(new Error('エラーが発生しました。最初からやり直してください。'));
     } finally {
       // 全ての処理が完了したら、ローディングをfalseにする
       setLoading(false);
@@ -83,13 +89,13 @@ export const useAvatarUpload = () => {
   useEffect(() => {
     if (apolloError) {
       console.error(apolloError);
-      setError(new Error("エラーが発生しました。最初からやり直してください。"));
+      setError(new Error('エラーが発生しました。最初からやり直してください。'));
     }
-  }, [apolloError])
+  }, [apolloError]);
 
   return {
     loading,
     error,
-    upload
+    upload,
   };
 };
