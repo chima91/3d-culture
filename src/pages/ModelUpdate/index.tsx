@@ -10,8 +10,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { UpdateForm } from './UpdateForm';
 import { UpdateModelSelect } from './UpdateModelSelect';
