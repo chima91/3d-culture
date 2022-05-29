@@ -1,6 +1,5 @@
 import { Avatar, Container, Grid } from '@material-ui/core';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { GlobalUser } from '../../stores/User';
 import { useSubscribe } from '../../hooks/Channel/useSubscribe';

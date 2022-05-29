@@ -1,10 +1,6 @@
-/**
- * @prettier
- */
-
 import { Button, TextField, Typography } from '@material-ui/core';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { useModelUpdate } from '../../../hooks/ModelUpdate';
@@ -25,9 +21,9 @@ export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId
-    }
-  })
+      id: objId,
+    },
+  });
 
   // リダイレクト用関数
   const navigate = useNavigate();
