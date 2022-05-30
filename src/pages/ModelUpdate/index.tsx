@@ -75,7 +75,7 @@ export const ModelUpdate = () => {
             <Grid xs item>
               <UpdateModelSelect
                 currentModelUrl={currentModel?.models_by_pk?.model_url}
-                currentThumbUrl={currentModel?.models_by_pk?.thumbnail_url!}
+                currentThumbUrl={currentModel?.models_by_pk?.thumbnail_url}
                 modelFile={modelFile}
                 thumbFile={thumbFile}
                 setModelFile={setModelFile}

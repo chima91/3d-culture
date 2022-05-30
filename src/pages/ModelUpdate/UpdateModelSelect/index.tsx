@@ -16,7 +16,7 @@ import useStyles from './style';
 
 export type ModelSelectProps = {
   currentModelUrl: string | undefined;
-  currentThumbUrl: string | undefined;
+  currentThumbUrl: string | undefined | null;
   modelFile: File | undefined;
   thumbFile: File | undefined;
   setModelFile: Dispatch<SetStateAction<File | undefined>>;
@@ -34,10 +34,10 @@ export const UpdateModelSelect = ({
   const styles = useStyles();
 
   // モデルのURLを格納
-  const [modelURL, setModelURL] = useState<string>(currentModelUrl || "");
+  const [modelURL, setModelURL] = useState<string>(currentModelUrl || '');
 
   // サムネイルの画像URLを格納
-  const [thumbURL, setThumbURL] = useState<string>(currentThumbUrl || "");
+  const [thumbURL, setThumbURL] = useState<string>(currentThumbUrl || '');
 
   // ファイルを選択した後に、setModelFile, setThumbFileを使用し、選択されたファイルをmodelFile, ThumbFileに格納。
   const selectModel = (event: ChangeEvent<HTMLInputElement>) => {

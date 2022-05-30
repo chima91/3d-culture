@@ -6,7 +6,9 @@ import { AuthCredential } from '../../stores/AuthCredential';
 import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 
-export const GlobalAccount = ({ children }: PropsWithChildren<{}>) => {
+export const GlobalAccount = ({
+  children,
+}: PropsWithChildren<Record<string, never>>) => {
   // ユーザー情報取得用のQuery関数
   const [
     userQuery,

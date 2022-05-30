@@ -31,6 +31,8 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const ApolloProvider = ({ children }: PropsWithChildren<{}>) => (
+export const ApolloProvider = ({
+  children,
+}: PropsWithChildren<Record<string, never>>) => (
   <Provider client={apolloClient}>{children}</Provider>
 );

@@ -10,7 +10,7 @@ import {
 import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
-  modelId: string;
+  modelId?: string;
   file: {
     model: File;
     thumbnail: File;
@@ -65,7 +65,7 @@ export const useModelUpdate = () => {
       // モデルのメタデータをHasuraを通してHerokuのPostgreSQLに保存する
       const res = await mutation({
         variables: {
-          id: modelId,
+          id: modelId!,
           title,
           description,
           model_url: modelUploadTask.ref.fullPath,

@@ -4,7 +4,9 @@ import { AuthCredential } from '../../stores/AuthCredential';
 import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
 import { fireAuth } from '../../utils/Firebase/config';
 
-export const AuthStateListener = ({ children }: PropsWithChildren<{}>) => {
+export const AuthStateListener = ({
+  children,
+}: PropsWithChildren<Record<string, never>>) => {
   const setCredential = useSetRecoilState(AuthCredential);
   const setLoaded = useSetRecoilState(AuthCredentialLoaded);
 
