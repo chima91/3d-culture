@@ -74,7 +74,7 @@ export const useModelUpdate = () => {
       });
 
       // 全ての処理が終わったら、モデルのメタデータを返す。
-      return res.data?.update_models_by_pk;
+      // return res.data?.update_models_by_pk;
     } catch (err) {
       console.error(err);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));

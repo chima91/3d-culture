@@ -25,7 +25,7 @@ export const useSubscribe = () => {
         });
         if (error) console.log(error.message);
       } catch (e) {
-        new Error('チャンネル登録に失敗しました。');
+        throw new Error('チャンネル登録に失敗しました。');
       }
     }
   };

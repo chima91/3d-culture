@@ -45,7 +45,7 @@ export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
     if (!titleRef.current?.value)
       return setErrorMessage(new Error('タイトルを入力してください。'));
 
-    upload({
+    return upload({
       file: {
         model: modelFile,
         thumbnail: thumbFile,

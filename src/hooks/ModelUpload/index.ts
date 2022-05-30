@@ -81,7 +81,7 @@ export const useModelUpload = () => {
       });
 
       // 全ての処理が終わったら、モデルのメタデータを返す。
-      return res.data?.insert_models_one;
+      // return res.data?.insert_models_one;
     } catch (err) {
       console.error(err);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
