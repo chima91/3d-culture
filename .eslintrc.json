@@ -21,13 +21,21 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-unused-vars": "off",
+    "no-use-before-define": "off",
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
     "react/function-component-definition": [
       "warn",
       { "namedComponents": "arrow-function" }
     ],
-    "no-use-before-define": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "labelComponents": ["label"],
+        "controlComponents": ["TextField"]
+      }
+    ],
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",
