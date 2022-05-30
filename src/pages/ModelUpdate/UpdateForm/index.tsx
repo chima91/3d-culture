@@ -52,7 +52,7 @@ export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
       return setErrorMessage(new Error('タイトルを入力してください。'));
 
     upload({
-      modelId: currentModel?.models_by_pk?.id!,
+      modelId: currentModel?.models_by_pk?.id,
       file: {
         model: modelFile,
         thumbnail: thumbFile,
