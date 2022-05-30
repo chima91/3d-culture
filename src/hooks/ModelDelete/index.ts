@@ -24,7 +24,7 @@ export const useModelDelete = () => {
           console.log(apolloError.message);
         }
       } catch (e) {
-        new Error('モデルの削除に失敗');
+        throw new Error('モデルの削除に失敗');
       }
     }
   };

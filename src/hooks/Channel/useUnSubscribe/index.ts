@@ -26,7 +26,7 @@ export const useUnSubscribe = () => {
 
         if (error) console.log(error.message);
       } catch (e) {
-        new Error('チャンネル登録の解除に失敗しました。');
+        throw new Error('チャンネル登録の解除に失敗しました。');
       }
     }
   };

@@ -51,7 +51,7 @@ export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
     if (!titleRef.current?.value)
       return setErrorMessage(new Error('タイトルを入力してください。'));
 
-    upload({
+    return upload({
       modelId: currentModel?.models_by_pk?.id,
       file: {
         model: modelFile,

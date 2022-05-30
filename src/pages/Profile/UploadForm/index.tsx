@@ -10,7 +10,7 @@ export type UploadFormProps = {
   avatarFile: File | undefined;
 };
 
-export const UploadForm = ({avatarFile}: UploadFormProps) => {
+export const UploadForm = ({ avatarFile }: UploadFormProps) => {
   const styles = useStyles();
   const globalUser = useRecoilValue(GlobalUser);
 
@@ -24,9 +24,11 @@ export const UploadForm = ({avatarFile}: UploadFormProps) => {
 
   const submit = () => {
     setErrorMessage(undefined);
-    if (!globalUser?.id) return setErrorMessage(new Error("ログインしてください。"));
-    if (!nameRef.current?.value) return setErrorMessage(new Error("名前を入力してください"));
-    upload({
+    if (!globalUser?.id)
+      return setErrorMessage(new Error('ログインしてください。'));
+    if (!nameRef.current?.value)
+      return setErrorMessage(new Error('名前を入力してください'));
+    return upload({
       file: {
         avatar: avatarFile,
       },
@@ -44,23 +46,23 @@ export const UploadForm = ({avatarFile}: UploadFormProps) => {
   return (
     <>
       <label className={styles.label}>
-        <Typography variant="body2">名前</Typography>
+        <Typography variant='body2'>名前</Typography>
         <TextField
-          size="small"
+          size='small'
           fullWidth
-          variant="outlined"
+          variant='outlined'
           inputRef={nameRef}
           defaultValue={globalUser?.name}
         />
       </label>
       <label className={styles.label}>
-        <Typography variant="body2">近況</Typography>
+        <Typography variant='body2'>近況</Typography>
         <TextField
           size='small'
           fullWidth
           multiline
           rows={4}
-          variant="outlined"
+          variant='outlined'
           inputRef={descRef}
         />
       </label>
@@ -68,18 +70,18 @@ export const UploadForm = ({avatarFile}: UploadFormProps) => {
       {/* エラーがあれば表示 */}
       {errorMessage?.message && (
         <label className={styles.label}>
-          <Typography color="error">{errorMessage.message}</Typography>
+          <Typography color='error'>{errorMessage.message}</Typography>
         </label>
       )}
 
       <div className={styles.button}>
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           disabled={loading}
           onClick={submit}
         >
-          {loading ? "更新中" : "プロフィールを更新"}
+          {loading ? '更新中' : 'プロフィールを更新'}
         </Button>
       </div>
     </>

@@ -74,7 +74,7 @@ export const useAvatarUpload = () => {
       });
 
       // 全ての処理が終わったら、avatarのメタデータを返す
-      return res.data?.update_users_by_pk;
+      // return res.data?.update_users_by_pk;
     } catch (err) {
       // アップロードの途中でエラーが発生したら、処理を中断して、ここに記述する処理が行われる
       console.error(err);
