@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
-import { useSetRecoilState } from "recoil";
+import { useEffect, useRef } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import { GlobalUser } from "../../../stores/User";
-import { FireSignupType } from "../../../utils/Firebase/signup";
-import { signup as fireSignup } from "../../../utils/Firebase/signup";
-import { useInsertUserMutation } from "../../../utils/graphql/generated";
-import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
-import { checkAuthToken } from "./checkAuthToken";
+import { GlobalUser } from '../../../stores/User';
+import {
+  FireSignupType,
+  signup as fireSignup,
+} from '../../../utils/Firebase/signup';
+import { useInsertUserMutation } from '../../../utils/graphql/generated';
+import { SetErrorFn, useAuthHelper } from '../useAuthHelper';
+import { checkAuthToken } from './checkAuthToken';
 
 export type SignupPropsType = {
   name: string;
@@ -27,17 +29,17 @@ export const useSignup = () => {
     let invalidValidation = false;
 
     if (!nameRef.current?.value) {
-      setError("name", "名前を入力してください。");
+      setError('name', '名前を入力してください。');
       invalidValidation = true;
     }
 
     if (!emailRef.current?.value) {
-      setError("email", "メールアドレスを入力してください。");
+      setError('email', 'メールアドレスを入力してください。');
       invalidValidation = true;
     }
 
     if (!passwordRef.current?.value) {
-      setError("password", "パスワードを入力してください。");
+      setError('password', 'パスワードを入力してください。');
       invalidValidation = true;
     }
 
@@ -45,14 +47,14 @@ export const useSignup = () => {
   };
 
   // 実際のサインアップのロジック
-  const signup = async() => {
+  const signup = async () => {
     // Firebaseのサインアップ処理を実行
     const { user } = await fireSignup({
-      email: emailRef.current?.value || "",
-      password: passwordRef.current?.value || "",
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
     });
 
-    if (!user?.uid) throw new Error("ユーザーの登録に失敗しました。");
+    if (!user?.uid) throw new Error('ユーザーの登録に失敗しました。');
 
     // アカウントにトークンが設定されるまで待機
     await checkAuthToken(user.uid);
@@ -61,8 +63,8 @@ export const useSignup = () => {
     const apolloResponse = await insertMutation({
       variables: {
         id: user.uid,
-        name: nameRef.current?.value || "",
-        email: emailRef.current?.value || "",
+        name: nameRef.current?.value || '',
+        email: emailRef.current?.value || '',
       },
     });
 
@@ -70,7 +72,7 @@ export const useSignup = () => {
       // GraphQLでデータが作成された後に確実にデータを格納する
       setGlobalUser(apolloResponse.data?.insert_users_one);
     } else {
-      throw new Error("ユーザーの登録に失敗しました。");
+      throw new Error('ユーザーの登録に失敗しました。');
     }
   };
 
@@ -78,12 +80,12 @@ export const useSignup = () => {
   const { authExecute, error, setErrorHandler, loading } = useAuthHelper(
     signup,
     formValidation,
-    "/"
+    '/',
   );
 
   // GraphQLのエラーがあったら、ここでキャッチして、エラー処理を行う。今回は、エラーメッセージを表示するだけ。
   useEffect(() => {
-    if (apolloError?.message) setErrorHandler("main", apolloError.message);
+    if (apolloError?.message) setErrorHandler('main', apolloError.message);
   }, [apolloError]);
 
   return {
