@@ -1,26 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // どのタイプのエラーなのかを管理するための型
 // main: 認証全体での、ネットワークエラーやそのサーバー側のエラーを格納
 // name: Name入力フォームに関するエラー
 // email: Email入力フォームに関するエラー
 // password: Password入力フォームに関するエラー
-export type ErrorState = "main" | "name" | "email" | "password";
+export type ErrorState = 'main' | 'name' | 'email' | 'password';
 
 export type SetErrorFn = (name: ErrorState, message: string) => void;
 
 export const useAuthHelper = (
   executeProcess: () => Promise<void>,
   formValidation: (setError: SetErrorFn) => boolean,
-  redirectTo?: string
+  redirectTo?: string,
 ) => {
   const navigate = useNavigate();
 
   // 複数のエラーを同時に管理できるようにするためのstate
   // Mapは { key : value }の形でオブジェクトを管理できるJavascriptのデータ構造
   // ただのObjectと違い、便利なメソッドが用意されている。
-  const [ error, setError ] = useState<Map<ErrorState, string>>(new Map());
+  const [error, setError] = useState<Map<ErrorState, string>>(new Map());
 
   // ローディング処理も合わせて共通化
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export const useAuthHelper = (
     const invalidValidation = formValidation(setErrorHandler);
 
     // バリデーションに問題があれば、認証ロジックを中断
-    if(invalidValidation) return;
+    if (invalidValidation) return;
 
     // 処理が開始したらローディングはtrue
     setLoading(true);
@@ -50,9 +50,9 @@ export const useAuthHelper = (
       // 処理が終了したら、ローディングはfalse
       setLoading(false);
       if (redirectTo) navigate(redirectTo);
-    } catch(err: any) {
+    } catch (err: any) {
       // エラーがあれば、エラーをセットして処理を中断
-      setErrorHandler("main", err.message);
+      setErrorHandler('main', err.message);
       // 処理が終了したら、ローディングはfalse
       setLoading(false);
     }
@@ -62,6 +62,6 @@ export const useAuthHelper = (
     error,
     loading,
     setErrorHandler,
-    authExecute
+    authExecute,
   };
 };

@@ -1,19 +1,25 @@
-import { Divider, ListItemIcon, Menu, MenuItem, Typography } from "@material-ui/core";
-import ExitToAppRounded from "@material-ui/icons/ExitToAppRounded"
-import { useNavigate } from "react-router";
+import {
+  Divider,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@material-ui/core';
+import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
+import { useNavigate } from 'react-router-dom';
 
 export type UserMenuProps = {
-  name?: string
-  buttonRef: HTMLElement | null
-  onClose: () => void
-  onLogout: () => void
-}
+  name?: string;
+  buttonRef: HTMLElement | null;
+  onClose: () => void;
+  onLogout: () => void;
+};
 
 export const UserMenu = ({
-  name = "NO NAME",
+  name = 'NO NAME',
   buttonRef,
   onClose,
-  onLogout
+  onLogout,
 }: UserMenuProps) => {
   const navigate = useNavigate();
   const gotoPage = (url: string) => {
@@ -24,7 +30,7 @@ export const UserMenu = ({
   return (
     <div>
       <Menu
-        id="user-menu"
+        id='user-menu'
         anchorEl={buttonRef}
         keepMounted
         open={Boolean(buttonRef)}
@@ -32,16 +38,18 @@ export const UserMenu = ({
       >
         <MenuItem>{name}</MenuItem>
         <Divider />
-        <MenuItem onClick={() => gotoPage("/profile")}>プロフィール編集</MenuItem>
+        <MenuItem onClick={() => gotoPage('/profile')}>
+          プロフィール編集
+        </MenuItem>
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
-            <ExitToAppRounded fontSize="small" />
+            <ExitToAppRounded fontSize='small' />
           </ListItemIcon>
-          <Typography variant="inherit" noWrap>
+          <Typography variant='inherit' noWrap>
             ログアウト
           </Typography>
         </MenuItem>
       </Menu>
     </div>
-  )
+  );
 };
