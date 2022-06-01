@@ -6,7 +6,8 @@ import { fireAuth } from '../../utils/Firebase/config';
 
 export const AuthStateListener = ({
   children,
-}: PropsWithChildren<Record<string, never>>) => {
+}: // eslint-disable-next-line @typescript-eslint/ban-types
+PropsWithChildren<{}>) => {
   const setCredential = useSetRecoilState(AuthCredential);
   const setLoaded = useSetRecoilState(AuthCredentialLoaded);
 
@@ -24,5 +25,6 @@ export const AuthStateListener = ({
     // この場合、AuthStateListenerはProviderとしてアプリケーションのRootで呼んでいるのでアプリケーションを閉じたときに実行される
     return unsubscriber;
   });
-  return { children };
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
 };

@@ -8,7 +8,8 @@ import { AccountLoaded } from '../../stores/AccountLoaded';
 
 export const GlobalAccount = ({
   children,
-}: PropsWithChildren<Record<string, never>>) => {
+}: // eslint-disable-next-line @typescript-eslint/ban-types
+PropsWithChildren<{}>) => {
   // ユーザー情報取得用のQuery関数
   const [
     userQuery,
@@ -65,5 +66,6 @@ export const GlobalAccount = ({
     }
   }, [apolloError]);
 
-  return { children };
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
 };

@@ -33,6 +33,5 @@ const apolloClient = new ApolloClient({
 
 export const ApolloProvider = ({
   children,
-}: PropsWithChildren<Record<string, never>>) => (
-  <Provider client={apolloClient}>{children}</Provider>
-);
+}: // eslint-disable-next-line @typescript-eslint/ban-types
+PropsWithChildren<{}>) => <Provider client={apolloClient}>{children}</Provider>;
