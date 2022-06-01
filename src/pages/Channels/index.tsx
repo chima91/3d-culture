@@ -65,54 +65,59 @@ export const Channels = () => {
 
   return (
     <Container>
-      {data?.users_by_pk?.subscribersByUserid.map((subscribe) => (
-        <div key={subscribe.subscribed.id}>
-          <Card className={styles.card}>
-            <div>
-              <CardHeader
-                className={styles.cardHeader}
-                avatar={
-                  <Avatar src={subscribe.subscribed.profile_photo_url || ''} />
-                }
-                title={subscribe.subscribed.name}
-              />
-              <Button
-                variant='contained'
-                color='default'
-                startIcon={<CancelIcon />}
-                onClick={() =>
-                  onUnSubscribe(globalUser?.id || '', subscribe.subscribed.id)
-                }
-                className={styles.unsubButton}
-              >
-                登録解除
-              </Button>
-            </div>
-            <Grid container spacing={2}>
-              {subscribe.subscribed.usersModelArrayRelation.map((model) => (
-                <Grid item xs={3} key={model.id}>
-                  <Link
-                    to={`/detail/${model.id}`}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <ObjCard
-                      title={model.title as string}
-                      views={model.views}
-                      created={model.created_at}
-                      fetcher={() =>
-                        storage
-                          .ref(model.thumbnail_url as string)
-                          .getDownloadURL()
-                      }
-                      onClick={() => onClickCard(model.id)}
+      {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
+      <>
+        {data?.users_by_pk?.subscribersByUserid.map((subscribe) => (
+          <div key={subscribe.subscribed.id}>
+            <Card className={styles.card}>
+              <div>
+                <CardHeader
+                  className={styles.cardHeader}
+                  avatar={
+                    <Avatar
+                      src={subscribe.subscribed.profile_photo_url || ''}
                     />
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          </Card>
-        </div>
-      ))}
+                  }
+                  title={subscribe.subscribed.name}
+                />
+                <Button
+                  variant='contained'
+                  color='default'
+                  startIcon={<CancelIcon />}
+                  onClick={() =>
+                    onUnSubscribe(globalUser?.id || '', subscribe.subscribed.id)
+                  }
+                  className={styles.unsubButton}
+                >
+                  登録解除
+                </Button>
+              </div>
+              <Grid container spacing={2}>
+                {subscribe.subscribed.usersModelArrayRelation.map((model) => (
+                  <Grid item xs={3} key={model.id}>
+                    <Link
+                      to={`/detail/${model.id}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <ObjCard
+                        title={model.title as string}
+                        views={model.views}
+                        created={model.created_at}
+                        fetcher={() =>
+                          storage
+                            .ref(model.thumbnail_url as string)
+                            .getDownloadURL()
+                        }
+                        onClick={() => onClickCard(model.id)}
+                      />
+                    </Link>
+                  </Grid>
+                ))}
+              </Grid>
+            </Card>
+          </div>
+        ))}
+      </>
     </Container>
   );
 };
