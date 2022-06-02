@@ -13,7 +13,7 @@ export const HeaderTitle = ({ title }: HeaderTitleProps) => {
 
   return (
     <Typography className={styles.root} variant='subtitle1' component='h3'>
-      {isTitleOver10 && title.slice(0, 10)}
+      {isTitleOver10 && `${title.slice(0, 10)}...`}
       {!isTitleOver10 && title}
     </Typography>
   );
