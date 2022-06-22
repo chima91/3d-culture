@@ -1,14 +1,9 @@
-/**
- * @prettier
- */
-
 import { Avatar, Container, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Head from '../../components/Head';
-import { GoogleForm } from '../../components/GoogleForm';
 import { ObjCard } from '../../components/ObjCard';
 import { ModalQR } from '../../components/ModalQR';
 import { SNS } from '../../components/SNS';
@@ -71,9 +66,8 @@ export const Home = () => {
     <Container>
       <Head
         title='トップページ'
-        imgUrl='https://www.culpticon.net/static/logo.png'
+        imgUrl='https://www.3dimencul.com/static/logo.png'
       />
-      <GoogleForm />
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
