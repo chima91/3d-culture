@@ -75,20 +75,10 @@ export const CanvasArea = ({
       <CardContent className={styles.canvas}>
         <Suspense
           fallback={
-            <div
-              style={{ color: 'white', textAlign: 'center', marginTop: 100 }}
-            >
-              Now Loading...
-            </div>
+            <div className={styles.fallback}>3Dモデルを読み込んでいます...</div>
           }
         >
-          {src ? (
-            <Three glbSrc={src} />
-          ) : (
-            <p style={{ color: 'red', textAlign: 'center', marginTop: 100 }}>
-              表示できる3Dモデルがありません。
-            </p>
-          )}
+          {src ? <Three glbSrc={src} /> : null}
         </Suspense>
       </CardContent>
 
