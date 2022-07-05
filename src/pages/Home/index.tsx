@@ -1,6 +1,6 @@
 import { Avatar, Container, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, VFC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Head from '../../components/Head';
@@ -16,14 +16,9 @@ import {
 import { PaginationWrapper } from '../../components/Pagination';
 import { SearchWords } from '../../stores/SearchWords';
 
-export const Home = () => {
+export const Home: VFC = () => {
   // modelを取得するquery
-  const { data, error } = useModelsQuery();
-
-  // エラーがあればコンソールに表示
-  useEffect(() => {
-    if (error) console.error(error);
-  }, [error]);
+  const { data } = useModelsQuery();
 
   // 検索ワードがある(recoil(SearchWords)がundefinedではない)場合は、data.modelsを絞り込み、modelsに結果を入れる
   const searchWords = useRecoilValue(SearchWords);
@@ -49,7 +44,7 @@ export const Home = () => {
   const pageItem = models?.slice(startItem, startItem + COUNT_PER_PAGE);
 
   // 閲覧回数をカウントアップするmutation
-  const [updateMutation, { error: apolloError }] = useUpdateModelViewsMutation({
+  const [updateMutation] = useUpdateModelViewsMutation({
     refetchQueries: [{ query: ModelsDocument }],
   });
   // 閲覧回数をカウントアップする関数
@@ -59,7 +54,6 @@ export const Home = () => {
         modelId: id as string,
       },
     });
-    if (apolloError) console.log(apolloError.message);
   };
 
   return (

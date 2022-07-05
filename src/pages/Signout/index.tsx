@@ -1,10 +1,10 @@
-import { Card, CircularProgress, Typography } from "@material-ui/core";
-import { useEffect } from "react";
+import { Card, CircularProgress, Typography } from '@material-ui/core';
+import { useEffect, VFC } from 'react';
 
-import useStyles from "../../components/AuthenticationStyle/style";
-import { useSignout } from "../../hooks/Authentication/useSignout";
+import useStyles from '../../components/AuthenticationStyle/style';
+import { useSignout } from '../../hooks/Authentication/useSignout';
 
-export const Signout = () => {
+export const Signout: VFC = () => {
   const styles = useStyles();
   const { signout } = useSignout();
 
@@ -13,9 +13,9 @@ export const Signout = () => {
   });
 
   return (
-    <Card className={styles.root} variant="outlined">
+    <Card className={styles.root} variant='outlined'>
       <CircularProgress className={styles.margin} size={70} thickness={4} />
-      <Typography variant="h6">ログアウト中</Typography>
+      <Typography variant='h6'>ログアウト中</Typography>
     </Card>
-  )
-}
+  );
+};

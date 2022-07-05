@@ -1,3 +1,4 @@
+import { VFC } from 'react';
 import {
   TwitterIcon,
   TwitterShareButton,
@@ -7,7 +8,7 @@ import {
   FacebookIcon,
 } from 'react-share';
 
-export const SNS = () => (
+export const SNS: VFC = () => (
   <span style={{ marginLeft: 15 }}>
     <TwitterShareButton
       url={window.location.href}

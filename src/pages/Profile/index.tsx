@@ -8,7 +8,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -18,7 +18,7 @@ import { AvatarSelect } from './AvatarSelect';
 import { UploadForm } from './UploadForm';
 import useStyles from './style';
 
-export const Profile = () => {
+export const Profile: VFC = () => {
   const styles = useStyles();
 
   // recoilの値を使用

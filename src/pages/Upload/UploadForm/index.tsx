@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@material-ui/core';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -12,7 +12,7 @@ export type UploadFormProps = {
   thumbFile: File | undefined;
 };
 
-export const UploadForm = ({ modelFile, thumbFile }: UploadFormProps) => {
+export const UploadForm: VFC<UploadFormProps> = ({ modelFile, thumbFile }) => {
   const styles = useStyles();
 
   // リダイレクト用関数

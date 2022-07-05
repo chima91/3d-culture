@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
   useState,
+  VFC,
 } from 'react';
 
 import useStyles from './style';
@@ -16,11 +17,11 @@ export type AvatarSelectProps = {
   setAvatarFile: Dispatch<SetStateAction<File | undefined>>;
 };
 
-export const AvatarSelect = ({
+export const AvatarSelect: VFC<AvatarSelectProps> = ({
   currentAvatarUrl,
   avatarFile,
   setAvatarFile,
-}: AvatarSelectProps) => {
+}) => {
   const styles = useStyles();
 
   // 画像表示用のURLを格納。URLは文字列 == string型

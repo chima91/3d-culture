@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@material-ui/core';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, VFC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -13,7 +13,7 @@ export type UpdateFormProps = {
   thumbFile: File | undefined;
 };
 
-export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
+export const UpdateForm: VFC<UpdateFormProps> = ({ modelFile, thumbFile }) => {
   const styles = useStyles();
 
   // URLから表示するモデルのIDを取得

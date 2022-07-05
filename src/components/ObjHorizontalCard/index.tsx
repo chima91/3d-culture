@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardMedia } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, VFC } from 'react';
 
 import { HeaderTitle, HeaderTitleProps } from '../ObjCard/HeaderTitle';
 import {
@@ -14,14 +14,14 @@ export type ObjHorizontalCardProps = {
 } & HeaderTitleProps &
   SubHeaderContentProps;
 
-export const ObjHorizontalCard = ({
+export const ObjHorizontalCard: VFC<ObjHorizontalCardProps> = ({
   fetcher,
   title,
   owner,
   created,
   views,
   onClick,
-}: ObjHorizontalCardProps) => {
+}) => {
   const styles = useStyles();
   // サムネイルのダウンロードリンクのステート
   const [src, setSrc] = useState<string>();

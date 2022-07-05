@@ -7,7 +7,7 @@ import {
   Grid,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { useEffect } from 'react';
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -22,31 +22,30 @@ import {
 import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
 import useStyles from './style';
 
-export const Channels = () => {
+export const Channels: VFC = () => {
   const styles = useStyles();
 
   // ユーザ情報アトム
   const globalUser = useRecoilValue(GlobalUser);
 
   // 登録チャンネル一覧を取得するquery
-  const { data, error } = useChannelListQuery({
+  const { data } = useChannelListQuery({
     variables: {
       id: globalUser?.id || '',
     },
   });
 
   // チャンネル登録を解除する
-  const { unsubscribe, error: delError } = useUnSubscribe();
+  const { unsubscribe } = useUnSubscribe();
   const onUnSubscribe = async (userid: string, subscribeId: string) => {
     await unsubscribe({
       userid,
       subscribeId,
     });
-    if (delError) console.log(delError.message);
   };
 
   // 閲覧回数をカウントアップするmutation
-  const [updateMutation, { error: apolloError }] = useUpdateModelViewsMutation({
+  const [updateMutation] = useUpdateModelViewsMutation({
     refetchQueries: [{ query: ModelsDocument }],
   });
   // 閲覧回数をカウントアップする関数
@@ -56,12 +55,7 @@ export const Channels = () => {
         modelId: id as string,
       },
     });
-    if (apolloError) console.log(apolloError.message);
   };
-
-  useEffect(() => {
-    if (error) console.error(error);
-  }, [error]);
 
   return (
     <Container>

@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardMedia } from '@material-ui/core';
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, ReactNode, VFC } from 'react';
 
 import useStyles from './style';
 import { HeaderTitle, HeaderTitleProps } from './HeaderTitle';
@@ -12,7 +12,7 @@ export type ObjCardProps = {
 } & HeaderTitleProps &
   SubHeaderContentProps;
 
-export const ObjCard = ({
+export const ObjCard: VFC<ObjCardProps> = ({
   fetcher,
   onClick,
   avatar,
@@ -20,7 +20,7 @@ export const ObjCard = ({
   owner,
   created,
   views,
-}: ObjCardProps) => {
+}) => {
   const styles = useStyles();
 
   // モデルのサムネイルのURLを格納する

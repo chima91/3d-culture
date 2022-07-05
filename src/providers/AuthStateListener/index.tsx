@@ -1,13 +1,10 @@
-import { useEffect, PropsWithChildren } from 'react';
+import { useEffect, FC, ReactNode } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { AuthCredential } from '../../stores/AuthCredential';
 import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
 import { fireAuth } from '../../utils/Firebase/config';
 
-export const AuthStateListener = ({
-  children,
-}: // eslint-disable-next-line @typescript-eslint/ban-types
-PropsWithChildren<{}>) => {
+export const AuthStateListener: FC<ReactNode> = ({ children }) => {
   const setCredential = useSetRecoilState(AuthCredential);
   const setLoaded = useSetRecoilState(AuthCredentialLoaded);
 

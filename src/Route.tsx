@@ -1,5 +1,6 @@
 import { useRoutes, Navigate } from 'react-router-dom';
 
+import { VFC } from 'react';
 import { HomeLayout } from './layouts/Home';
 import { SideLessHomeLayout } from './layouts/SidelessHome';
 import { SimpleLayout } from './layouts/Simple';
@@ -15,7 +16,7 @@ import { Channels } from './pages/Channels';
 import { Profile } from './pages/Profile';
 import { NotFound } from './pages/NotFound';
 
-export const RootRouter = () =>
+export const RootRouter: VFC = () =>
   useRoutes([
     {
       element: <HomeLayout />,

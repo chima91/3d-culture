@@ -1,9 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { VFC } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { DashboardHeader } from "../../templates/DashboardHeader";
-import useStyles from "./style";
+import { DashboardHeader } from '../../templates/DashboardHeader';
+import useStyles from './style';
 
-export const SideLessHomeLayout = () => {
+export const SideLessHomeLayout: VFC = () => {
   const styles = useStyles();
 
   return (

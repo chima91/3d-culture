@@ -1,8 +1,9 @@
-import { Outlet } from "react-router-dom";
+import { VFC } from 'react';
+import { Outlet } from 'react-router-dom';
 
-import useStyles from "./style"
+import useStyles from './style';
 
-export const SimpleLayout = () => {
+export const SimpleLayout: VFC = () => {
   const styles = useStyles();
 
   return (

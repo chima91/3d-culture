@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { useEffect, useState, Suspense, ReactNode } from 'react';
+import { useEffect, useState, Suspense, ReactNode, VFC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Three } from '../../../components/Three';
@@ -27,12 +27,12 @@ export type CanvasAreaProps = {
   isCurrentModelByOthers: boolean; // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
   isCurrentModelByMine: boolean; // ログイン中のユーザーと、表示中モデルの投稿者が同じかどうか
   isSubscribed: boolean; // チャンネル登録済みかどうか
-  onSubscribe: () => any; // チャンネル登録処理
-  onUnSubscribe: () => any; // チャンネル登録解除処理
+  onSubscribe: () => void; // チャンネル登録処理
+  onUnSubscribe: () => void; // チャンネル登録解除処理
   fetcher: () => Promise<string | undefined>;
 };
 
-export const CanvasArea = ({
+export const CanvasArea: VFC<CanvasAreaProps> = ({
   modelId,
   title,
   created,
@@ -47,7 +47,7 @@ export const CanvasArea = ({
   onSubscribe,
   onUnSubscribe,
   fetcher,
-}: CanvasAreaProps) => {
+}) => {
   const styles = useStyles();
   // モデルのダウンロードリンクURLを格納するためのステート
   const [src, setSrc] = useState<string>();
@@ -58,15 +58,12 @@ export const CanvasArea = ({
 
   // モデルを削除するmutation
   const navigate = useNavigate();
-  const { modelDelete, apolloError } = useModelDelete();
+  const { modelDelete } = useModelDelete();
   const handleModelDelete = async (id: string) => {
     await modelDelete({
       id,
     });
     navigate('/');
-    if (apolloError) {
-      console.log(apolloError.message);
-    }
   };
 
   return (

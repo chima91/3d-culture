@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useRecoilValue } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { UpdateForm } from './UpdateForm';
@@ -19,7 +19,7 @@ import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 import { useModelByPkQuery } from '../../utils/graphql/generated';
 
-export const ModelUpdate = () => {
+export const ModelUpdate: VFC = () => {
   const styles = useStyles();
 
   const accountLoaded = useRecoilValue(AccountLoaded);
@@ -36,10 +36,6 @@ export const ModelUpdate = () => {
     setOpen(false);
     navigate('/');
   };
-
-  // debug
-  console.log('accountLoaded(ModelUpdate page):', accountLoaded);
-  console.log('globalUser(ModelUpdate page):', globalUser);
 
   // アカウントが読み込まれていない、未ログインであれば`/login`へリダレクト
   useEffect(() => {

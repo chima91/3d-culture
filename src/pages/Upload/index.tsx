@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useRecoilValue } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UploadForm } from './UploadForm';
@@ -18,7 +18,7 @@ import useStyles from './style';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 
-export const Upload = () => {
+export const Upload: VFC = () => {
   const styles = useStyles();
 
   const accountLoaded = useRecoilValue(AccountLoaded);
@@ -35,10 +35,6 @@ export const Upload = () => {
     setOpen(false);
     navigate('/');
   };
-
-  // debug
-  console.log('accountLoaded(Upload page):', accountLoaded);
-  console.log('globalUser(Upload page):', globalUser);
 
   // アカウントが読み込まれていない、未ログインであれば`/login`へリダレクト
   useEffect(() => {

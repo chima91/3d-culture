@@ -12,7 +12,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SearchIcon from '@material-ui/icons/Search';
 import { useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, VFC } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { Logo } from '../../components/Logo';
@@ -21,7 +21,7 @@ import useStyles from './style';
 import { GlobalUser } from '../../stores/User';
 import { UserMenu } from './UserMenu';
 
-export const DashboardHeader = () => {
+export const DashboardHeader: VFC = () => {
   const styles = useStyles();
   const globalUser = useRecoilValue(GlobalUser);
 

@@ -1,4 +1,4 @@
-import { useEffect, PropsWithChildren } from 'react';
+import { useEffect, FC, ReactNode } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { GlobalUser } from '../../stores/User';
 import { useUserByIdLazyQuery } from '../../utils/graphql/generated';
@@ -6,10 +6,7 @@ import { AuthCredential } from '../../stores/AuthCredential';
 import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 
-export const GlobalAccount = ({
-  children,
-}: // eslint-disable-next-line @typescript-eslint/ban-types
-PropsWithChildren<{}>) => {
+export const GlobalAccount: FC<ReactNode> = ({ children }) => {
   // ユーザー情報取得用のQuery関数
   const [
     userQuery,
@@ -58,10 +55,8 @@ PropsWithChildren<{}>) => {
   }, [authLoaded, apolloData]);
 
   useEffect(() => {
-    // GraphQLからのエラーがあった場合は、
-    // Recoilをudefinedで更新する。
+    // GraphQLからのエラーがあった場合は、Recoilをudefinedで更新する。
     if (apolloError?.message) {
-      console.error(apolloError?.message);
       setGlobalUser(undefined);
     }
   }, [apolloError]);

@@ -1,13 +1,13 @@
 import { InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { useRef } from 'react';
+import { useRef, VFC } from 'react';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
 import useStyles from './style';
 import { SearchWords } from '../../../stores/SearchWords';
 
-export const SearchBar = () => {
+export const SearchBar: VFC = () => {
   const styles = useStyles();
 
   const inputRef = useRef<HTMLInputElement>(null);

@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
+import { VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export type UserMenuProps = {
@@ -15,12 +16,12 @@ export type UserMenuProps = {
   onLogout: () => void;
 };
 
-export const UserMenu = ({
+export const UserMenu: VFC<UserMenuProps> = ({
   name = 'NO NAME',
   buttonRef,
   onClose,
   onLogout,
-}: UserMenuProps) => {
+}) => {
   const navigate = useNavigate();
   const gotoPage = (url: string) => {
     onClose();

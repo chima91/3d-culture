@@ -1,6 +1,7 @@
 import { Avatar, Container, Grid } from '@material-ui/core';
 import { useParams, Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
+import { VFC } from 'react';
 import { GlobalUser } from '../../stores/User';
 import { useSubscribe } from '../../hooks/Channel/useSubscribe';
 import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
@@ -19,7 +20,7 @@ import {
 } from '../../utils/graphql/generated';
 import { storage } from '../../utils/Firebase/config';
 
-export const Detail = () => {
+export const Detail: VFC = () => {
   const styles = useStyles();
 
   // URLから表示するモデルのIDを取得
@@ -41,7 +42,7 @@ export const Detail = () => {
   const recoModels = recommendModels?.models.slice(0, MODELS_DISP_MAX);
 
   // 閲覧回数をカウントアップするmutation
-  const [updateMutation, { error: apolloError }] = useUpdateModelViewsMutation({
+  const [updateMutation] = useUpdateModelViewsMutation({
     refetchQueries: [{ query: ModelsDocument }],
   });
   // 閲覧回数をカウントアップする関数
@@ -51,7 +52,6 @@ export const Detail = () => {
         modelId: id as string,
       },
     });
-    if (apolloError) console.log(apolloError.message);
   };
 
   // モデル投稿者の登録者数を取得する
@@ -61,22 +61,20 @@ export const Detail = () => {
     },
   });
   // チャンネル登録する
-  const { subscribe, error: insError } = useSubscribe();
+  const { subscribe } = useSubscribe();
   const onSubscribe = async (userid: string, subscribeId: string) => {
     await subscribe({
       userid,
       subscribeId,
     });
-    if (insError) console.log(insError.message);
   };
   // チャンネル登録を解除する
-  const { unsubscribe, error: delError } = useUnSubscribe();
+  const { unsubscribe } = useUnSubscribe();
   const onUnSubscribe = async (userid: string, subscribeId: string) => {
     await unsubscribe({
       userid,
       subscribeId,
     });
-    if (delError) console.log(delError.message);
   };
   // チャンネル登録済みユーザーを取得し、表示中のモデル投稿者が含まれるか調べる
   // ユーザー情報から登録済みチャンネルIDの配列を取得

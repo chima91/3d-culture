@@ -1,8 +1,9 @@
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
 import useStyles from './style';
 
-export const Logo = () => {
+export const Logo: VFC = () => {
   const styles = useStyles();
 
   return (

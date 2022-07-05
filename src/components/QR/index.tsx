@@ -1,6 +1,7 @@
-import { useQRCode } from "react-qrcodes";
+import { VFC } from 'react';
+import { useQRCode } from 'react-qrcodes';
 
-export const QR = () => {
+export const QR: VFC = () => {
   const [inputRef]: any = useQRCode({
     text: window.location.href,
     options: {
@@ -8,8 +9,8 @@ export const QR = () => {
       margin: 3, // QRコードの周りの空白マージン
       scale: 1,
       width: 200,
-    }
+    },
   });
 
   return <canvas ref={inputRef} />;
-}
+};

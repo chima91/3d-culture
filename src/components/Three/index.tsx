@@ -1,11 +1,12 @@
 import * as Fiber from '@react-three/fiber';
 import * as Drei from '@react-three/drei';
+import { VFC } from 'react';
 
 export type ThreeProp = {
   glbSrc: string;
 };
 
-export const Three = ({ glbSrc }: ThreeProp) => {
+export const Three: VFC<ThreeProp> = ({ glbSrc }) => {
   const { scene } = Drei.useGLTF(glbSrc);
 
   return (

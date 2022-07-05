@@ -1,3 +1,4 @@
+import { VFC } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 type HeadProps = {
@@ -5,7 +6,7 @@ type HeadProps = {
   imgUrl: string | undefined | null;
 };
 
-const Head = ({ title, imgUrl }: HeadProps) => (
+const Head: VFC<HeadProps> = ({ title, imgUrl }) => (
   <HelmetProvider>
     <Helmet>
       {title ? <title>{title} - 3dimencul</title> : <title>3dimencul</title>}
