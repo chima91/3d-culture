@@ -17,6 +17,7 @@ import { GlobalUser } from '../../stores/User';
 import { AvatarSelect } from './AvatarSelect';
 import { UploadForm } from './UploadForm';
 import useStyles from './style';
+import Head from '../../components/Head';
 
 export const Profile: VFC = () => {
   const styles = useStyles();
@@ -49,8 +50,9 @@ export const Profile: VFC = () => {
 
   return (
     <Dialog fullWidth maxWidth='md' open={open} onClose={handleClose}>
+      <Head title='プロフィール更新' />
       <DialogTitle>
-        プロフィール
+        プロフィール更新
         <IconButton className={styles.closeButton} onClick={handleClose}>
           <CloseIcon />
         </IconButton>

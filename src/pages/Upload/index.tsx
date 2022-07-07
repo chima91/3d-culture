@@ -17,6 +17,7 @@ import { ModelSelect } from './ModelSelect';
 import useStyles from './style';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
+import Head from '../../components/Head';
 
 export const Upload: VFC = () => {
   const styles = useStyles();
@@ -47,6 +48,7 @@ export const Upload: VFC = () => {
 
   return (
     <Dialog fullWidth maxWidth='md' open>
+      <Head title='3Dモデルのアップロード' />
       <DialogTitle>
         3Dモデルのアップロード
         <IconButton className={styles.closeButton} onClick={handleClose}>

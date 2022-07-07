@@ -19,6 +19,7 @@ import {
   ModelsDocument,
 } from '../../utils/graphql/generated';
 import { storage } from '../../utils/Firebase/config';
+import Head from '../../components/Head';
 
 export const Detail: VFC = () => {
   const styles = useStyles();
@@ -93,6 +94,11 @@ export const Detail: VFC = () => {
 
   return (
     <Container className={styles.root}>
+      <Head
+        title={
+          currentModel ? `詳細 - ${currentModel.models_by_pk?.title}` : '詳細'
+        }
+      />
       <ModalQR />
       <SNS />
       <Grid container spacing={4}>

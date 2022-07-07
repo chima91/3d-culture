@@ -4,6 +4,7 @@ import { VFC } from 'react';
 import { Logo } from '../../components/Logo';
 import useStyles from '../../components/AuthenticationStyle/style';
 import { useLogin } from '../../hooks/Authentication/useLogin';
+import Head from '../../components/Head';
 
 export const Login: VFC = () => {
   const styles = useStyles();
@@ -11,6 +12,7 @@ export const Login: VFC = () => {
 
   return (
     <Card className={styles.root} variant='outlined'>
+      <Head title='ログイン' />
       <div className={`${styles.logo} ${styles.margin}`}>
         <Logo />
       </div>

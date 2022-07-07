@@ -21,6 +21,7 @@ import {
 } from '../../utils/graphql/generated';
 import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
 import useStyles from './style';
+import Head from '../../components/Head';
 
 export const Channels: VFC = () => {
   const styles = useStyles();
@@ -59,6 +60,7 @@ export const Channels: VFC = () => {
 
   return (
     <Container>
+      <Head title='登録チャンネル' />
       {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
       <>
         {data?.users_by_pk?.subscribersByUserid.map((subscribe) => (

@@ -18,6 +18,7 @@ import useStyles from './style';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 import { useModelByPkQuery } from '../../utils/graphql/generated';
+import Head from '../../components/Head';
 
 export const ModelUpdate: VFC = () => {
   const styles = useStyles();
@@ -57,6 +58,7 @@ export const ModelUpdate: VFC = () => {
 
   return (
     <Dialog fullWidth maxWidth='md' open>
+      <Head title='3Dモデルの更新' />
       <DialogTitle>
         3Dモデルの更新
         <IconButton onClick={handleClose}>

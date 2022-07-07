@@ -4,6 +4,7 @@ import { VFC } from 'react';
 import { Logo } from '../../components/Logo';
 import useStyles from '../../components/AuthenticationStyle/style';
 import { useForgetPass } from '../../hooks/Authentication/useForgetPass';
+import Head from '../../components/Head';
 
 export const ForgetPassForm: VFC = () => {
   const styles = useStyles();
@@ -11,6 +12,7 @@ export const ForgetPassForm: VFC = () => {
 
   return (
     <Card className={styles.root} variant='outlined'>
+      <Head title='パスワードの再発行' />
       <div className={`${styles.logo} ${styles.margin}`}>
         <Logo />
       </div>

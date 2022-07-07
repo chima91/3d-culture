@@ -58,10 +58,7 @@ export const Home: VFC = () => {
 
   return (
     <Container>
-      <Head
-        title='トップページ'
-        imgUrl='https://www.3dimencul.com/static/logo.png'
-      />
+      <Head title='トップページ' />
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
