@@ -8,6 +8,7 @@ import {
 import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
 import { VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useStyles from './style';
 
 export type UserMenuProps = {
   name?: string;
@@ -22,6 +23,8 @@ export const UserMenu: VFC<UserMenuProps> = ({
   onClose,
   onLogout,
 }) => {
+  const styles = useStyles();
+
   const navigate = useNavigate();
   const gotoPage = (url: string) => {
     onClose();
@@ -37,18 +40,24 @@ export const UserMenu: VFC<UserMenuProps> = ({
         open={Boolean(buttonRef)}
         onClose={onClose}
       >
-        <MenuItem>{name}</MenuItem>
+        <MenuItem className={styles.name}>
+          {name}
+          <span className={styles.nameSpan}>さん</span>
+        </MenuItem>
         <Divider />
         <MenuItem onClick={() => gotoPage('/profile')}>
           プロフィール編集
         </MenuItem>
+        <MenuItem onClick={() => gotoPage('/channels')}>
+          登録チャンネル
+        </MenuItem>
         <MenuItem onClick={onLogout}>
-          <ListItemIcon>
-            <ExitToAppRounded fontSize='small' />
-          </ListItemIcon>
           <Typography variant='inherit' noWrap>
             ログアウト
           </Typography>
+          <ListItemIcon>
+            <ExitToAppRounded />
+          </ListItemIcon>
         </MenuItem>
       </Menu>
     </div>
