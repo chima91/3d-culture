@@ -1,10 +1,4 @@
-import {
-  Divider,
-  ListItemIcon,
-  Menu,
-  MenuItem,
-  Typography,
-} from '@material-ui/core';
+import { Divider, Menu, MenuItem } from '@material-ui/core';
 import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
 import { VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -32,34 +26,24 @@ export const UserMenu: VFC<UserMenuProps> = ({
   };
 
   return (
-    <div>
-      <Menu
-        id='user-menu'
-        anchorEl={buttonRef}
-        keepMounted
-        open={Boolean(buttonRef)}
-        onClose={onClose}
-      >
-        <MenuItem className={styles.name}>
-          {name}
-          <span className={styles.nameSpan}>さん</span>
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={() => gotoPage('/profile')}>
-          プロフィール編集
-        </MenuItem>
-        <MenuItem onClick={() => gotoPage('/channels')}>
-          登録チャンネル
-        </MenuItem>
-        <MenuItem onClick={onLogout}>
-          <Typography variant='inherit' noWrap>
-            ログアウト
-          </Typography>
-          <ListItemIcon>
-            <ExitToAppRounded />
-          </ListItemIcon>
-        </MenuItem>
-      </Menu>
-    </div>
+    <Menu
+      id='user-menu'
+      anchorEl={buttonRef}
+      keepMounted
+      open={Boolean(buttonRef)}
+      onClose={onClose}
+    >
+      <div className={styles.name}>
+        {name}
+        <span className={styles.nameSpan}>さん</span>
+      </div>
+      <Divider />
+      <MenuItem onClick={() => gotoPage('/profile')}>プロフィール編集</MenuItem>
+      <MenuItem onClick={() => gotoPage('/channels')}>登録チャンネル</MenuItem>
+      <MenuItem onClick={onLogout}>
+        ログアウト
+        <ExitToAppRounded className={styles.logoutIcon} />
+      </MenuItem>
+    </Menu>
   );
 };
