@@ -1,11 +1,9 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core';
 
 export default makeStyles({
   root: {
-    backgroundColor: "#ffffff",
-    minHeight: "100%",
-    // "@media (max-width: 600px)": {
-    //   display: "none",
-    // }
+    minHeight: '100%',
+    padding: 0,
+    borderRight: '1px solid #ddd',
   },
 });
