@@ -15,6 +15,7 @@ import {
 } from '../../utils/graphql/generated';
 import { PaginationWrapper } from '../../components/Pagination';
 import { SearchWords } from '../../stores/SearchWords';
+import useStyles from './style';
 
 export const Home: VFC = () => {
   // modelを取得するquery
@@ -56,6 +57,8 @@ export const Home: VFC = () => {
     });
   };
 
+  const styles = useStyles();
+
   return (
     <Container>
       <Head title='トップページ' />
@@ -66,8 +69,8 @@ export const Home: VFC = () => {
         {!pageItem?.length && <p>該当するモデルがありませんでした。</p>}
         {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示 */}
         {pageItem?.map((model) => (
-          <Grid item xs={12} md={6} lg={3} key={model.id}>
-            <Link to={`/detail/${model.id}`} style={{ textDecoration: 'none' }}>
+          <Grid item xs={6} lg={3} key={model.id}>
+            <Link to={`/detail/${model.id}`} className={styles.link}>
               <ObjCard
                 title={model.title}
                 owner={model.owner?.name || ''}
