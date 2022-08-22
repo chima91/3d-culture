@@ -1,19 +1,23 @@
+import { VFC } from 'react';
 import { useRoutes, Navigate } from 'react-router-dom';
 
-import { VFC } from 'react';
 import { HomeLayout } from './layouts/Home';
 import { SideLessHomeLayout } from './layouts/SidelessHome';
 import { SimpleLayout } from './layouts/Simple';
-import { Detail } from './pages/Detail';
-import { ForgetPassForm } from './pages/ForgetPassForm';
+
 import { Home } from './pages/Home';
-import { Login } from './pages/Login';
-import { Signout } from './pages/Signout';
-import { Signup } from './pages/Signup';
+import { About } from './pages/About';
 import { Upload } from './pages/Upload';
-import { ModelUpdate } from './pages/ModelUpdate';
-import { Channels } from './pages/Channels';
 import { Profile } from './pages/Profile';
+import { Channels } from './pages/Channels';
+
+import { Detail } from './pages/Detail';
+import { ModelUpdate } from './pages/ModelUpdate';
+
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
+import { Signout } from './pages/Signout';
+import { ForgetPassForm } from './pages/ForgetPassForm';
 import { NotFound } from './pages/NotFound';
 
 export const RootRouter: VFC = () =>
@@ -22,6 +26,7 @@ export const RootRouter: VFC = () =>
       element: <HomeLayout />,
       children: [
         { path: '/', element: <Home /> },
+        { path: 'about', element: <About /> },
         { path: 'upload', element: <Upload /> },
         { path: 'profile', element: <Profile /> },
         { path: 'channels', element: <Channels /> },
