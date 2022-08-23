@@ -6,6 +6,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { FC, ReactNode } from 'react';
+
 import { fireAuth } from '../../utils/Firebase/config';
 
 // GraphQl APIのエンドポイントを指定する

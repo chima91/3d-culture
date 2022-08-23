@@ -1,10 +1,11 @@
 import { useEffect, FC, ReactNode } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { GlobalUser } from '../../stores/User';
-import { useUserByIdLazyQuery } from '../../utils/graphql/generated';
+
+import { AccountLoaded } from '../../stores/AccountLoaded';
 import { AuthCredential } from '../../stores/AuthCredential';
 import { AuthCredentialLoaded } from '../../stores/AuthCredentialLoaded';
-import { AccountLoaded } from '../../stores/AccountLoaded';
+import { GlobalUser } from '../../stores/User';
+import { useUserByIdLazyQuery } from '../../utils/graphql/generated';
 
 export const GlobalAccount: FC<ReactNode> = ({ children }) => {
   // ユーザー情報取得用のQuery関数
