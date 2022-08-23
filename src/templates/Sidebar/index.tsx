@@ -1,4 +1,3 @@
-import { VFC } from 'react';
 import {
   List,
   ListItem,
@@ -9,10 +8,12 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { GlobalUser } from '../../stores/User';
+
 import useStyles from './style';
 
 export const Sidebar: VFC = () => {
