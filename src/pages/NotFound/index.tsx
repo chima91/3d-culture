@@ -1,9 +1,9 @@
 import { Button, Card, Typography } from '@material-ui/core';
 import { VFC } from 'react';
 
-import { Logo } from '../../components/Logo';
 import useStyles from '../../components/AuthenticationStyle/style';
 import Head from '../../components/Head';
+import { Logo } from '../../components/Logo';
 
 export const NotFound: VFC = () => {
   const styles = useStyles();

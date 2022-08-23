@@ -1,10 +1,10 @@
 import { Button, Card, TextField, Typography } from '@material-ui/core';
-
 import { VFC } from 'react';
-import { Logo } from '../../components/Logo';
+
 import useStyles from '../../components/AuthenticationStyle/style';
-import { useSignup } from '../../hooks/Authentication/useSignup';
 import Head from '../../components/Head';
+import { Logo } from '../../components/Logo';
+import { useSignup } from '../../hooks/Authentication/useSignup';
 
 export const Signup: VFC = () => {
   const styles = useStyles();

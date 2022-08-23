@@ -8,16 +8,17 @@ import {
   IconButton,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useRecoilValue } from 'recoil';
 import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { UploadForm } from './UploadForm';
-import { ModelSelect } from './ModelSelect';
-import useStyles from './style';
+import Head from '../../components/Head';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
-import Head from '../../components/Head';
+
+import { ModelSelect } from './ModelSelect';
+import useStyles from './style';
+import { UploadForm } from './UploadForm';
 
 export const Upload: VFC = () => {
   const styles = useStyles();

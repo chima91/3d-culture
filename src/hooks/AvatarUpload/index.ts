@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { GlobalUser } from '../../stores/User';
 import { storage } from '../../utils/Firebase/config';
 import {
   UserByIdDocument,
   useUpdateUserMutation,
 } from '../../utils/graphql/generated';
-import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   file: {

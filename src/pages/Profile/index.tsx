@@ -12,12 +12,13 @@ import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import Head from '../../components/Head';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
+
 import { AvatarSelect } from './AvatarSelect';
-import { UploadForm } from './UploadForm';
 import useStyles from './style';
-import Head from '../../components/Head';
+import { UploadForm } from './UploadForm';
 
 export const Profile: VFC = () => {
   const styles = useStyles();

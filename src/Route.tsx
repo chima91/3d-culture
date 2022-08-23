@@ -4,21 +4,18 @@ import { useRoutes, Navigate } from 'react-router-dom';
 import { HomeLayout } from './layouts/Home';
 import { SideLessHomeLayout } from './layouts/SidelessHome';
 import { SimpleLayout } from './layouts/Simple';
-
-import { Home } from './pages/Home';
 import { About } from './pages/About';
-import { Upload } from './pages/Upload';
-import { Profile } from './pages/Profile';
 import { Channels } from './pages/Channels';
-
 import { Detail } from './pages/Detail';
-import { ModelUpdate } from './pages/ModelUpdate';
-
-import { Login } from './pages/Login';
-import { Signup } from './pages/Signup';
-import { Signout } from './pages/Signout';
 import { ForgetPassForm } from './pages/ForgetPassForm';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { ModelUpdate } from './pages/ModelUpdate';
 import { NotFound } from './pages/NotFound';
+import { Profile } from './pages/Profile';
+import { Signout } from './pages/Signout';
+import { Signup } from './pages/Signup';
+import { Upload } from './pages/Upload';
 
 export const RootRouter: VFC = () =>
   useRoutes([

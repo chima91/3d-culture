@@ -2,6 +2,7 @@ import { Divider, Menu, MenuItem } from '@material-ui/core';
 import ExitToAppRounded from '@material-ui/icons/ExitToAppRounded';
 import { VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import useStyles from './style';
 
 export type UserMenuProps = {

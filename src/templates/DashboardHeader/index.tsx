@@ -7,18 +7,18 @@ import {
   Dialog,
   DialogContent,
 } from '@material-ui/core';
-
-import UploadFileIcon from '@mui/icons-material/UploadFile';
 import SearchIcon from '@material-ui/icons/Search';
-import { useRecoilValue } from 'recoil';
-import { Link, useNavigate } from 'react-router-dom';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { useState, MouseEvent, VFC } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import { Logo } from '../../components/Logo';
+import { GlobalUser } from '../../stores/User';
+
 import { SearchBar } from './SearchBar';
 import useStyles from './style';
-import { GlobalUser } from '../../stores/User';
 import { UserMenu } from './UserMenu';
 
 export const DashboardHeader: VFC = () => {

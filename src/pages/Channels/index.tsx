@@ -11,7 +11,9 @@ import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import Head from '../../components/Head';
 import { ObjCard } from '../../components/ObjCard';
+import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
 import { GlobalUser } from '../../stores/User';
 import { storage } from '../../utils/Firebase/config';
 import {
@@ -19,9 +21,8 @@ import {
   useUpdateModelViewsMutation,
   ModelsDocument,
 } from '../../utils/graphql/generated';
-import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
+
 import useStyles from './style';
-import Head from '../../components/Head';
 
 export const Channels: VFC = () => {
   const styles = useStyles();

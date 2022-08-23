@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { useModelUpdate } from '../../../hooks/ModelUpdate';
 import { GlobalUser } from '../../../stores/User';
 import { useModelByPkQuery } from '../../../utils/graphql/generated';
+
 import useStyles from './style';
 
 export type UpdateFormProps = {

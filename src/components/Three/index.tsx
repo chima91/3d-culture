@@ -1,5 +1,5 @@
-import * as Fiber from '@react-three/fiber';
 import * as Drei from '@react-three/drei';
+import * as Fiber from '@react-three/fiber';
 import { VFC } from 'react';
 
 export type ThreeProp = {

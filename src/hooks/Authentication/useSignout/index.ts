@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+
 import { signout as FireSignout } from '../../../utils/Firebase/signout';
 
 export const useSignout = () => {

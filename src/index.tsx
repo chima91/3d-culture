@@ -1,12 +1,13 @@
+import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import { RecoilRoot } from 'recoil';
-import { RootRouter } from './Route';
+
+import { ApolloProvider } from './providers/ApolloClient';
 import { AuthStateListener } from './providers/AuthStateListener';
 import { GlobalAccount } from './providers/GlobalAccount';
-import { ApolloProvider } from './providers/ApolloClient';
+import { RootRouter } from './Route';
 
 // Material-UIの「テーマ」を作成。
 const theme = createTheme();

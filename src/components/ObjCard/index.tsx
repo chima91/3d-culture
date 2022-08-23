@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardMedia } from '@material-ui/core';
 import { useEffect, useState, ReactNode, VFC } from 'react';
 
-import useStyles from './style';
 import { HeaderTitle, HeaderTitleProps } from './HeaderTitle';
+import useStyles from './style';
 import { SubHeaderContent, SubHeaderContentProps } from './SubHeaderContent';
 
 export type ObjCardProps = {
