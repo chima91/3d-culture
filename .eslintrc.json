@@ -18,10 +18,11 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "import", "unused-imports"],
   "rules": {
     "no-unused-vars": "off",
     "no-use-before-define": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
@@ -46,7 +47,25 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ],
+    "unused-imports/no-unused-imports": "error"
   },
   "settings": {
     "import/resolver": {
