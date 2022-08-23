@@ -8,17 +8,18 @@ import {
   IconButton,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useRecoilValue } from 'recoil';
 import { useEffect, useState, VFC } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { UpdateForm } from './UpdateForm';
-import { UpdateModelSelect } from './UpdateModelSelect';
-import useStyles from './style';
+import Head from '../../components/Head';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 import { useModelByPkQuery } from '../../utils/graphql/generated';
-import Head from '../../components/Head';
+
+import useStyles from './style';
+import { UpdateForm } from './UpdateForm';
+import { UpdateModelSelect } from './UpdateModelSelect';
 
 export const ModelUpdate: VFC = () => {
   const styles = useStyles();

@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 
 import { useAvatarUpload } from '../../../hooks/AvatarUpload';
 import { GlobalUser } from '../../../stores/User';
+
 import useStyles from './style';
 
 export type UploadFormProps = {

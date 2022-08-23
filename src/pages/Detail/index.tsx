@@ -1,16 +1,16 @@
 import { Avatar, Container, Grid } from '@material-ui/core';
+import { VFC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { VFC } from 'react';
-import { GlobalUser } from '../../stores/User';
+
+import Head from '../../components/Head';
+import { ModalQR } from '../../components/ModalQR';
+import { ObjHorizontalCard } from '../../components/ObjHorizontalCard';
+import { SNS } from '../../components/SNS';
 import { useSubscribe } from '../../hooks/Channel/useSubscribe';
 import { useUnSubscribe } from '../../hooks/Channel/useUnSubscribe';
-
-import { CanvasArea } from './CanvasArea';
-import { ObjHorizontalCard } from '../../components/ObjHorizontalCard';
-import { ModalQR } from '../../components/ModalQR';
-import { SNS } from '../../components/SNS';
-import useStyles from './style';
+import { GlobalUser } from '../../stores/User';
+import { storage } from '../../utils/Firebase/config';
 import {
   useModelByPkQuery,
   useRecommendModelsQuery,
@@ -18,8 +18,9 @@ import {
   useUpdateModelViewsMutation,
   ModelsDocument,
 } from '../../utils/graphql/generated';
-import { storage } from '../../utils/Firebase/config';
-import Head from '../../components/Head';
+
+import { CanvasArea } from './CanvasArea';
+import useStyles from './style';
 
 export const Detail: VFC = () => {
   const styles = useStyles();
