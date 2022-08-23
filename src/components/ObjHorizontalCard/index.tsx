@@ -6,6 +6,7 @@ import {
   SubHeaderContent,
   SubHeaderContentProps,
 } from '../ObjCard/SubHeaderContent';
+
 import useStyles from './style';
 
 export type ObjHorizontalCardProps = {

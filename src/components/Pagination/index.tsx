@@ -1,5 +1,6 @@
 import Pagination from '@material-ui/lab/Pagination';
 import { VFC } from 'react';
+
 import useStyles from './style';
 
 export type PaginationProps = {
