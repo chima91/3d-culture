@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import { SetErrorFn, useAuthHelper } from "../useAuthHelper";
-import { login as FireLogin } from "../../../utils/Firebase/login";
+import { login as FireLogin } from '../../../utils/Firebase/login';
+import { SetErrorFn, useAuthHelper } from '../useAuthHelper';
 
 export const useLogin = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -12,11 +12,11 @@ export const useLogin = () => {
 
     // 今回はシンプルにするために、入力が空でないかだけ確認する
     if (!emailRef.current?.value) {
-      setError("email", "メールアドレスを入力してください。");
+      setError('email', 'メールアドレスを入力してください。');
       invalidValidation = true;
     }
     if (!passwordRef.current?.value) {
-      setError("password", "パスワードを入力してください。");
+      setError('password', 'パスワードを入力してください。');
       invalidValidation = true;
     }
 
@@ -24,17 +24,21 @@ export const useLogin = () => {
   };
 
   // 実際のログインのロジック
-  const login = async() => {
+  const login = async () => {
     // Firebaseのログイン処理を実行
     const { user } = await FireLogin({
-      email: emailRef.current?.value || "",
-      password: passwordRef.current?.value || ""
+      email: emailRef.current?.value || '',
+      password: passwordRef.current?.value || '',
     });
-    if(!user?.uid) throw new Error("ログインに失敗しました。");
+    if (!user?.uid) throw new Error('ログインに失敗しました。');
   };
 
   // useAuthHelperを使用して、実際に認証に使用する関数を生成する
-  const { authExecute, error, loading } = useAuthHelper(login, formValidation, "/");
+  const { authExecute, error, loading } = useAuthHelper(
+    login,
+    formValidation,
+    '/',
+  );
 
   return {
     ref: {
@@ -43,6 +47,6 @@ export const useLogin = () => {
     },
     login: authExecute,
     error,
-    loading
-  }
-}
+    loading,
+  };
+};

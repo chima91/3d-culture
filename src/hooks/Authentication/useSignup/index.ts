@@ -8,6 +8,7 @@ import {
 } from '../../../utils/Firebase/signup';
 import { useInsertUserMutation } from '../../../utils/graphql/generated';
 import { SetErrorFn, useAuthHelper } from '../useAuthHelper';
+
 import { checkAuthToken } from './checkAuthToken';
 
 export type SignupPropsType = {
