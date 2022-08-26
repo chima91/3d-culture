@@ -1,16 +1,24 @@
+import { useQRCode } from 'next-qrcode';
 import { VFC } from 'react';
-import { useQRCode } from 'react-qrcodes';
 
 export const QR: VFC = () => {
-  const [inputRef]: any = useQRCode({
-    text: window.location.href,
-    options: {
-      level: 'M', // 誤り訂正レベル
-      margin: 3, // QRコードの周りの空白マージン
-      scale: 1,
-      width: 200,
-    },
-  });
+  const { Canvas } = useQRCode();
 
-  return <canvas ref={inputRef} />;
+  return (
+    <Canvas
+      text={window.location.href}
+      options={{
+        type: 'image/jpeg',
+        quality: 0.3,
+        level: 'M', // 誤り訂正レベル
+        margin: 3,
+        scale: 4,
+        width: 200,
+        color: {
+          dark: '#010599FF',
+          light: '#FFBF60FF',
+        },
+      }}
+    />
+  );
 };
