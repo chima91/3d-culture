@@ -22,7 +22,7 @@ export const UpdateForm: VFC<UpdateFormProps> = ({ modelFile, thumbFile }) => {
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId,
+      id: objId!,
     },
   });
 

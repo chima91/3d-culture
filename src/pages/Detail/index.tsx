@@ -30,13 +30,13 @@ export const Detail: VFC = () => {
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId,
+      id: objId!,
     },
   });
   // IDからリコメンドのモデル群を取得
   const { data: recommendModels } = useRecommendModelsQuery({
     variables: {
-      currentModelId: objId,
+      currentModelId: objId!,
     },
   });
   // リコメンドモデルの表示件数を一時的に6件に制限。後でページネーションやインフィニティスクロールを導入する。
