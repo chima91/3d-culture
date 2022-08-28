@@ -1,0 +1,18 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+        - echo "REACT_APP_GRAPHQL_END_POINT_ORIGIN=$REACT_APP_GRAPHQL_END_POINT_ORIGIN" >> .env
+        - echo "REACT_APP_HASURA_SECRET_KEY=$REACT_APP_HASURA_SECRET_KEY" >> .env
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
