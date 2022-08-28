@@ -5,7 +5,8 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { PropsWithChildren } from 'react';
+import { FC, ReactNode } from 'react';
+
 import { fireAuth } from '../../utils/Firebase/config';
 
 // GraphQl APIのエンドポイントを指定する
@@ -31,7 +32,6 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const ApolloProvider = ({
-  children,
-}: // eslint-disable-next-line @typescript-eslint/ban-types
-PropsWithChildren<{}>) => <Provider client={apolloClient}>{children}</Provider>;
+export const ApolloProvider: FC<ReactNode> = ({ children }) => (
+  <Provider client={apolloClient}>{children}</Provider>
+);

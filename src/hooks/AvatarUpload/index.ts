@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import { GlobalUser } from '../../stores/User';
 import { storage } from '../../utils/Firebase/config';
 import {
   UserByIdDocument,
   useUpdateUserMutation,
 } from '../../utils/graphql/generated';
-import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   file: {
@@ -38,7 +38,7 @@ export const useAvatarUpload = () => {
     return null;
   };
 
-  const upload = async ({ file, name, description, userId }: UploadProps) => {
+  const upload = async ({ file, name, userId }: UploadProps) => {
     // ユーザが読み込まれていない、未ログインであれば処理を中断する
     if (!globalUser?.id) return;
 
@@ -65,7 +65,7 @@ export const useAvatarUpload = () => {
       }
 
       // avatarのメタデータを保存する
-      const res = await mutation({
+      await mutation({
         variables: {
           id: userId,
           name,
@@ -76,8 +76,6 @@ export const useAvatarUpload = () => {
       // 全ての処理が終わったら、avatarのメタデータを返す
       // return res.data?.update_users_by_pk;
     } catch (err) {
-      // アップロードの途中でエラーが発生したら、処理を中断して、ここに記述する処理が行われる
-      console.error(err);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     } finally {
       // 全ての処理が完了したら、ローディングをfalseにする
@@ -88,7 +86,6 @@ export const useAvatarUpload = () => {
   // Appollo Clientのエラーをキャッチする
   useEffect(() => {
     if (apolloError) {
-      console.error(apolloError);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     }
   }, [apolloError]);

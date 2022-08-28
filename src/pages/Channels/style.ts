@@ -1,19 +1,31 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core';
 
 export default makeStyles({
-  // 要素の横幅の最大値を調整
-  card: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-    padding: 10,
+  subscCard: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    margin: '0 0 1rem 0',
+    padding: '1rem',
+    '@media (min-width: 768px)': {
+      flexWrap: 'nowrap',
+      alignItems: 'center',
+    },
   },
-  cardHeader: {
-    width: 240,
+  subscHeader: {
+    width: '80%',
+    textAlign: 'center',
+    margin: '0 0 1rem 0',
+    '@media (min-width: 768px)': {
+      width: '60%',
+      margin: '0 1rem 1rem 0',
+    },
   },
-  unsubButton: {
-    marginTop: 10,
-    marginLeft: 10,
+  subscName: {
+    width: '85%',
+    margin: '0 auto',
+    '@media (min-width: 768px)': {
+      width: '50%',
+    },
   },
 });

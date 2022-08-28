@@ -8,11 +8,12 @@ import {
 } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { useEffect, useState, Suspense, ReactNode } from 'react';
+import { useEffect, useState, Suspense, ReactNode, VFC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Three } from '../../../components/Three';
 import { useModelDelete } from '../../../hooks/ModelDelete';
+
 import useStyles from './style';
 
 export type CanvasAreaProps = {
@@ -27,12 +28,12 @@ export type CanvasAreaProps = {
   isCurrentModelByOthers: boolean; // ログイン中のユーザーと、表示中モデルの投稿者が違うかどうか
   isCurrentModelByMine: boolean; // ログイン中のユーザーと、表示中モデルの投稿者が同じかどうか
   isSubscribed: boolean; // チャンネル登録済みかどうか
-  onSubscribe: () => any; // チャンネル登録処理
-  onUnSubscribe: () => any; // チャンネル登録解除処理
+  onSubscribe: () => void; // チャンネル登録処理
+  onUnSubscribe: () => void; // チャンネル登録解除処理
   fetcher: () => Promise<string | undefined>;
 };
 
-export const CanvasArea = ({
+export const CanvasArea: VFC<CanvasAreaProps> = ({
   modelId,
   title,
   created,
@@ -47,7 +48,7 @@ export const CanvasArea = ({
   onSubscribe,
   onUnSubscribe,
   fetcher,
-}: CanvasAreaProps) => {
+}) => {
   const styles = useStyles();
   // モデルのダウンロードリンクURLを格納するためのステート
   const [src, setSrc] = useState<string>();
@@ -58,15 +59,12 @@ export const CanvasArea = ({
 
   // モデルを削除するmutation
   const navigate = useNavigate();
-  const { modelDelete, apolloError } = useModelDelete();
+  const { modelDelete } = useModelDelete();
   const handleModelDelete = async (id: string) => {
     await modelDelete({
       id,
     });
     navigate('/');
-    if (apolloError) {
-      console.log(apolloError.message);
-    }
   };
 
   return (
@@ -75,20 +73,10 @@ export const CanvasArea = ({
       <CardContent className={styles.canvas}>
         <Suspense
           fallback={
-            <div
-              style={{ color: 'white', textAlign: 'center', marginTop: 100 }}
-            >
-              Now Loading...
-            </div>
+            <div className={styles.fallback}>3Dモデルを読み込んでいます...</div>
           }
         >
-          {src ? (
-            <Three glbSrc={src} />
-          ) : (
-            <p style={{ color: 'red', textAlign: 'center', marginTop: 100 }}>
-              表示できる3Dモデルがありません。
-            </p>
-          )}
+          {src ? <Three glbSrc={src} /> : null}
         </Suspense>
       </CardContent>
 

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useRecoilValue } from 'recoil';
+import { GlobalUser } from '../../stores/User';
 import { storage } from '../../utils/Firebase/config';
 import {
   ModelsDocument,
   useUpdateModelMutation,
 } from '../../utils/graphql/generated';
-import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   modelId?: string;
@@ -77,7 +77,6 @@ export const useModelUpdate = () => {
       // eslint-disable-next-line consistent-return
       return res.data?.update_models_by_pk;
     } catch (err) {
-      console.error(err);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     } finally {
       setLoading(false);
@@ -87,7 +86,6 @@ export const useModelUpdate = () => {
   // ApolloClientのエラーをキャッチする
   useEffect(() => {
     if (apolloError) {
-      console.error(apolloError);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     }
   }, [apolloError]);

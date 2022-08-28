@@ -1,13 +1,14 @@
-import { IconButton, InputBase, Paper } from '@material-ui/core';
+import { InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import { useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRef, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
-import useStyles from './style';
 import { SearchWords } from '../../../stores/SearchWords';
 
-export const SearchBar = () => {
+import useStyles from './style';
+
+export const SearchBar: VFC = () => {
   const styles = useStyles();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,10 +37,14 @@ export const SearchBar = () => {
         inputRef={inputRef}
         defaultValue={searchWords?.title}
       />
-      <div className={styles.searchIcon}>
-        <IconButton onClick={handleClickSearch}>
-          <SearchIcon />
-        </IconButton>
+      <div
+        className={styles.searchIcon}
+        onClick={handleClickSearch}
+        onKeyDown={handleClickSearch}
+        role='button'
+        tabIndex={0}
+      >
+        <SearchIcon />
       </div>
     </Paper>
   );

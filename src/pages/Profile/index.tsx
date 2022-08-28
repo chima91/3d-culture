@@ -8,17 +8,19 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import Head from '../../components/Head';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
-import { AvatarSelect } from './AvatarSelect';
-import { UploadForm } from './UploadForm';
-import useStyles from './style';
 
-export const Profile = () => {
+import { AvatarSelect } from './AvatarSelect';
+import useStyles from './style';
+import { UploadForm } from './UploadForm';
+
+export const Profile: VFC = () => {
   const styles = useStyles();
 
   // recoilの値を使用
@@ -49,8 +51,9 @@ export const Profile = () => {
 
   return (
     <Dialog fullWidth maxWidth='md' open={open} onClose={handleClose}>
+      <Head title='プロフィール更新' />
       <DialogTitle>
-        プロフィール
+        プロフィール更新
         <IconButton className={styles.closeButton} onClick={handleClose}>
           <CloseIcon />
         </IconButton>

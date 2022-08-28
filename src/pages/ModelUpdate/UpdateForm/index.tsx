@@ -1,11 +1,12 @@
 import { Button, TextField, Typography } from '@material-ui/core';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, VFC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { useModelUpdate } from '../../../hooks/ModelUpdate';
 import { GlobalUser } from '../../../stores/User';
 import { useModelByPkQuery } from '../../../utils/graphql/generated';
+
 import useStyles from './style';
 
 export type UpdateFormProps = {
@@ -13,7 +14,7 @@ export type UpdateFormProps = {
   thumbFile: File | undefined;
 };
 
-export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
+export const UpdateForm: VFC<UpdateFormProps> = ({ modelFile, thumbFile }) => {
   const styles = useStyles();
 
   // URLから表示するモデルのIDを取得
@@ -21,7 +22,7 @@ export const UpdateForm = ({ modelFile, thumbFile }: UpdateFormProps) => {
   // IDから表示するモデルを取得
   const { data: currentModel } = useModelByPkQuery({
     variables: {
-      id: objId,
+      id: objId!,
     },
   });
 

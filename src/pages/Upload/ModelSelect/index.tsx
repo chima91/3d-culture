@@ -1,7 +1,3 @@
-/**
- * @prettier
- */
-
 import { Button, CardMedia, Divider, Typography } from '@material-ui/core';
 import {
   useState,
@@ -10,6 +6,7 @@ import {
   useEffect,
   Dispatch,
   SetStateAction,
+  VFC,
 } from 'react';
 
 import useStyles from './style';
@@ -21,12 +18,12 @@ export type ModelSelectProps = {
   setThumbFile: Dispatch<SetStateAction<File | undefined>>;
 };
 
-export const ModelSelect = ({
+export const ModelSelect: VFC<ModelSelectProps> = ({
   modelFile,
   thumbFile,
   setModelFile,
   setThumbFile,
-}: ModelSelectProps) => {
+}) => {
   const styles = useStyles();
 
   // モデルのURLを格納

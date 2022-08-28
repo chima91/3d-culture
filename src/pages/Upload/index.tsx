@@ -8,17 +8,19 @@ import {
   IconButton,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useRecoilValue } from 'recoil';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { UploadForm } from './UploadForm';
-import { ModelSelect } from './ModelSelect';
-import useStyles from './style';
+import Head from '../../components/Head';
 import { AccountLoaded } from '../../stores/AccountLoaded';
 import { GlobalUser } from '../../stores/User';
 
-export const Upload = () => {
+import { ModelSelect } from './ModelSelect';
+import useStyles from './style';
+import { UploadForm } from './UploadForm';
+
+export const Upload: VFC = () => {
   const styles = useStyles();
 
   const accountLoaded = useRecoilValue(AccountLoaded);
@@ -36,10 +38,6 @@ export const Upload = () => {
     navigate('/');
   };
 
-  // debug
-  console.log('accountLoaded(Upload page):', accountLoaded);
-  console.log('globalUser(Upload page):', globalUser);
-
   // アカウントが読み込まれていない、未ログインであれば`/login`へリダレクト
   useEffect(() => {
     if (accountLoaded) {
@@ -51,6 +49,7 @@ export const Upload = () => {
 
   return (
     <Dialog fullWidth maxWidth='md' open>
+      <Head title='3Dモデルのアップロード' />
       <DialogTitle>
         3Dモデルのアップロード
         <IconButton className={styles.closeButton} onClick={handleClose}>

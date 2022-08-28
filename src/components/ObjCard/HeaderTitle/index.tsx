@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import { VFC } from 'react';
 
 import useStyles from './style';
 
@@ -6,7 +7,7 @@ export type HeaderTitleProps = {
   title: string;
 };
 
-export const HeaderTitle = ({ title }: HeaderTitleProps) => {
+export const HeaderTitle: VFC<HeaderTitleProps> = ({ title }) => {
   const styles = useStyles();
   // モデルのタイトルが10文字を超える場合は省略する
   const isTitleOver10 = title.length > 10;

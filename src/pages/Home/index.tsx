@@ -1,34 +1,26 @@
-/**
- * @prettier
- */
-
 import { Avatar, Container, Grid } from '@material-ui/core';
+import { useState, VFC } from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import Head from '../../components/Head';
-import { GoogleForm } from '../../components/GoogleForm';
-import { ObjCard } from '../../components/ObjCard';
 import { ModalQR } from '../../components/ModalQR';
+import { ObjCard } from '../../components/ObjCard';
+import { PaginationWrapper } from '../../components/Pagination';
 import { SNS } from '../../components/SNS';
+import { SearchWords } from '../../stores/SearchWords';
 import { storage } from '../../utils/Firebase/config';
 import {
   useModelsQuery,
   useUpdateModelViewsMutation,
   ModelsDocument,
 } from '../../utils/graphql/generated';
-import { PaginationWrapper } from '../../components/Pagination';
-import { SearchWords } from '../../stores/SearchWords';
 
-export const Home = () => {
+import useStyles from './style';
+
+export const Home: VFC = () => {
   // modelを取得するquery
-  const { data, error } = useModelsQuery();
-
-  // エラーがあればコンソールに表示
-  useEffect(() => {
-    if (error) console.error(error);
-  }, [error]);
+  const { data } = useModelsQuery();
 
   // 検索ワードがある(recoil(SearchWords)がundefinedではない)場合は、data.modelsを絞り込み、modelsに結果を入れる
   const searchWords = useRecoilValue(SearchWords);
@@ -54,7 +46,7 @@ export const Home = () => {
   const pageItem = models?.slice(startItem, startItem + COUNT_PER_PAGE);
 
   // 閲覧回数をカウントアップするmutation
-  const [updateMutation, { error: apolloError }] = useUpdateModelViewsMutation({
+  const [updateMutation] = useUpdateModelViewsMutation({
     refetchQueries: [{ query: ModelsDocument }],
   });
   // 閲覧回数をカウントアップする関数
@@ -64,16 +56,13 @@ export const Home = () => {
         modelId: id as string,
       },
     });
-    if (apolloError) console.log(apolloError.message);
   };
+
+  const styles = useStyles();
 
   return (
     <Container>
-      <Head
-        title='トップページ'
-        imgUrl='https://www.culpticon.net/static/logo.png'
-      />
-      <GoogleForm />
+      <Head title='トップページ' />
       <ModalQR />
       <SNS />
       <Grid container spacing={2}>
@@ -81,8 +70,8 @@ export const Home = () => {
         {!pageItem?.length && <p>該当するモデルがありませんでした。</p>}
         {/* queryでモデルを取得した後、条件で絞り込んだor全てのモデルデータを1ページ毎に表示 */}
         {pageItem?.map((model) => (
-          <Grid item xs={12} md={6} lg={3} key={model.id}>
-            <Link to={`/detail/${model.id}`} style={{ textDecoration: 'none' }}>
+          <Grid item xs={6} lg={3} key={model.id}>
+            <Link to={`/detail/${model.id}`} className={styles.link}>
               <ObjCard
                 title={model.title}
                 owner={model.owner?.name || ''}

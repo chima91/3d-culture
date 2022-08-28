@@ -1,17 +1,13 @@
-/**
- * @prettier
- */
-
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 
-import { useRecoilValue } from 'recoil';
+import { GlobalUser } from '../../stores/User';
 import { storage } from '../../utils/Firebase/config';
 import {
   ModelsDocument,
   useInsertModelMutation,
 } from '../../utils/graphql/generated';
-import { GlobalUser } from '../../stores/User';
 
 type UploadProps = {
   file: {
@@ -84,7 +80,6 @@ export const useModelUpload = () => {
       // eslint-disable-next-line consistent-return
       return res.data?.insert_models_one;
     } catch (err) {
-      console.error(err);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     } finally {
       setLoading(false);
@@ -94,7 +89,6 @@ export const useModelUpload = () => {
   // ApolloClientのエラーをキャッチする
   useEffect(() => {
     if (apolloError) {
-      console.error(apolloError);
       setError(new Error('エラーが発生しました。最初からやり直してください。'));
     }
   }, [apolloError]);

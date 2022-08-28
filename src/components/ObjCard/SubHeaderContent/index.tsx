@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core';
+import { VFC } from 'react';
 
 export type SubHeaderContentProps = {
   owner?: string;
@@ -6,11 +7,11 @@ export type SubHeaderContentProps = {
   views?: number;
 };
 
-export const SubHeaderContent = ({
+export const SubHeaderContent: VFC<SubHeaderContentProps> = ({
   owner,
   created,
   views,
-}: SubHeaderContentProps) => (
+}) => (
   <>
     <Typography variant='body2'>{owner}</Typography>
     <Typography variant='body2'>

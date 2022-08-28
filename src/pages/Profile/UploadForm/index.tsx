@@ -1,16 +1,17 @@
 import { Button, TextField, Typography } from '@material-ui/core';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, VFC } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import { useAvatarUpload } from '../../../hooks/AvatarUpload';
 import { GlobalUser } from '../../../stores/User';
+
 import useStyles from './style';
 
 export type UploadFormProps = {
   avatarFile: File | undefined;
 };
 
-export const UploadForm = ({ avatarFile }: UploadFormProps) => {
+export const UploadForm: VFC<UploadFormProps> = ({ avatarFile }) => {
   const styles = useStyles();
   const globalUser = useRecoilValue(GlobalUser);
 
