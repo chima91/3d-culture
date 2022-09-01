@@ -1,7 +1,7 @@
 import { Button, Card, TextField, Typography } from '@material-ui/core';
 import { VFC } from 'react';
 
-import useStyles from '../../components/AuthenticationStyle/style';
+import useStyles from '../../assets/AuthenticationCardStyle';
 import Head from '../../components/Head';
 import { Logo } from '../../components/Logo';
 import { useForgetPass } from '../../hooks/Authentication/useForgetPass';
@@ -13,21 +13,21 @@ export const ForgetPassForm: VFC = () => {
   return (
     <Card className={styles.root} variant='outlined'>
       <Head title='パスワードの再発行' />
-      <div className={`${styles.logo} ${styles.margin}`}>
+      <div className={`${styles.logo} ${styles.div}`}>
         <Logo />
       </div>
 
-      <Typography className={styles.margin} component='h1' variant='h5'>
+      <Typography className={styles.div} component='h1' variant='h5'>
         パスワードの再発行
       </Typography>
 
       {error.has('main') && (
-        <Typography className={styles.margin} color='error'>
+        <Typography className={styles.div} color='error'>
           {error.get('main')}
         </Typography>
       )}
 
-      <label className={`${styles.label} ${styles.margin}`}>
+      <label className={`${styles.label} ${styles.div}`}>
         <Typography>メールアドレス</Typography>
         <TextField
           type='email'
@@ -42,12 +42,12 @@ export const ForgetPassForm: VFC = () => {
       </label>
 
       {sendSuccess && (
-        <Typography className={styles.margin} color='primary'>
+        <Typography className={styles.div} color='primary'>
           ✔︎メールの送信が完了しました。
         </Typography>
       )}
 
-      <div className={styles.margin}>
+      <div className={styles.div}>
         <Button
           variant='contained'
           color='primary'

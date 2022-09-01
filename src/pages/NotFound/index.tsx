@@ -1,7 +1,7 @@
 import { Button, Card, Typography } from '@material-ui/core';
 import { VFC } from 'react';
 
-import useStyles from '../../components/AuthenticationStyle/style';
+import useStyles from '../../assets/SimpleCardStyle';
 import Head from '../../components/Head';
 import { Logo } from '../../components/Logo';
 
@@ -11,11 +11,11 @@ export const NotFound: VFC = () => {
   return (
     <Card className={styles.root} variant='outlined'>
       <Head title='お探しのページは見つかりませんでした。' />
-      <div className={`${styles.logo} ${styles.margin}`}>
+      <div className={`${styles.logo} ${styles.div}`}>
         <Logo />
       </div>
 
-      <Typography className={styles.margin} component='h1' variant='h5'>
+      <Typography className={styles.div} component='h1' variant='h5'>
         お探しのページは見つかりませんでした。
       </Typography>
 

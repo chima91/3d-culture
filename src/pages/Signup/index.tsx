@@ -1,7 +1,7 @@
 import { Button, Card, TextField, Typography } from '@material-ui/core';
 import { VFC } from 'react';
 
-import useStyles from '../../components/AuthenticationStyle/style';
+import useStyles from '../../assets/AuthenticationCardStyle';
 import Head from '../../components/Head';
 import { Logo } from '../../components/Logo';
 import { useSignup } from '../../hooks/Authentication/useSignup';
@@ -14,11 +14,11 @@ export const Signup: VFC = () => {
   return (
     <Card className={styles.root} variant='outlined'>
       <Head title='新規アカウント登録' />
-      <div className={`${styles.logo} ${styles.margin}`}>
+      <div className={`${styles.logo} ${styles.div}`}>
         <Logo />
       </div>
 
-      <Typography className={styles.margin} component='h1' variant='h5'>
+      <Typography className={styles.div} component='h1' variant='h5'>
         新規アカウント登録
       </Typography>
 
@@ -27,12 +27,12 @@ export const Signup: VFC = () => {
         ErrorをMapで管理しているので、簡単にエラーがあるかどうかを確認できる
       */}
       {error.has('main') && (
-        <Typography className={styles.margin} color='error'>
+        <Typography className={styles.div} color='error'>
           {error.get('main')}
         </Typography>
       )}
 
-      <label className={`${styles.label} ${styles.margin}`}>
+      <label className={`${styles.label} ${styles.div}`}>
         <Typography>名前</Typography>
         <TextField
           required
@@ -45,7 +45,7 @@ export const Signup: VFC = () => {
         />
       </label>
 
-      <label className={`${styles.label} ${styles.margin}`}>
+      <label className={`${styles.label} ${styles.div}`}>
         <Typography>メールアドレス</Typography>
         <TextField
           type='email'
@@ -59,7 +59,7 @@ export const Signup: VFC = () => {
         />
       </label>
 
-      <label className={`${styles.label} ${styles.margin}`}>
+      <label className={`${styles.label} ${styles.div}`}>
         <Typography>パスワード</Typography>
         <TextField
           type='password'
@@ -73,7 +73,7 @@ export const Signup: VFC = () => {
         />
       </label>
 
-      <div className={styles.margin}>
+      <div className={styles.div}>
         <Button
           variant='contained'
           color='primary'
