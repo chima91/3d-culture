@@ -26,6 +26,7 @@
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off",
+    "react/no-unknown-property": "off",
     "react/function-component-definition": [
       "warn",
       { "namedComponents": "arrow-function" }
